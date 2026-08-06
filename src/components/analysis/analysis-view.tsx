@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   ShieldAlert,
-  AlertTriangle,
   IndianRupee,
   CalendarClock,
   Download,
@@ -12,16 +11,11 @@ import {
   FileUp,
   Check,
 } from "lucide-react";
-import type { Analysis, Bilingual, Severity } from "@/lib/types";
-
-const FLAG_LABEL: Record<string, string> = {
-  hidden_clause: "Hidden clause",
-  unfair_charge: "Unfair charge",
-  penalty: "Penalty",
-  auto_renewal: "Auto-renewal",
-  liability: "One-sided liability",
-  other: "Watch out",
-};
+import type { Analysis, Bilingual } from "@/lib/types";
+import { FLAG_LABEL } from "@/lib/flag-actions";
+import { getVerdict } from "@/lib/verdict";
+import { VerdictCard } from "@/components/analyze/verdict-card";
+import { FlagList } from "@/components/analyze/flag-list";
 
 function BilingualText({
   value,
@@ -31,17 +25,6 @@ function BilingualText({
   lang: "en" | "hi";
 }) {
   return <>{value[lang]}</>;
-}
-
-function severityStyles(severity: Severity) {
-  switch (severity) {
-    case "danger":
-      return "border-red-300 bg-red-50";
-    case "warning":
-      return "border-amber-300 bg-amber-50";
-    default:
-      return "border-blue-200 bg-blue-50";
-  }
 }
 
 function RiskMeter({ risk }: { risk: Analysis["risk"] }) {
@@ -188,6 +171,14 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
       </div>
 
       <div className="mt-6">
+        <VerdictCard
+          score={analysis.risk.score}
+          verdict={getVerdict(analysis.risk.score)}
+          lang={lang}
+        />
+      </div>
+
+      <div className="mt-6">
         <RiskMeter risk={analysis.risk} />
         <p className="mt-2 text-sm text-muted">
           <BilingualText value={analysis.risk.reason} lang={lang} />
@@ -195,47 +186,7 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
       </div>
 
       {analysis.flags.length > 0 && (
-        <div className="mt-10">
-          <div className="flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-gold" aria-hidden="true" />
-            <h2 className="font-display text-xl font-semibold text-navy">
-              What to watch for
-            </h2>
-          </div>
-          <div className="mt-5 space-y-4">
-            {analysis.flags.map((flag, i) => (
-              <div
-                key={i}
-                className={`rounded-xl border p-5 ${severityStyles(flag.severity)}`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-semibold text-ink">
-                    {FLAG_LABEL[flag.type] ?? "Watch out"}
-                  </p>
-                  {flag.severity === "danger" ? (
-                    <span className="rounded-full bg-red-500 px-2.5 py-0.5 text-xs font-semibold text-white">
-                      Serious
-                    </span>
-                  ) : flag.severity === "warning" ? (
-                    <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-xs font-semibold text-white">
-                      Warning
-                    </span>
-                  ) : (
-                    <span className="rounded-full bg-blue-500 px-2.5 py-0.5 text-xs font-semibold text-white">
-                      Note
-                    </span>
-                  )}
-                </div>
-                <p className="mt-3 text-sm italic text-muted">
-                  &quot;{flag.quote}&quot;
-                </p>
-                <p className="mt-3 leading-7 text-ink">
-                  <BilingualText value={flag.explanation} lang={lang} />
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <FlagList flags={analysis.flags} lang={lang} />
       )}
 
       {analysis.charges.length > 0 && (
