@@ -38,7 +38,7 @@ export function FlagCard({
   return (
     <div className={`rounded-xl border p-5 ${meta.card}`}>
       <div className="flex items-center justify-between gap-3">
-        <p className="font-semibold text-ink">
+        <p className="font-semibold text-foreground">
           {FLAG_LABEL[flag.type] ?? "Watch out"}
         </p>
         <span
@@ -47,10 +47,10 @@ export function FlagCard({
           {meta.label}
         </span>
       </div>
-      <p className="mt-3 text-sm italic text-muted">&quot;{flag.quote}&quot;</p>
-      <p className="mt-3 leading-7 text-ink">{flag.explanation[lang]}</p>
-      <p className="mt-3 flex items-start gap-2 text-sm font-medium text-ink">
-        <MoveRight className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+      <p className="mt-3 text-sm italic text-muted-foreground">&quot;{flag.quote}&quot;</p>
+      <p className="mt-3 leading-7 text-foreground">{flag.explanation[lang]}</p>
+      <p className="mt-3 flex items-start gap-2 text-sm font-medium text-foreground">
+        <MoveRight className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
         {action[lang]}
       </p>
     </div>

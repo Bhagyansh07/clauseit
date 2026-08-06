@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { SectionLabel } from "@/components/ui/section-label";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -58,58 +59,95 @@ const plans = [
 export default function Pricing() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-      <div className="max-w-2xl">
-        <h1 className="font-display text-4xl font-semibold text-navy sm:text-5xl">
-          Simple pricing
-        </h1>
-        <p className="mt-4 text-lg text-muted">
-          Start free, upgrade when you need it. Pay with UPI, cards, or netbanking.
-        </p>
-      </div>
+      <SectionLabel>Pricing</SectionLabel>
+      <h1 className="mt-6 font-display text-4xl leading-tight tracking-[-0.02em] text-foreground sm:text-5xl">
+        Simple pricing for{" "}
+        <span className="gradient-text">everyday review</span>
+      </h1>
+      <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+        Start free, upgrade when you need it. Pay with UPI, cards, or
+        netbanking.
+      </p>
 
-      <div className="mt-14 grid gap-6 lg:grid-cols-3">
-        {plans.map((plan) => (
-          <div
-            key={plan.name}
-            className={`flex flex-col rounded-2xl border bg-white p-8 ${
-              plan.highlighted
-                ? "border-gold shadow-lg shadow-gold/10"
-                : "border-line"
-            }`}
-          >
-            <h2 className="font-display text-xl font-semibold text-navy">
-              {plan.name}
-            </h2>
-            <p className="mt-1 text-sm text-muted">{plan.tagline}</p>
-            <p className="mt-6">
-              <span className="font-display text-4xl font-semibold text-navy">
-                {plan.price}
-              </span>
-              <span className="ml-2 text-sm text-muted">{plan.period}</span>
-            </p>
-            <ul className="mt-8 flex-1 space-y-3">
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-3 text-sm">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
-                  <span className="text-ink">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/signup"
-              className={`mt-8 rounded-lg px-5 py-3 text-center font-semibold transition-colors ${
-                plan.highlighted
-                  ? "bg-gold text-navy hover:bg-gold-dark"
-                  : "bg-navy text-paper hover:bg-navy-light"
-              }`}
+      <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
+        {plans.map((plan) =>
+          plan.highlighted ? (
+            <div
+              key={plan.name}
+              className="relative rounded-2xl bg-gradient-to-br from-accent to-accent-secondary p-[2px] shadow-accent-lg"
             >
-              {plan.cta}
-            </Link>
-          </div>
-        ))}
+              <div className="flex h-full flex-col rounded-2xl bg-foreground p-8 text-background">
+                <h2 className="font-display text-xl text-background">
+                  {plan.name}
+                </h2>
+                <p className="mt-1 text-sm text-background/60">{plan.tagline}</p>
+                <p className="mt-6">
+                  <span className="font-display text-4xl">{plan.price}</span>
+                  <span className="ml-2 text-sm text-background/60">
+                    {plan.period}
+                  </span>
+                </p>
+                <ul className="mt-8 flex-1 space-y-3">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3 text-sm">
+                      <Check
+                        className="mt-0.5 h-4 w-4 shrink-0 text-accent-secondary"
+                        aria-hidden="true"
+                      />
+                      <span className="text-background/80">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/signup"
+                  className="gradient-bg mt-8 rounded-xl px-5 py-3 text-center font-semibold text-white transition-all hover:brightness-110"
+                >
+                  {plan.cta}
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div
+              key={plan.name}
+              className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm"
+            >
+              <h2 className="font-display text-xl text-foreground">
+                {plan.name}
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {plan.tagline}
+              </p>
+              <p className="mt-6">
+                <span className="font-display text-4xl text-foreground">
+                  {plan.price}
+                </span>
+                <span className="ml-2 text-sm text-muted-foreground">
+                  {plan.period}
+                </span>
+              </p>
+              <ul className="mt-8 flex-1 space-y-3">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm">
+                    <Check
+                      className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                      aria-hidden="true"
+                    />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/signup"
+                className="mt-8 rounded-xl border border-border px-5 py-3 text-center font-semibold text-foreground transition-colors hover:border-accent/40 hover:bg-accent/5"
+              >
+                {plan.cta}
+              </Link>
+            </div>
+          )
+        )}
       </div>
 
-      <p className="mt-10 max-w-2xl text-sm text-muted">
+      <p className="mt-10 max-w-2xl text-sm text-muted-foreground">
         Premium includes a lawyer review section, arriving soon. Pro and Premium
         cancel anytime from your account page.
       </p>

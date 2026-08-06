@@ -16,15 +16,28 @@ export default function AnalyzePage() {
     if (!id) return;
     const timer = window.setTimeout(() => {
       const raw = sessionStorage.getItem(id);
-      if (!raw) {
-        setAnalysis("missing");
-        return;
+      if (raw) {
+        try {
+          setAnalysis(JSON.parse(raw) as Analysis);
+          return;
+        } catch {
+          setAnalysis("missing");
+          return;
+        }
       }
-      try {
-        setAnalysis(JSON.parse(raw) as Analysis);
-      } catch {
-        setAnalysis("missing");
+
+      const stored = window.localStorage.getItem(`clauseit-analysis-${id}`);
+      if (stored) {
+        try {
+          setAnalysis(JSON.parse(stored) as Analysis);
+          return;
+        } catch {
+          setAnalysis("missing");
+          return;
+        }
       }
+
+      setAnalysis("missing");
     }, 0);
     return () => window.clearTimeout(timer);
   }, [id]);

@@ -1,11 +1,12 @@
 import {
-  CheckCircle2,
   Globe,
   Lock,
   Camera,
   Languages,
   Wallet,
 } from "lucide-react";
+import { SectionLabel } from "@/components/ui/section-label";
+import { FadeIn } from "@/components/ui/fade-in";
 
 const points = [
   {
@@ -37,29 +38,42 @@ const points = [
 
 export default function WhyUnique() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-28">
       <div className="max-w-2xl">
-        <h2 className="font-display text-3xl font-semibold text-navy">
-          Why ClauseIt
-        </h2>
-        <p className="mt-4 text-muted">
-          A generic AI tool does not understand a Mumbai rent agreement or a
-          Delhi home-loan foreclosure clause. ClauseIt is built around the
-          reader, not the lawyer.
-        </p>
+        <FadeIn>
+          <SectionLabel>Why ClauseIt</SectionLabel>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <h2 className="mt-6 font-display text-3xl leading-tight tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
+            Built for the way{" "}
+            <span className="gradient-text">real people</span> read documents
+          </h2>
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <p className="mt-5 text-lg leading-8 text-muted-foreground">
+            ClauseIt is designed around everyday decisions: signing a lease,
+            accepting a policy, taking a loan, or reviewing a job offer. It is
+            practical, direct, and built to make the risk obvious.
+          </p>
+        </FadeIn>
       </div>
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        {points.map((point) => (
-          <div key={point.title} className="flex gap-4">
-            <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
-            <div>
-              <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-navy">
-                <point.icon className="h-5 w-5 text-gold" aria-hidden="true" />
-                {point.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-muted">{point.text}</p>
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {points.map((point, i) => (
+          <FadeIn key={point.title} delay={0.06 * i}>
+            <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg">
+              <div className="flex items-center gap-3">
+                <span className="gradient-bg flex h-10 w-10 shrink-0 items-center justify-center rounded-lg shadow-accent">
+                  <point.icon className="h-4 w-4 text-white" aria-hidden="true" />
+                </span>
+                <h3 className="font-display text-lg text-foreground">
+                  {point.title}
+                </h3>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                {point.text}
+              </p>
             </div>
-          </div>
+          </FadeIn>
         ))}
       </div>
     </section>

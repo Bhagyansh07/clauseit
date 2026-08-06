@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="ClauseIt — Read the clauses, not the fine print">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f1b2d"/>
-      <stop offset="1" stop-color="#1a2b42"/>
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="goldline" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#d4a837"/>
-      <stop offset="1" stop-color="#f0d98a"/>
+    <linearGradient id="accentline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0052ff"/>
+      <stop offset="1" stop-color="#4d7cff"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="360" fill="url(#bg)"/>
 
-  <rect x="0" y="0" width="1200" height="6" fill="url(#goldline)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="url(#accentline)"/>
 
-  <g fill="none" stroke="#d4a837" stroke-opacity="0.22">
+  <g fill="none" stroke="#4d7cff" stroke-opacity="0.22">
     <rect x="72" y="82" width="300" height="196" rx="10"/>
-    <rect x="72" y="82" width="300" height="10" rx="5" fill="#d4a837" fill-opacity="0.14" stroke="none"/>
+    <rect x="72" y="82" width="300" height="10" rx="5" fill="#0052ff" fill-opacity="0.14" stroke="none"/>
   </g>
-  <g fill="#faf9f6" fill-opacity="0.5">
+  <g fill="#fafafa" fill-opacity="0.5">
     <rect x="96" y="112" width="180" height="10" rx="5"/>
     <rect x="96" y="136" width="252" height="8" rx="4"/>
     <rect x="96" y="156" width="220" height="8" rx="4"/>
@@ -26,26 +26,26 @@
     <rect x="96" y="212" width="150" height="9" rx="4"/>
     <rect x="96" y="232" width="110" height="9" rx="4"/>
   </g>
-  <g fill="none" stroke="#d4a837" stroke-opacity="0.55">
+  <g fill="none" stroke="#4d7cff" stroke-opacity="0.55">
     <rect x="96" y="190" width="252" height="1" rx="0.5"/>
   </g>
 
   <g font-family="Georgia, 'Times New Roman', serif">
-    <text x="470" y="172" font-size="66" font-weight="bold" fill="#faf9f6">Clause</text>
-    <text x="705" y="172" font-size="66" font-weight="bold" fill="#d4a837">It</text>
+    <text x="470" y="172" font-size="66" font-weight="bold" fill="#fafafa">Clause</text>
+    <text x="705" y="172" font-size="66" font-weight="bold" fill="#4d7cff">It</text>
   </g>
 
   <g font-family="Arial, Helvetica, sans-serif">
-    <text x="470" y="212" font-size="26" fill="#d4a837">Read the clauses, not the fine print.</text>
-    <text x="470" y="246" font-size="16" fill="#faf9f6" fill-opacity="0.6">Plain-language bilingual (EN/HI) analysis of loans, insurance, rent &amp; job documents.</text>
+    <text x="470" y="212" font-size="26" fill="#4d7cff">Read the clauses, not the fine print.</text>
+    <text x="470" y="246" font-size="16" fill="#fafafa" fill-opacity="0.6">Plain-language bilingual (EN/HI) analysis of loans, insurance, rent &amp; job documents.</text>
   </g>
 
   <g font-family="Arial, Helvetica, sans-serif">
-    <rect x="470" y="268" width="120" height="30" rx="15" fill="none" stroke="#faf9f6" stroke-opacity="0.25"/>
-    <text x="530" y="287" font-size="13" fill="#faf9f6" fill-opacity="0.7" text-anchor="middle">PDF · Word · Photo</text>
-    <rect x="602" y="268" width="132" height="30" rx="15" fill="none" stroke="#faf9f6" stroke-opacity="0.25"/>
-    <text x="668" y="287" font-size="13" fill="#faf9f6" fill-opacity="0.7" text-anchor="middle">10 free / month</text>
-    <rect x="746" y="268" width="150" height="30" rx="15" fill="none" stroke="#d4a837" stroke-opacity="0.5"/>
-    <text x="821" y="287" font-size="13" fill="#d4a837" text-anchor="middle">English + Hindi</text>
+    <rect x="470" y="268" width="120" height="30" rx="15" fill="none" stroke="#fafafa" stroke-opacity="0.25"/>
+    <text x="530" y="287" font-size="13" fill="#fafafa" fill-opacity="0.7" text-anchor="middle">PDF · Word · Photo</text>
+    <rect x="602" y="268" width="132" height="30" rx="15" fill="none" stroke="#fafafa" stroke-opacity="0.25"/>
+    <text x="668" y="287" font-size="13" fill="#fafafa" fill-opacity="0.7" text-anchor="middle">10 free / month</text>
+    <rect x="746" y="268" width="150" height="30" rx="15" fill="none" stroke="#0052ff" stroke-opacity="0.6"/>
+    <text x="821" y="287" font-size="13" fill="#4d7cff" text-anchor="middle">English + Hindi</text>
   </g>
 </svg>

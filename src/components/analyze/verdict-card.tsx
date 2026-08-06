@@ -72,10 +72,10 @@ export function VerdictCard({
         <div className="flex items-center gap-3">
           <Icon className={`h-8 w-8 ${styles.icon}`} aria-hidden="true" />
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-muted">
+            <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               Should you sign?
             </p>
-            <h2 className="font-display text-2xl font-semibold text-navy">
+            <h2 className="font-display text-2xl text-foreground">
               {verdict.label}
             </h2>
           </div>
@@ -83,13 +83,13 @@ export function VerdictCard({
         <div
           className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 bg-white ${styles.ring}`}
         >
-          <span className="font-display text-xl font-semibold text-navy">
+          <span className="font-display text-xl text-foreground">
             {score}
-            <span className="text-sm text-muted">/10</span>
+            <span className="text-sm text-muted-foreground">/10</span>
           </span>
         </div>
       </div>
-      <p className="mt-4 leading-7 text-ink">{copy[lang]}</p>
+      <p className="mt-4 leading-7 text-foreground">{copy[lang]}</p>
     </div>
   );
 }
