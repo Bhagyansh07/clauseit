@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
+import { ProfileMenu } from "@/components/profile-menu";
 import { getCurrentUser } from "@/lib/auth";
 
 export default function Header() {
@@ -32,25 +33,10 @@ export default function Header() {
           <Link href="/pricing" className="transition-colors hover:text-navy">
             Plans
           </Link>
-          {user && (
-            <>
-              <Link href="/dashboard" className="transition-colors hover:text-navy">
-                Dashboard
-              </Link>
-              <Link href="/account" className="transition-colors hover:text-navy">
-                Account
-              </Link>
-            </>
-          )}
         </div>
         <div className="flex items-center gap-3">
           {user ? (
-            <Link
-              href="/account"
-              className="text-sm font-medium text-navy transition-opacity hover:opacity-70"
-            >
-              {user.name}
-            </Link>
+            <ProfileMenu user={user} />
           ) : (
             <Link
               href="/login"
