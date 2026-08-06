@@ -163,7 +163,7 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
         <button
           type="button"
           onClick={downloadReport}
-          className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm font-semibold text-violet transition-colors hover:border-violet"
+          className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-violet transition-colors hover:border-violet"
         >
           <Download className="h-4 w-4" aria-hidden="true" />
           Download report

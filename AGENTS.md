@@ -47,44 +47,45 @@ Upload any document (PDF, DOCX, TXT, or camera photo) and get a plain-language a
 
 ## 3. Design System (Locked)
 
-Do not invent a new look per page. Use these tokens consistently everywhere. See the "PW.live-style revamp" spec (the source of truth given by the user). This REPLACED the earlier "Notary's Desk" navy/gold spec AND the "Minimalist Modern" electric-blue spec; do not reintroduce old gold-on-navy or electric-blue looks. The site is a vibrant, eye-catching, professional consumer look: deep navy + violet/fuchsia gradients, bold Poppins display type, colorful gradient tiles, dark gradient hero with animated counters, gradient CTAs.
+Do not invent a new look per page. Use these tokens consistently everywhere. See the "Deep Emerald & Gold" spec (the source of truth given by the user). This REPLACED the earlier "PW.live-style" violet/fuchsia spec, the "Notary's Desk" navy/gold spec, AND the "Minimalist Modern" electric-blue spec; do not reintroduce violet/fuchsia, electric-blue, or neon looks. The site is simple, elegant, and premium: deep pine-emerald + soft antique gold on warm ivory, restrained gradients (emerald→teal for buttons, emerald→gold for word highlights), bold Poppins display type, dark pine hero with soft glow, animated counters. Every colour must work in both light AND dark mode — the dark palette flips via CSS variables in `globals.css` (`.dark` block); never hardcode light-only colours.
 
-| Token | Value | Use |
+| Token | Value (light / dark) | Use |
 |---|---|---|
-| Navy | `#1E1B4B` | Dark hero/footer backgrounds, dark panels |
-| Navy-light | `#6D28D9` | Secondary depth on navy, hover fills |
-| Violet | `#7C3AED` | Primary accent: links, icons, chips, active states |
-| Fuchsia | `#DB2777` | Secondary accent (gradient partner of violet) |
-| Gold | `#F59E0B` | Trust accent: Hindi lines, stamp, small highlights |
-| Gold-bright | `#FBBF24` | Bright accent on dark/violet backgrounds |
-| Parchment | `#F8F7FF` | Page background |
-| Paper | `#FFFFFF` | Cards |
-| Ink | `#1E1B33` | Body text |
-| Ink-soft | `#6B6887` | Secondary / meta text |
-| Red / red-soft | `#E11D48` / `#FDE8EF` | Serious severity |
-| Amber / amber-soft | `#D97706` / `#FEF3C7` | Warning severity |
-| Sage / sage-soft | `#059669` / `#D1FAE5` | Note / safe severity |
-| Line | `#E9E6F6` | Hairlines, borders, dashed dividers |
+| Navy | `#143A3A` / `#E9E4D8` | Headings, primary text (flips to ivory in dark) |
+| Navy-light | `#0F5149` / `#2A9D8F` | Hover fills, secondary depth |
+| Navy-solid | `#143A3A` (fixed both) | Hero/footer/dark panels background |
+| Violet (accent) | `#1F6F67` / `#37A191` | Links, icons, chips, active states (this is emerald now) |
+| Fuchsia | `#C18F3B` / `#C99A3D` | Warm gold secondary (this is gold now) |
+| Gold | `#B78A2E` / `#C99A3D` | Trust accent: Hindi lines, stamp, highlights |
+| Gold-bright | `#C99A3D` / `#E3C06B` | Accent on dark backgrounds |
+| Parchment | `#F6F3EC` / `#0F1B1B` | Page background |
+| Paper | `#FFFFFF` / `#152626` | Cards |
+| Ink | `#263534` / `#EAE5DA` | Body text |
+| Ink-soft | `#5F6D6A` / `#9FB0AC` | Secondary / meta text |
+| Red / red-soft | `#B4493F` / `#F5E4E1` | Serious severity |
+| Amber / amber-soft | `#B7781F` / `#F6EDD9` | Warning severity |
+| Sage / sage-soft | `#4E7C5A` / `#E5EFE7` | Note / safe severity |
+| Line | `#E6E2D6` / `#263A38` | Hairlines, borders, dashed dividers |
+| Gradient (bg) | `#1F6F67→#2A9D8F` / `#2A9D8F→#43BBA9` | `--gradient-from/to` for `.gradient-bg`, `.gradient-border` |
 | Headings font | Poppins (500–800) | `font-display` |
 | Body font | Inter (400–600) + Noto Sans Devanagari (400–700) | `font-sans` (both scripts) |
 | Labels font | JetBrains Mono (400–500, uppercase) | `font-mono` |
 | Radius | `rounded-xl`/`rounded-2xl` on cards and inputs | — |
 | Container | `max-w-6xl` for marketing pages, `max-w-4xl` for reading | — |
-| Icons | Lucide only | — |
 
 **Signature elements (use deliberately, not everywhere):**
-- **Gradient text/bg:** the violet→fuchsia linear gradient (`#7C3AED` → `#DB2777`) via `.gradient-text`, `.gradient-bg`, `.gradient-border` utilities (defined in `globals.css`). Used for CTAs, key headline words, the Pro pricing card, the 404 number.
-- **Dark hero:** navy `#1E1B4B` section with blurred violet/fuchsia glow blobs (`blur-3xl`), gradient badge pill, gradient CTA buttons, and an animated stats band (Counter component: `useInView` + `requestAnimationFrame`, 900ms ease-out cubic, one shot, respects `prefers-reduced-motion`).
-- **Color tiles:** full-gradient cards with white text (expertise grid). Allowed gradients: violet→fuchsia, fuchsia→rose-500, amber→orange-500, violet→sky-500, sky-500→violet, fuchsia→violet. Default Tailwind palette colors may accompany the custom tokens.
-- **Stamp:** a circular, gold-ringed, tilted seal (`#FBBF24`) overlapping the top-right edge of the verdict card. Lands once (rotate + scale animation), never loops. Disabled under `prefers-reduced-motion`. See `src/components/analyze/stamp.tsx`.
+- **Gradient text:** emerald→gold (`--gradient-from` → `--gold`) via `.gradient-text`. Used for a few key headline words, the logo "It", the 404 number. Never neon.
+- **Gradient buttons:** emerald→teal via `.gradient-bg` with white text and `shadow-glow`, hover `brightness-110`. Used for CTAs and icon chips. Secondary buttons = paper fill, `border-line`, hover `border-violet` (emerald).
+- **Dark hero:** navy-solid `#143A3A` with blurred emerald/gold glow blobs (`blur-3xl`), badge pill, and an animated stats band (Counter component: `useInView` + `requestAnimationFrame`, 900ms ease-out cubic, one shot, respects `prefers-reduced-motion`).
+- **Color tiles:** full-gradient cards with white text (expertise grid). Allowed gradients stay in the emerald/teal/gold family: `from-emerald-700 to-teal-600`, `from-violet to-gold`, `from-teal-700 to-emerald-800`, `from-gold to-amber`, `from-emerald-600 to-teal-500`, `from-teal-600 to-gold`. NEVER default tailwind blue/pink/orange-neon (sky-500, rose-500, orange-500) with these.
+- **Stamp:** a circular, gold-ringed, tilted seal (`#C99A3D`) overlapping the top-right edge of the verdict card. Lands once (rotate + scale animation), never loops. Disabled under `prefers-reduced-motion`. See `src/components/analyze/stamp.tsx`.
 - **Risk gauge:** a radial/arc gauge (`src/components/analyze/risk-gauge.tsx`), NEVER a progress bar. Severity-colored by level.
-- **Verdict card:** the only inverted card on the site — gradient navy→violet with a fuchsia blur blob, white text, gold-bright Hindi subline, radial gauge, overlapping stamp.
-- **Flag cards:** white card with a THIN LEFT border in the severity color (4px), a soft pill badge (`bg-*-soft text-*`), the quoted clause in italic, a dashed divider, then the plain explanation and a one-line action in violet with a fuchsia arrow.
-- **Severity colors are reserved for flags.** Violet/fuchsia gradients are reserved for CTAs, brand, and key highlights. Never use plain blue.
+- **Verdict card:** the only inverted card on the site — gradient navy-solid→violet with a soft gold/emerald blur blob, white text, gold-bright Hindi subline, radial gauge, overlapping stamp.
+- **Flag cards:** paper card with a THIN LEFT border in the severity color (4px), a soft pill badge (`bg-*-soft text-*`), the quoted clause in italic, a dashed divider, then the plain explanation and a one-line action in violet with a gold arrow.
+- **Severity colors are reserved for flags.** Emerald/gold gradients are reserved for CTAs, brand, and key highlights. Never use plain blue or neon purple/pink.
 - **Language toggle:** two-button pill, violet border, active side fills the gradient with white text.
 - **Section labels:** violet pill with a pulsing violet dot + mono uppercase (~0.15em tracking).
-- **Buttons:** primary = `gradient-bg` white text with `shadow-glow`, hover `brightness-110`. Secondary = white/paper fill, `border-line`, hover `border-violet`. Focus rings `ring-violet/25`.
-- **Cards:** white or parchment on the page background, `rounded-2xl`, `shadow-paper`, optional `hover:-translate-y-1` lift. Pro highlight cards use full `gradient-bg` with white text.
+- **Cards:** paper on parchment, `rounded-2xl`, `shadow-paper`, optional `hover:-translate-y-1` lift. Pro highlight cards use full `gradient-bg` with white text.
 - **Motion:** entrance animations and counter one-shot; stamp lands once. NO continuous pulse (the single pulsing section-label dot is allowed), NO rotating rings, NO floating cards. Respect `prefers-reduced-motion`.
 
 **Layout rules:**
@@ -153,7 +154,7 @@ Before any feature or release is considered done, verify:
 
 ### 6.1 Visible
 - Custom domain in production, not default `vercel.app`.
-- Navy + violet/fuchsia palette everywhere; no plain-blue default Tailwind look, no old Notary gold-on-navy scheme.
+- Deep emerald + gold palette on warm ivory everywhere; no plain-blue default Tailwind look, no violet/fuchsia, no old Notary gold-on-navy scheme.
 - Real screenshots of the actual product on the landing page; no generic AI stock photos.
 - No fake testimonials, fake visitor/customer counts, or invented social proof. Empty is better than fake.
 - No broken buttons. No `href="#"` dead links. Every interactive element works.

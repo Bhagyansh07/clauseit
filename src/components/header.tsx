@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
 import { ProfileMenu } from "@/components/profile-menu";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { getCurrentUser } from "@/lib/auth";
 
 export default function Header() {
@@ -22,7 +23,7 @@ export default function Header() {
         </Link>
         <div className="hidden items-center gap-8 text-sm font-semibold text-ink-soft md:flex">
           <Link
-            href={user ? "/upload" : "/signup"}
+            href="/signup"
             className="transition-colors hover:text-violet"
           >
             Analyze
@@ -35,6 +36,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           {user ? (
             <ProfileMenu user={user} />
           ) : (

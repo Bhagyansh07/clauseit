@@ -76,7 +76,7 @@ export default function Pricing() {
             className={`flex flex-col rounded-2xl p-8 shadow-paper ${
               plan.highlighted
                 ? "gradient-bg text-white shadow-glow"
-                : "border border-line bg-white"
+                : "border border-line bg-paper"
             }`}
           >
             <h2 className={`font-display text-xl font-bold ${plan.highlighted ? "text-white" : "text-navy"}`}>

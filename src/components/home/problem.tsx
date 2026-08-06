@@ -49,7 +49,7 @@ export default function Problem() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {examples.map((example, i) => (
           <FadeIn key={example.title} delay={0.08 * i}>
-            <div className="h-full overflow-hidden rounded-2xl border border-line bg-white shadow-paper transition-transform duration-200 hover:-translate-y-1">
+            <div className="h-full overflow-hidden rounded-2xl border border-line bg-paper shadow-paper transition-transform duration-200 hover:-translate-y-1">
               <div
                 className={`bg-gradient-to-r ${example.accent} h-1.5`}
                 aria-hidden="true"

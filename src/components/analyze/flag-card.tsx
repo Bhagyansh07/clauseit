@@ -37,7 +37,7 @@ export function FlagCard({
 
   return (
     <div
-      className={`rounded-xl border border-line border-l-4 bg-white p-5 shadow-paper ${meta.border}`}
+      className={`rounded-xl border border-line border-l-4 bg-paper p-5 shadow-paper ${meta.border}`}
     >
       <div className="flex items-center justify-between gap-3">
         <p className="font-display font-bold text-navy">

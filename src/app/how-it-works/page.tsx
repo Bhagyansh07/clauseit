@@ -63,7 +63,7 @@ export default function HowItWorks() {
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {steps.map((item) => (
-            <div key={item.step} className="rounded-2xl border border-line bg-white p-6 shadow-paper">
+            <div key={item.step} className="rounded-2xl border border-line bg-paper p-6 shadow-paper">
               <span className="gradient-bg flex h-11 w-11 items-center justify-center rounded-xl font-mono text-sm font-bold text-white shadow-glow">
                 {item.step}
               </span>
@@ -78,7 +78,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-white">
+      <section className="border-y border-line bg-paper">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
           <SectionLabel>Small print, translated</SectionLabel>
           <h2 className="mt-6 font-display text-3xl leading-tight text-navy sm:text-4xl">
@@ -129,7 +129,7 @@ export default function HowItWorks() {
           {faqs.map((faq) => (
             <details
               key={faq.q}
-              className="rounded-2xl border border-line bg-white px-6 py-5 shadow-paper open:border-violet"
+              className="rounded-2xl border border-line bg-paper px-6 py-5 shadow-paper open:border-violet"
             >
               <summary className="cursor-pointer font-semibold text-navy">
                 {faq.q}

@@ -6,7 +6,7 @@ export default function FinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
       <FadeIn>
-        <div className="relative overflow-hidden rounded-3xl bg-navy px-6 py-14 text-center sm:px-12 sm:py-20">
+        <div className="relative overflow-hidden rounded-3xl bg-navy-solid px-6 py-14 text-center sm:px-12 sm:py-20">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-violet/40 blur-[100px]"
