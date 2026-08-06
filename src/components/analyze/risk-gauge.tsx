@@ -27,7 +27,7 @@ export function RiskGauge({
         stroke="currentColor"
         strokeOpacity="0.15"
         strokeWidth="6"
-        className={onDark ? "text-gold-bright" : "text-navy"}
+        className={onDark ? "text-white" : "text-violet"}
       />
       <circle
         cx="40"
@@ -45,8 +45,8 @@ export function RiskGauge({
         y="45"
         textAnchor="middle"
         fontSize="17"
-        fontWeight="500"
-        fill={onDark ? "#FBF9F4" : "#23211D"}
+        fontWeight="700"
+        fill={onDark ? "#FFFFFF" : "#1E1B33"}
       >
         {score}
         <tspan fontSize="9" dx="1">

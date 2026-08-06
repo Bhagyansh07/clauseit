@@ -32,12 +32,12 @@ export default function DashboardPage() {
   if (!user) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <div className="rounded border border-line bg-paper p-8 text-center shadow-paper">
-          <h1 className="font-display text-3xl font-semibold text-navy">Your dashboard</h1>
+        <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-paper">
+          <h1 className="font-display text-3xl font-bold text-navy">Your dashboard</h1>
           <p className="mt-3 text-ink-soft">Log in to see your analysis history and usage.</p>
           <Link
             href="/login"
-            className="mt-6 inline-block rounded border border-navy bg-navy px-6 py-3 font-semibold text-paper transition-colors hover:bg-navy-light"
+            className="gradient-bg mt-6 inline-block rounded-xl px-6 py-3 font-semibold text-white shadow-glow transition-all hover:brightness-110"
           >
             Log in
           </Link>
@@ -47,21 +47,21 @@ export default function DashboardPage() {
   }
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="rounded border border-line bg-paper p-8 shadow-paper">
+    <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="rounded-2xl border border-line bg-white p-8 shadow-paper">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold">
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-violet">
               Dashboard
             </p>
-            <h1 className="mt-2 font-display text-3xl font-semibold text-navy">
+            <h1 className="mt-2 font-display text-3xl font-bold text-navy">
               Welcome back, {user.name}
             </h1>
             <p className="mt-2 text-ink-soft">
               {user.email} · You are on the {user.plan} plan.
             </p>
           </div>
-          <div className="rounded border border-line bg-parchment px-4 py-3 text-sm text-ink-soft">
+          <div className="rounded-xl border border-line bg-parchment px-4 py-3 text-sm text-ink-soft">
             <p className="font-semibold text-navy">Free usage this month</p>
             <p>
               {usage} / 10 analyses
@@ -72,20 +72,24 @@ export default function DashboardPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <Link
             href="/upload"
-            className="group rounded border border-line bg-parchment p-5 transition-colors hover:border-gold"
+            className="group rounded-2xl border border-line bg-parchment p-5 transition-colors hover:border-violet"
           >
-            <FileUp className="h-5 w-5 text-gold" aria-hidden="true" />
-            <p className="mt-2 font-semibold text-navy">Analyze a new document</p>
+            <span className="gradient-bg flex h-10 w-10 items-center justify-center rounded-xl text-white">
+              <FileUp className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <p className="mt-3 font-display font-bold text-navy">Analyze a new document</p>
             <p className="mt-2 text-sm text-ink-soft">
               Upload a PDF, Word file, or paste text and get a plain-language breakdown.
             </p>
           </Link>
           <Link
             href="/account"
-            className="group rounded border border-line bg-parchment p-5 transition-colors hover:border-gold"
+            className="group rounded-2xl border border-line bg-parchment p-5 transition-colors hover:border-violet"
           >
-            <User className="h-5 w-5 text-gold" aria-hidden="true" />
-            <p className="mt-2 font-semibold text-navy">Account and billing</p>
+            <span className="gradient-bg flex h-10 w-10 items-center justify-center rounded-xl text-white">
+              <User className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <p className="mt-3 font-display font-bold text-navy">Account and billing</p>
             <p className="mt-2 text-sm text-ink-soft">
               View your plan details and upgrade options.
             </p>
@@ -93,9 +97,9 @@ export default function DashboardPage() {
         </div>
 
         <div className="mt-10">
-          <h2 className="font-display text-xl font-semibold text-navy">Recent analyses</h2>
+          <h2 className="font-display text-xl font-bold text-navy">Recent analyses</h2>
           {analyses.length === 0 ? (
-            <div className="mt-4 rounded border border-dashed border-line bg-parchment p-6 text-center text-sm text-ink-soft">
+            <div className="mt-4 rounded-2xl border border-dashed border-line bg-parchment p-6 text-center text-sm text-ink-soft">
               No analyses yet. Start with your first document.
             </div>
           ) : (
@@ -108,7 +112,7 @@ export default function DashboardPage() {
                     sessionStorage.setItem(item.id, JSON.stringify(item.analysis));
                     router.push(`/analyze/${item.id}`);
                   }}
-                  className="w-full rounded border border-line bg-parchment p-4 text-left transition-colors hover:border-gold"
+                  className="w-full rounded-xl border border-line bg-parchment p-4 text-left transition-colors hover:border-violet"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
@@ -119,7 +123,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="text-sm text-ink-soft">
                       Risk:{" "}
-                      <span className="font-semibold text-navy">
+                      <span className="font-semibold text-violet">
                         {item.riskLevel}
                       </span>{" "}
                       ({item.riskScore}/10)

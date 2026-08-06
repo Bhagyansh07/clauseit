@@ -55,10 +55,7 @@ export default function HowItWorks() {
         <SectionLabel>How it works</SectionLabel>
         <h1 className="mt-6 max-w-2xl font-display text-4xl leading-tight text-navy sm:text-5xl">
           Three steps between you and a document you{" "}
-          <span className="relative whitespace-nowrap text-gold">
-            actually understand
-            <span className="verdict-underline" aria-hidden="true" />
-          </span>
+          <span className="gradient-text">actually understand</span>
         </h1>
         <p className="mt-4 text-lg text-ink-soft">
           From upload to review, the experience is fast and clear.
@@ -66,11 +63,11 @@ export default function HowItWorks() {
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {steps.map((item) => (
-            <div key={item.step} className="rounded border border-line bg-paper p-6 shadow-paper">
-              <span className="flex h-11 w-11 items-center justify-center rounded-sm border border-gold bg-parchment font-mono text-sm font-semibold text-gold">
+            <div key={item.step} className="rounded-2xl border border-line bg-white p-6 shadow-paper">
+              <span className="gradient-bg flex h-11 w-11 items-center justify-center rounded-xl font-mono text-sm font-bold text-white shadow-glow">
                 {item.step}
               </span>
-              <h2 className="mt-4 font-display text-2xl font-semibold text-navy">
+              <h2 className="mt-4 font-display text-2xl font-bold text-navy">
                 {item.title}
               </h2>
               <p className="mt-3 text-sm leading-6 text-ink-soft">
@@ -81,7 +78,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-paper">
+      <section className="border-y border-line bg-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
           <SectionLabel>Small print, translated</SectionLabel>
           <h2 className="mt-6 font-display text-3xl leading-tight text-navy sm:text-4xl">
@@ -92,8 +89,8 @@ export default function HowItWorks() {
             paragraphs. This is what ClauseIt makes of it.
           </p>
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <div className="rounded border border-line bg-parchment p-6">
-              <h3 className="font-mono text-xs uppercase tracking-[0.15em] text-ink-soft">
+            <div className="rounded-2xl border border-line bg-parchment p-6">
+              <h3 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-ink-soft">
                 What the document says
               </h3>
               <p className="mt-4 leading-7 text-ink">
@@ -104,8 +101,8 @@ export default function HowItWorks() {
                 forthwith.
               </p>
             </div>
-            <div className="rounded border-2 border-navy bg-paper p-6">
-              <h3 className="font-mono text-xs uppercase tracking-[0.15em] text-gold">
+            <div className="gradient-border rounded-2xl p-6">
+              <h3 className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-violet">
                 What it means
               </h3>
               <ul className="mt-4 space-y-3 leading-7 text-ink">
@@ -132,7 +129,7 @@ export default function HowItWorks() {
           {faqs.map((faq) => (
             <details
               key={faq.q}
-              className="rounded border border-line bg-paper px-6 py-5 shadow-paper open:border-navy"
+              className="rounded-2xl border border-line bg-white px-6 py-5 shadow-paper open:border-violet"
             >
               <summary className="cursor-pointer font-semibold text-navy">
                 {faq.q}

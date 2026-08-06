@@ -26,12 +26,12 @@ export default function AccountPage() {
   if (!user) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <div className="rounded border border-line bg-paper p-8 text-center shadow-paper">
-          <h1 className="font-display text-3xl font-semibold text-navy">Account</h1>
+        <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-paper">
+          <h1 className="font-display text-3xl font-bold text-navy">Account</h1>
           <p className="mt-3 text-ink-soft">Log in to manage your plan and settings.</p>
           <Link
             href="/login"
-            className="mt-6 inline-block rounded border border-navy bg-navy px-6 py-3 font-semibold text-paper transition-colors hover:bg-navy-light"
+            className="gradient-bg mt-6 inline-block rounded-xl px-6 py-3 font-semibold text-white shadow-glow transition-all hover:brightness-110"
           >
             Log in
           </Link>
@@ -42,21 +42,25 @@ export default function AccountPage() {
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="rounded border border-line bg-paper p-8 shadow-paper">
-        <h1 className="font-display text-3xl font-semibold text-navy">Account</h1>
+      <div className="rounded-2xl border border-line bg-white p-8 shadow-paper">
+        <h1 className="font-display text-3xl font-bold text-navy">Account</h1>
         <p className="mt-3 text-ink-soft">
           Manage your ClauseIt account locally for now.
         </p>
 
-        <div className="mt-8 rounded border border-line bg-parchment p-6">
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold">Profile</p>
-          <p className="mt-2 text-xl font-semibold text-navy">{user.name}</p>
+        <div className="mt-8 rounded-2xl border border-line bg-parchment p-6">
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-violet">
+            Profile
+          </p>
+          <p className="mt-2 text-xl font-bold text-navy">{user.name}</p>
           <p className="mt-1 text-ink-soft">{user.email}</p>
         </div>
 
-        <div className="mt-6 rounded border border-line bg-parchment p-6">
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold">Plan</p>
-          <p className="mt-2 text-xl font-semibold text-navy">
+        <div className="mt-6 rounded-2xl border border-line bg-parchment p-6">
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-violet">
+            Plan
+          </p>
+          <p className="mt-2 text-xl font-bold text-navy">
             {planLabels[user.plan as Plan]}
           </p>
           <p className="mt-2 text-sm text-ink-soft">
@@ -67,13 +71,13 @@ export default function AccountPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/dashboard"
-            className="rounded border border-navy bg-navy px-5 py-3 font-semibold text-paper transition-colors hover:bg-navy-light"
+            className="gradient-bg rounded-xl px-5 py-3 font-semibold text-white shadow-glow transition-all hover:brightness-110"
           >
             Go to dashboard
           </Link>
           <button
             onClick={handleLogout}
-            className="rounded border border-line bg-paper px-5 py-3 font-semibold text-navy transition-colors hover:border-red hover:bg-red-soft hover:text-red"
+            className="rounded-xl border border-line bg-white px-5 py-3 font-semibold text-navy transition-colors hover:border-red hover:bg-red-soft hover:text-red"
           >
             Log out
           </button>

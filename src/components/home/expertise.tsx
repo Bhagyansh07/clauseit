@@ -14,45 +14,52 @@ const categories = [
     icon: ScanSearch,
     title: "Hidden clauses",
     text: "Terms buried deep that change what the document really says.",
+    chip: "from-violet to-fuchsia",
   },
   {
     icon: Banknote,
     title: "Unfair charges",
     text: "Fees, interest, and amounts that cost more than they should.",
+    chip: "from-fuchsia to-rose-500",
   },
   {
     icon: FileWarning,
     title: "Penalties and bonds",
     text: "Exit penalties, service bonds, and fines you were not told about.",
+    chip: "from-amber to-orange-500",
   },
   {
     icon: RefreshCcw,
     title: "Auto-renewal",
     text: "Contracts that renew themselves and raise your cost every year.",
+    chip: "from-violet to-sky-500",
   },
   {
     icon: Scale,
     title: "One-sided liability",
     text: "Clauses that put most of the risk on you and little on them.",
+    chip: "from-sky-500 to-violet",
   },
   {
     icon: HelpCircle,
     title: "Jurisdiction traps",
     text: "Places that decide your disputes before they even happen.",
+    chip: "from-fuchsia to-violet",
   },
 ];
 
 export default function Expertise() {
   return (
-    <section className="border-y border-line bg-paper">
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+    <section className="border-y border-line bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="max-w-2xl">
           <FadeIn>
             <SectionLabel>The kind of issues ClauseIt looks for</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
-              Built to catch what <span className="text-gold">small print hides</span>
+            <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-navy sm:text-4xl">
+              Built to catch what{" "}
+              <span className="gradient-text">small print hides</span>
             </h2>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -66,12 +73,14 @@ export default function Expertise() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, i) => (
             <FadeIn key={category.title} delay={0.06 * i}>
-              <div className="h-full rounded border border-line bg-parchment p-6 shadow-paper">
-                <category.icon className="h-6 w-6 text-gold" aria-hidden="true" />
-                <h3 className="mt-4 font-display text-lg font-semibold text-navy">
-                  {category.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-ink-soft">{category.text}</p>
+              <div
+                className={`group h-full rounded-2xl bg-gradient-to-br ${category.chip} p-6 text-white shadow-paper transition-transform duration-200 hover:-translate-y-1 hover:shadow-glow`}
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 backdrop-blur">
+                  <category.icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 font-display text-lg font-bold">{category.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/85">{category.text}</p>
               </div>
             </FadeIn>
           ))}

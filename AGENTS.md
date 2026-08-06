@@ -47,40 +47,45 @@ Upload any document (PDF, DOCX, TXT, or camera photo) and get a plain-language a
 
 ## 3. Design System (Locked)
 
-Do not invent a new look per page. Use these tokens consistently everywhere. See the "The Notary's Desk" spec (the source of truth given by the user). This REPLACED the earlier "Minimalist Modern" electric-blue spec; do not reintroduce blue gradients.
+Do not invent a new look per page. Use these tokens consistently everywhere. See the "PW.live-style revamp" spec (the source of truth given by the user). This REPLACED the earlier "Notary's Desk" navy/gold spec AND the "Minimalist Modern" electric-blue spec; do not reintroduce old gold-on-navy or electric-blue looks. The site is a vibrant, eye-catching, professional consumer look: deep navy + violet/fuchsia gradients, bold Poppins display type, colorful gradient tiles, dark gradient hero with animated counters, gradient CTAs.
 
 | Token | Value | Use |
 |---|---|---|
-| Navy | `#0A1A34` | Primary text, headings, verdict card background |
-| Navy-light | `#1E3A63` | Secondary navy, action-line text |
-| Gold | `#C79A3E` | THE one accent: verdict, stamp, focus rings, links |
-| Gold-bright | `#E0B75A` | Stamp text/lines on navy |
-| Parchment | `#F3EEE3` | Page background (with grain) |
-| Paper | `#FBF9F4` | Cards |
-| Ink | `#23211D` | Body text |
-| Ink-soft | `#706A5C` | Secondary / meta text |
-| Red / red-soft | `#9E3B32` / `#F3E3E0` | Serious severity |
-| Amber / amber-soft | `#B97D2B` / `#F5E9D6` | Warning severity |
-| Sage / sage-soft | `#4F7358` / `#E4ECE3` | Note / safe severity |
-| Line | `#D8CFB8` | Hairlines, borders, dashed dividers |
-| Headings font | Fraunces (400–700, English only) | `font-display` |
-| Body font | IBM Plex Sans + IBM Plex Sans Devanagari (400–700) | `font-sans` (both scripts) |
-| Labels font | IBM Plex Mono (400–500, uppercase) | `font-mono` |
-| Radius | 2–4px (`rounded`), never `rounded-2xl` | — |
-| Container | ~740px reading width (`max-w-3xl`/`max-w-4xl`) | — |
+| Navy | `#1E1B4B` | Dark hero/footer backgrounds, dark panels |
+| Navy-light | `#6D28D9` | Secondary depth on navy, hover fills |
+| Violet | `#7C3AED` | Primary accent: links, icons, chips, active states |
+| Fuchsia | `#DB2777` | Secondary accent (gradient partner of violet) |
+| Gold | `#F59E0B` | Trust accent: Hindi lines, stamp, small highlights |
+| Gold-bright | `#FBBF24` | Bright accent on dark/violet backgrounds |
+| Parchment | `#F8F7FF` | Page background |
+| Paper | `#FFFFFF` | Cards |
+| Ink | `#1E1B33` | Body text |
+| Ink-soft | `#6B6887` | Secondary / meta text |
+| Red / red-soft | `#E11D48` / `#FDE8EF` | Serious severity |
+| Amber / amber-soft | `#D97706` / `#FEF3C7` | Warning severity |
+| Sage / sage-soft | `#059669` / `#D1FAE5` | Note / safe severity |
+| Line | `#E9E6F6` | Hairlines, borders, dashed dividers |
+| Headings font | Poppins (500–800) | `font-display` |
+| Body font | Inter (400–600) + Noto Sans Devanagari (400–700) | `font-sans` (both scripts) |
+| Labels font | JetBrains Mono (400–500, uppercase) | `font-mono` |
+| Radius | `rounded-xl`/`rounded-2xl` on cards and inputs | — |
+| Container | `max-w-6xl` for marketing pages, `max-w-4xl` for reading | — |
 | Icons | Lucide only | — |
 
 **Signature elements (use deliberately, not everywhere):**
-- **Stamp:** a circular, gold-ringed, tilted seal (rotates ~-12deg) overlapping the top-right edge of the verdict card. Lands once (rotate + scale animation), never loops. Disabled under `prefers-reduced-motion`. See `src/components/analyze/stamp.tsx`.
+- **Gradient text/bg:** the violet→fuchsia linear gradient (`#7C3AED` → `#DB2777`) via `.gradient-text`, `.gradient-bg`, `.gradient-border` utilities (defined in `globals.css`). Used for CTAs, key headline words, the Pro pricing card, the 404 number.
+- **Dark hero:** navy `#1E1B4B` section with blurred violet/fuchsia glow blobs (`blur-3xl`), gradient badge pill, gradient CTA buttons, and an animated stats band (Counter component: `useInView` + `requestAnimationFrame`, 900ms ease-out cubic, one shot, respects `prefers-reduced-motion`).
+- **Color tiles:** full-gradient cards with white text (expertise grid). Allowed gradients: violet→fuchsia, fuchsia→rose-500, amber→orange-500, violet→sky-500, sky-500→violet, fuchsia→violet. Default Tailwind palette colors may accompany the custom tokens.
+- **Stamp:** a circular, gold-ringed, tilted seal (`#FBBF24`) overlapping the top-right edge of the verdict card. Lands once (rotate + scale animation), never loops. Disabled under `prefers-reduced-motion`. See `src/components/analyze/stamp.tsx`.
 - **Risk gauge:** a radial/arc gauge (`src/components/analyze/risk-gauge.tsx`), NEVER a progress bar. Severity-colored by level.
-- **Verdict card:** the only inverted navy section on the whole site. Gold eyebrow label, Fraunces headline, gold-bright Hindi subline, radial gauge, overlapping stamp.
-- **Flag cards:** paper card with a THIN LEFT border in the severity color (4px), a soft pill badge (`bg-*-soft text-*`), the quoted clause in italic, a dashed divider, then the plain explanation and a one-line action in navy-light with a gold arrow.
-- **Severity colors are reserved for flags.** Gold is reserved for trust/verdict/brand. Never use blue, purple, or gradient fills.
-- **Language toggle:** two-button pill, navy border, active side fills navy with paper text.
-- **Section labels:** static gold dot + mono uppercase (~0.1em tracking). No pulsing.
-- **Buttons:** primary = navy fill on paper, hover navy-light, focus `ring-2 ring-gold`. Secondary = paper fill, `border-line`, hover `border-gold`.
-- **Grain:** near-invisible paper noise over the whole page via `body::before` (opacity 0.035). Do not add per-section textures.
-- **Motion:** entrance animation once + stamp once. NO floating cards, NO rotating rings, NO continuous pulse. Respect `prefers-reduced-motion`.
+- **Verdict card:** the only inverted card on the site — gradient navy→violet with a fuchsia blur blob, white text, gold-bright Hindi subline, radial gauge, overlapping stamp.
+- **Flag cards:** white card with a THIN LEFT border in the severity color (4px), a soft pill badge (`bg-*-soft text-*`), the quoted clause in italic, a dashed divider, then the plain explanation and a one-line action in violet with a fuchsia arrow.
+- **Severity colors are reserved for flags.** Violet/fuchsia gradients are reserved for CTAs, brand, and key highlights. Never use plain blue.
+- **Language toggle:** two-button pill, violet border, active side fills the gradient with white text.
+- **Section labels:** violet pill with a pulsing violet dot + mono uppercase (~0.15em tracking).
+- **Buttons:** primary = `gradient-bg` white text with `shadow-glow`, hover `brightness-110`. Secondary = white/paper fill, `border-line`, hover `border-violet`. Focus rings `ring-violet/25`.
+- **Cards:** white or parchment on the page background, `rounded-2xl`, `shadow-paper`, optional `hover:-translate-y-1` lift. Pro highlight cards use full `gradient-bg` with white text.
+- **Motion:** entrance animations and counter one-shot; stamp lands once. NO continuous pulse (the single pulsing section-label dot is allowed), NO rotating rings, NO floating cards. Respect `prefers-reduced-motion`.
 
 **Layout rules:**
 - Every page has exactly one `<h1>`, then a clear hierarchy.
@@ -148,7 +153,7 @@ Before any feature or release is considered done, verify:
 
 ### 6.1 Visible
 - Custom domain in production, not default `vercel.app`.
-- Navy + gold palette on parchment everywhere; no purple/blue gradients, no default Tailwind/shadcn look.
+- Navy + violet/fuchsia palette everywhere; no plain-blue default Tailwind look, no old Notary gold-on-navy scheme.
 - Real screenshots of the actual product on the landing page; no generic AI stock photos.
 - No fake testimonials, fake visitor/customer counts, or invented social proof. Empty is better than fake.
 - No broken buttons. No `href="#"` dead links. Every interactive element works.
@@ -203,7 +208,7 @@ Before any feature or release is considered done, verify:
 - Do not leave dead code, unused imports, commented-out blocks, or `console.log`s.
 - Do not ship fake reviews, fake counts, or fake testimonials.
 - Do not use default AI-generated hero text ("Empowering the future of...").
-- Do not use purple gradients or default starter styling.
+- Do not use plain-blue default Tailwind styling, the old electric-blue palette, or the old navy/gold scheme.
 - Do not break responsive layout on mobile.
 - Do not expose AI calls from the client side, ever.
 - Do not trust frontend checks for quotas or authorization.

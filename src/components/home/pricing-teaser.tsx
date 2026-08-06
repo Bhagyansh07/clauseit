@@ -39,17 +39,17 @@ const plans = [
 
 export default function PricingTeaser() {
   return (
-    <section className="border-y border-line bg-paper">
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+    <section className="border-y border-line bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-xl">
             <FadeIn>
               <SectionLabel>Pricing</SectionLabel>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
+              <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-navy sm:text-4xl">
                 Clear pricing for everyday{" "}
-                <span className="text-gold">document review</span>
+                <span className="gradient-text">document review</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
@@ -61,7 +61,7 @@ export default function PricingTeaser() {
           </div>
           <Link
             href="/pricing"
-            className="group inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-navy underline-offset-4 hover:text-gold hover:underline"
+            className="group inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-violet hover:text-fuchsia"
           >
             See full pricing
             <ArrowRight
@@ -75,21 +75,31 @@ export default function PricingTeaser() {
           {plans.map((plan, i) => (
             <FadeIn key={plan.name} delay={0.08 * i}>
               <div
-                className={`flex h-full flex-col rounded border bg-parchment p-6 shadow-paper ${
-                  plan.highlight ? "border-2 border-navy" : "border-line"
+                className={`flex h-full flex-col rounded-2xl p-7 shadow-paper ${
+                  plan.highlight
+                    ? "gradient-bg text-white shadow-glow"
+                    : "border border-line bg-parchment"
                 }`}
               >
                 <p
                   className={`font-mono text-sm font-medium uppercase tracking-[0.12em] ${
-                    plan.highlight ? "text-gold" : "text-ink-soft"
+                    plan.highlight ? "text-white/80" : "text-ink-soft"
                   }`}
                 >
                   {plan.name}
                 </p>
-                <p className="mt-3 font-display text-4xl font-semibold text-navy">
+                <p
+                  className={`mt-3 font-display text-4xl font-bold ${
+                    plan.highlight ? "text-white" : "text-navy"
+                  }`}
+                >
                   <span className="text-xl">₹</span>
                   {plan.price}
-                  <span className="ml-2 text-sm font-normal text-ink-soft">
+                  <span
+                    className={`ml-2 text-sm font-normal ${
+                      plan.highlight ? "text-white/75" : "text-ink-soft"
+                    }`}
+                  >
                     {plan.period}
                   </span>
                 </p>
@@ -97,19 +107,27 @@ export default function PricingTeaser() {
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex gap-2">
                       <Check
-                        className="mt-0.5 h-4 w-4 shrink-0 text-gold"
+                        className={`mt-0.5 h-4 w-4 shrink-0 ${
+                          plan.highlight ? "text-gold-bright" : "text-violet"
+                        }`}
                         aria-hidden="true"
                       />
-                      <span className="text-ink-soft">{feature}</span>
+                      <span
+                        className={
+                          plan.highlight ? "text-white/90" : "text-ink-soft"
+                        }
+                      >
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
                 <Link
                   href="/signup"
-                  className={`mt-6 inline-flex h-11 items-center justify-center rounded border px-4 text-sm font-semibold transition-colors ${
+                  className={`mt-6 inline-flex h-11 items-center justify-center rounded-xl px-4 text-sm font-bold transition-all ${
                     plan.highlight
-                      ? "border-navy bg-navy text-paper hover:bg-navy-light"
-                      : "border-line bg-paper text-navy hover:border-gold"
+                      ? "bg-white text-violet hover:bg-white/90"
+                      : "border border-violet bg-white text-violet hover:bg-violet hover:text-white"
                   }`}
                 >
                   {plan.highlight ? "Start with Pro" : "Get started"}

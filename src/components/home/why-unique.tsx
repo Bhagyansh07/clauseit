@@ -13,40 +13,45 @@ const points = [
     icon: Globe,
     title: "Built for India",
     text: "Made for loan, insurance, rent, and job documents. The terms that matter to Indian households, not generic templates.",
+    chip: "from-violet to-fuchsia",
   },
   {
     icon: Languages,
     title: "English and Hindi",
     text: "Both, on every result, written in simple language. No law-school vocabulary.",
+    chip: "from-fuchsia to-amber",
   },
   {
     icon: Camera,
     title: "Works from a photo",
     text: "No printer, no scanner. Point your phone at the page and upload.",
+    chip: "from-amber to-violet",
   },
   {
     icon: Lock,
     title: "Your document is not stored",
     text: "Uploads are analyzed and discarded. We never keep a copy of your file by default.",
+    chip: "from-violet to-sky-500",
   },
   {
     icon: Wallet,
     title: "Free to start",
     text: "10 documents every month at no charge. No card required.",
+    chip: "from-sky-500 to-fuchsia",
   },
 ];
 
 export default function WhyUnique() {
   return (
-    <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="max-w-2xl">
         <FadeIn>
           <SectionLabel>Why ClauseIt</SectionLabel>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
-            Built for the way <span className="text-gold">real people</span>{" "}
-            read documents
+          <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-navy sm:text-4xl">
+            Built for the way{" "}
+            <span className="gradient-text">real people</span> read documents
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
@@ -60,10 +65,14 @@ export default function WhyUnique() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {points.map((point, i) => (
           <FadeIn key={point.title} delay={0.06 * i}>
-            <div className="h-full rounded border border-line bg-paper p-6 shadow-paper">
+            <div className="h-full rounded-2xl border border-line bg-white p-6 shadow-paper transition-transform duration-200 hover:-translate-y-1">
               <div className="flex items-center gap-3">
-                <point.icon className="h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
-                <h3 className="font-display text-lg font-semibold text-navy">
+                <span
+                  className={`bg-gradient-to-br ${point.chip} flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white`}
+                >
+                  <point.icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h3 className="font-display text-lg font-bold text-navy">
                   {point.title}
                 </h3>
               </div>

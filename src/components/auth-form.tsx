@@ -38,12 +38,12 @@ export function AuthForm({ mode }: AuthFormProps) {
   }
 
   const inputClass =
-    "w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-ink placeholder:text-ink-soft/60 focus:border-gold focus:ring-2 focus:ring-gold/30 focus:outline-none";
+    "w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-ink placeholder:text-ink-soft/60 focus:border-violet focus:ring-2 focus:ring-violet/25 focus:outline-none";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded border border-line bg-paper p-6 shadow-paper"
+      className="space-y-4 rounded-2xl border border-line bg-white p-7 shadow-seal"
     >
       {mode === "signup" && (
         <div>
@@ -86,7 +86,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       </div>
 
       {error && (
-        <p className="rounded-sm border border-red-soft bg-red-soft px-3 py-2 text-sm text-red">
+        <p className="rounded-xl border border-red-soft bg-red-soft px-3 py-2 text-sm text-red">
           {error}
         </p>
       )}
@@ -94,7 +94,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded border border-navy bg-navy px-4 py-2.5 font-semibold text-paper transition-colors hover:bg-navy-light focus:ring-2 focus:ring-gold focus:outline-none disabled:opacity-60"
+        className="gradient-bg w-full rounded-xl px-4 py-3 font-semibold text-white shadow-glow transition-all hover:brightness-110 focus:ring-2 focus:ring-violet/40 focus:outline-none disabled:opacity-60"
       >
         {loading
           ? "Please wait..."

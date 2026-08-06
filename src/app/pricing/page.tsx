@@ -62,10 +62,7 @@ export default function Pricing() {
       <SectionLabel>Pricing</SectionLabel>
       <h1 className="mt-6 font-display text-4xl leading-tight text-navy sm:text-5xl">
         Simple pricing for{" "}
-        <span className="relative whitespace-nowrap text-gold">
-          everyday review
-          <span className="verdict-underline" aria-hidden="true" />
-        </span>
+        <span className="gradient-text">everyday review</span>
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-ink-soft">
         Start free, upgrade when you need it. Pay with UPI, cards, or
@@ -76,39 +73,47 @@ export default function Pricing() {
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`flex flex-col rounded border bg-paper p-8 shadow-paper ${
+            className={`flex flex-col rounded-2xl p-8 shadow-paper ${
               plan.highlighted
-                ? "border-2 border-navy"
-                : "border border-line"
+                ? "gradient-bg text-white shadow-glow"
+                : "border border-line bg-white"
             }`}
           >
-            <h2 className="font-display text-xl font-semibold text-navy">
+            <h2 className={`font-display text-xl font-bold ${plan.highlighted ? "text-white" : "text-navy"}`}>
               {plan.name}
             </h2>
-            <p className="mt-1 text-sm text-ink-soft">{plan.tagline}</p>
+            <p className={`mt-1 text-sm ${plan.highlighted ? "text-white/80" : "text-ink-soft"}`}>
+              {plan.tagline}
+            </p>
             <p className="mt-6">
-              <span className="font-display text-4xl font-semibold text-navy">
+              <span className={`font-display text-4xl font-bold ${plan.highlighted ? "text-white" : "text-navy"}`}>
                 {plan.price}
               </span>
-              <span className="ml-2 text-sm text-ink-soft">{plan.period}</span>
+              <span className={`ml-2 text-sm ${plan.highlighted ? "text-white/75" : "text-ink-soft"}`}>
+                {plan.period}
+              </span>
             </p>
             <ul className="mt-8 flex-1 space-y-3">
               {plan.features.map((feature) => (
                 <li key={feature} className="flex items-start gap-3 text-sm">
                   <Check
-                    className="mt-0.5 h-4 w-4 shrink-0 text-gold"
+                    className={`mt-0.5 h-4 w-4 shrink-0 ${
+                      plan.highlighted ? "text-gold-bright" : "text-violet"
+                    }`}
                     aria-hidden="true"
                   />
-                  <span className="text-ink">{feature}</span>
+                  <span className={plan.highlighted ? "text-white/90" : "text-ink"}>
+                    {feature}
+                  </span>
                 </li>
               ))}
             </ul>
             <Link
               href="/signup"
-              className={`mt-8 rounded px-5 py-3 text-center font-semibold transition-colors ${
+              className={`mt-8 rounded-xl px-5 py-3 text-center font-semibold transition-all ${
                 plan.highlighted
-                  ? "border border-navy bg-navy text-paper hover:bg-navy-light"
-                  : "border border-line bg-paper text-navy hover:border-gold"
+                  ? "bg-white text-violet hover:bg-white/90"
+                  : "border border-violet text-violet hover:bg-violet hover:text-white"
               }`}
             >
               {plan.cta}

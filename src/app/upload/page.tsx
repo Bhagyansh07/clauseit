@@ -42,7 +42,7 @@ export default function UploadPage() {
   if (!checked) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
-        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-gold" />
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-violet" />
         <p className="mt-4 font-mono text-sm uppercase tracking-[0.12em] text-ink-soft">
           Checking your session
         </p>
@@ -139,7 +139,7 @@ export default function UploadPage() {
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-      <h1 className="font-display text-4xl font-semibold leading-tight text-navy sm:text-5xl">
+      <h1 className="font-display text-4xl font-bold leading-tight text-navy sm:text-5xl">
         Upload a document
       </h1>
       <p className="mt-3 text-ink-soft">
@@ -147,7 +147,7 @@ export default function UploadPage() {
       </p>
 
       <div
-        className="mt-10 flex flex-col items-center justify-center rounded border-2 border-dashed border-line bg-paper px-6 py-14 text-center transition-colors hover:border-gold focus-within:border-gold"
+        className="mt-10 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-line bg-white px-6 py-14 text-center transition-colors hover:border-violet focus-within:border-violet"
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
@@ -157,8 +157,8 @@ export default function UploadPage() {
       >
         {file ? (
           <div className="w-full max-w-md">
-            <div className="flex items-center gap-4 rounded border border-line bg-parchment p-4">
-              <FileText className="h-7 w-7 shrink-0 text-gold" aria-hidden="true" />
+            <div className="flex items-center gap-4 rounded-2xl border border-line bg-parchment p-4">
+              <FileText className="h-7 w-7 shrink-0 text-violet" aria-hidden="true" />
               <div className="min-w-0 flex-1 text-left">
                 <p className="truncate font-medium text-ink">{file.name}</p>
                 <p className="text-sm text-ink-soft">
@@ -178,7 +178,7 @@ export default function UploadPage() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="rounded border border-line bg-paper px-4 py-2 text-sm font-medium text-navy transition-colors hover:border-gold"
+                className="rounded-xl border border-line bg-white px-4 py-2 text-sm font-semibold text-navy transition-colors hover:border-violet"
               >
                 Choose another file
               </button>
@@ -186,8 +186,8 @@ export default function UploadPage() {
           </div>
         ) : (
           <>
-            <FileUp className="h-10 w-10 text-gold" aria-hidden="true" />
-            <p className="mt-4 font-semibold text-navy">
+            <FileUp className="h-10 w-10 text-violet" aria-hidden="true" />
+            <p className="mt-4 font-display text-lg font-bold text-navy">
               Drop your document here
             </p>
             <p className="mt-1 text-sm text-ink-soft">
@@ -197,16 +197,16 @@ export default function UploadPage() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="rounded border border-navy bg-navy px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-navy-light"
+                className="gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
               >
                 Browse files
               </button>
               <button
                 type="button"
                 onClick={() => cameraInputRef.current?.click()}
-                className="flex items-center justify-center gap-2 rounded border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-gold"
+                className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-violet"
               >
-                <Camera className="h-4 w-4" aria-hidden="true" />
+                <Camera className="h-4 w-4 text-violet" aria-hidden="true" />
                 Scan with camera
               </button>
             </div>
@@ -244,8 +244,8 @@ export default function UploadPage() {
 
       <div className="mt-10">
         <div className="flex items-center gap-2">
-          <ClipboardType className="h-5 w-5 text-gold" aria-hidden="true" />
-          <h2 className="font-display text-lg font-semibold text-navy">
+          <ClipboardType className="h-5 w-5 text-violet" aria-hidden="true" />
+          <h2 className="font-display text-lg font-bold text-navy">
             Or paste text
           </h2>
         </div>
@@ -254,7 +254,7 @@ export default function UploadPage() {
           onChange={(e) => setPastedText(e.target.value)}
           rows={6}
           placeholder="Paste the text of an agreement, policy, or terms here..."
-          className="mt-4 w-full rounded border border-line bg-paper px-4 py-3 leading-7 placeholder:text-ink-soft/60 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+          className="mt-4 w-full rounded-2xl border border-line bg-white px-4 py-3 leading-7 placeholder:text-ink-soft/60 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/25"
         />
       </div>
 
@@ -268,7 +268,7 @@ export default function UploadPage() {
         type="button"
         onClick={handleAnalyze}
         disabled={submit.status === "loading"}
-        className="mt-8 flex w-full items-center justify-center gap-2 rounded border border-navy bg-navy px-6 py-4 text-lg font-semibold text-paper transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-60"
+        className="gradient-bg mt-8 flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-lg font-semibold text-white shadow-glow transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {submit.status === "loading" ? (
           <>
