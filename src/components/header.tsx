@@ -22,7 +22,7 @@ export default function Header() {
         </Link>
         <div className="hidden items-center gap-8 text-sm font-semibold text-ink-soft md:flex">
           <Link
-            href={user ? "/upload" : "/login"}
+            href={user ? "/upload" : "/signup"}
             className="transition-colors hover:text-violet"
           >
             Analyze
@@ -38,19 +38,21 @@ export default function Header() {
           {user ? (
             <ProfileMenu user={user} />
           ) : (
-            <Link
-              href="/login"
-              className="text-sm font-semibold text-navy transition-opacity hover:opacity-70"
-            >
-              Log in
-            </Link>
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-semibold text-navy transition-opacity hover:opacity-70"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                className="gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
+              >
+                Get started
+              </Link>
+            </>
           )}
-          <Link
-            href={user ? "/upload" : "/signup"}
-            className="gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
-          >
-            {user ? "Upload" : "Get started"}
-          </Link>
         </div>
       </nav>
     </header>

@@ -63,15 +63,15 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
         onClick={() => setOpen((value) => !value)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex items-center gap-2.5 rounded-xl border border-line bg-white px-2 py-1.5 text-sm font-semibold text-navy transition-colors hover:border-violet"
+        aria-label="Account menu"
+        className="flex h-9 w-9 items-center justify-center rounded-full transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-violet/40"
       >
         <span
           aria-hidden="true"
-          className="gradient-bg flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white"
+          className="gradient-bg flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white"
         >
           {initials(user.name)}
         </span>
-        <span className="hidden sm:inline">{user.name}</span>
       </button>
 
       {open && (
