@@ -2,8 +2,9 @@
 
 import { CheckCircle2, AlertTriangle, ShieldAlert } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import type { Language } from "@/lib/types";
 import type { VerdictResult } from "@/lib/verdict";
+import { RiskGauge } from "@/components/analyze/risk-gauge";
+import { Stamp } from "@/components/analyze/stamp";
 
 const VERDICT_COPY: Record<
   VerdictResult["verdict"],
@@ -28,68 +29,53 @@ const VERDICT_COPY: Record<
 
 const STYLES: Record<
   VerdictResult["colorToken"],
-  { border: string; bg: string; icon: string; badge: string; ring: string }
+  { gauge: string; badge: string }
 > = {
-  emerald: {
-    border: "border-emerald-200",
-    bg: "bg-emerald-50",
-    icon: "text-emerald-600",
-    badge: "bg-emerald-500",
-    ring: "border-emerald-500",
-  },
-  amber: {
-    border: "border-amber-200",
-    bg: "bg-amber-50",
-    icon: "text-amber-600",
-    badge: "bg-amber-500",
-    ring: "border-amber-500",
-  },
-  red: {
-    border: "border-red-200",
-    bg: "bg-red-50",
-    icon: "text-red-600",
-    badge: "bg-red-500",
-    ring: "border-red-500",
-  },
+  emerald: { gauge: "#4F7358", badge: "bg-sage-soft text-sage" },
+  amber: { gauge: "#B97D2B", badge: "bg-amber-soft text-amber" },
+  red: { gauge: "#9E3B32", badge: "bg-red-soft text-red" },
 };
 
 export function VerdictCard({
   score,
   verdict,
-  lang,
 }: {
   score: number;
   verdict: VerdictResult;
-  lang: Language;
 }) {
   const copy = VERDICT_COPY[verdict.verdict];
   const styles = STYLES[verdict.colorToken];
-  const Icon = copy.icon;
 
   return (
-    <div className={`rounded-xl border ${styles.border} ${styles.bg} p-6`}>
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <Icon className={`h-8 w-8 ${styles.icon}`} aria-hidden="true" />
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              Should you sign?
-            </p>
-            <h2 className="font-display text-2xl text-foreground">
-              {verdict.label}
-            </h2>
-          </div>
-        </div>
-        <div
-          className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 bg-white ${styles.ring}`}
-        >
-          <span className="font-display text-xl text-foreground">
-            {score}
-            <span className="text-sm text-muted-foreground">/10</span>
+    <div className="relative rounded bg-navy p-6 text-paper sm:p-7">
+      <div className="flex items-center gap-2.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+        <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold-bright">
+          Should you sign?
+        </p>
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-start justify-between gap-6">
+        <div className="min-w-0 flex-1">
+          <h2 className="font-display text-3xl font-semibold leading-tight">
+            {verdict.label}
+          </h2>
+          <p className="mt-3 max-w-md leading-7 text-paper/80">{copy.en}</p>
+          <p className="mt-2 max-w-md text-sm leading-6 text-gold-bright/90">
+            {copy.hi}
+          </p>
+          <span
+            className={`mt-4 inline-block rounded-sm px-2.5 py-0.5 text-xs font-semibold ${styles.badge}`}
+          >
+            Score {score}/10
           </span>
         </div>
+        <div className="hidden shrink-0 pr-4 sm:block">
+          <RiskGauge score={score} color={styles.gauge} onDark />
+        </div>
       </div>
-      <p className="mt-4 leading-7 text-foreground">{copy[lang]}</p>
+
+      <Stamp verdict={verdict.verdict} />
     </div>
   );
 }

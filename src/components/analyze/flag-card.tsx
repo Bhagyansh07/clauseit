@@ -6,22 +6,22 @@ import { FLAG_ACTION, FLAG_LABEL } from "@/lib/flag-actions";
 
 const SEVERITY_META: Record<
   Severity,
-  { label: string; card: string; badge: string }
+  { label: string; border: string; badge: string }
 > = {
   danger: {
     label: "Serious",
-    card: "border-red-200 bg-red-50",
-    badge: "bg-red-500",
+    border: "border-l-red",
+    badge: "bg-red-soft text-red",
   },
   warning: {
     label: "Warning",
-    card: "border-amber-200 bg-amber-50",
-    badge: "bg-amber-500",
+    border: "border-l-amber",
+    badge: "bg-amber-soft text-amber",
   },
   info: {
     label: "Note",
-    card: "border-blue-200 bg-blue-50",
-    badge: "bg-blue-500",
+    border: "border-l-sage",
+    badge: "bg-sage-soft text-sage",
   },
 };
 
@@ -36,21 +36,22 @@ export function FlagCard({
   const action = FLAG_ACTION[flag.type];
 
   return (
-    <div className={`rounded-xl border p-5 ${meta.card}`}>
+    <div className={`rounded border border-line border-l-4 bg-paper p-5 ${meta.border}`}>
       <div className="flex items-center justify-between gap-3">
-        <p className="font-semibold text-foreground">
+        <p className="font-semibold text-navy">
           {FLAG_LABEL[flag.type] ?? "Watch out"}
         </p>
         <span
-          className={`shrink-0 rounded-full ${meta.badge} px-2.5 py-0.5 text-xs font-semibold text-white`}
+          className={`shrink-0 rounded-sm px-2.5 py-0.5 text-xs font-semibold ${meta.badge}`}
         >
           {meta.label}
         </span>
       </div>
-      <p className="mt-3 text-sm italic text-muted-foreground">&quot;{flag.quote}&quot;</p>
-      <p className="mt-3 leading-7 text-foreground">{flag.explanation[lang]}</p>
-      <p className="mt-3 flex items-start gap-2 text-sm font-medium text-foreground">
-        <MoveRight className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+      <p className="mt-3 text-sm italic text-ink-soft">&quot;{flag.quote}&quot;</p>
+      <div className="my-3 border-t border-dashed border-line" />
+      <p className="leading-7 text-ink">{flag.explanation[lang]}</p>
+      <p className="mt-3 flex items-start gap-2 text-sm font-medium text-navy-light">
+        <MoveRight className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
         {action[lang]}
       </p>
     </div>

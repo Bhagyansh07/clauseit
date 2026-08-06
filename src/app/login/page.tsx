@@ -9,17 +9,24 @@ export const metadata: Metadata = {
 
 export default function Login() {
   return (
-    <section className="mx-auto flex max-w-6xl flex-1 items-center px-4 py-20 sm:px-6">
+    <section className="mx-auto flex max-w-3xl flex-1 items-center px-4 py-16 sm:px-6 sm:py-20">
       <div className="mx-auto w-full max-w-md">
         <div className="text-center">
-          <h1 className="font-display text-3xl tracking-[-0.02em] text-foreground">Log in</h1>
-          <p className="mt-3 text-muted-foreground">Access your uploads, analysis history, and saved reports.</p>
+          <h1 className="font-display text-3xl font-semibold text-navy">
+            Log in
+          </h1>
+          <p className="mt-3 text-ink-soft">
+            Access your uploads, analysis history, and saved reports.
+          </p>
         </div>
         <div className="mt-8">
           <AuthForm mode="login" />
         </div>
-        <p className="mt-5 text-center text-sm text-muted-foreground">
-          New here? <Link href="/signup" className="font-semibold text-accent">Create an account</Link>
+        <p className="mt-5 text-center text-sm text-ink-soft">
+          New here?{" "}
+          <Link href="/signup" className="font-semibold text-navy underline decoration-gold underline-offset-4">
+            Create an account
+          </Link>
         </p>
       </div>
     </section>

@@ -23,7 +23,7 @@ const features = [
   {
     icon: ShieldAlert,
     title: "Risk score",
-    text: "Green, yellow, or red. One number that tells you how careful to be before you sign.",
+    text: "A gauge that tells you how careful to be before you sign.",
   },
   {
     icon: CalendarClock,
@@ -44,38 +44,33 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-28">
+    <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="max-w-2xl">
         <FadeIn>
           <SectionLabel>Features</SectionLabel>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="mt-6 font-display text-3xl leading-tight tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
-            What ClauseIt{" "}
-            <span className="gradient-text">highlights</span> for you
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
+            What ClauseIt <span className="text-gold">highlights</span> for you
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="mt-5 text-lg leading-8 text-muted-foreground">
+          <p className="mt-4 text-lg leading-8 text-ink-soft">
             The analysis is built around the details people usually miss: hidden
             clauses, unfair charges, automatic renewals, and deadlines that
             matter.
           </p>
         </FadeIn>
       </div>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, i) => (
           <FadeIn key={feature.title} delay={0.06 * i}>
-            <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg">
-              <span className="gradient-bg flex h-12 w-12 items-center justify-center rounded-xl shadow-accent transition-transform group-hover:scale-110">
-                <feature.icon className="h-5 w-5 text-white" aria-hidden="true" />
-              </span>
-              <h3 className="mt-5 font-display text-xl text-foreground">
+            <div className="h-full rounded border border-line bg-paper p-6 shadow-paper transition-transform duration-200 hover:-translate-y-0.5">
+              <feature.icon className="h-6 w-6 text-gold" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-lg font-semibold text-navy">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {feature.text}
-              </p>
+              <p className="mt-2 text-sm leading-6 text-ink-soft">{feature.text}</p>
             </div>
           </FadeIn>
         ))}

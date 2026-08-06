@@ -14,30 +14,30 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+      <nav className="mx-auto flex h-16 max-w-4xl items-center justify-between px-4 sm:px-6">
         <Link href="/" aria-label="ClauseIt home" className="flex items-center">
           <Logo />
         </Link>
-        <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground sm:flex">
+        <div className="hidden items-center gap-8 text-sm font-medium text-ink-soft sm:flex">
           <Link
             href={user ? "/upload" : "/login"}
-            className="transition-colors hover:text-foreground"
+            className="transition-colors hover:text-navy"
           >
             Analyze
           </Link>
-          <Link href="/how-it-works" className="transition-colors hover:text-foreground">
+          <Link href="/how-it-works" className="transition-colors hover:text-navy">
             How it works
           </Link>
-          <Link href="/pricing" className="transition-colors hover:text-foreground">
+          <Link href="/pricing" className="transition-colors hover:text-navy">
             Plans
           </Link>
           {user && (
             <>
-              <Link href="/dashboard" className="transition-colors hover:text-foreground">
+              <Link href="/dashboard" className="transition-colors hover:text-navy">
                 Dashboard
               </Link>
-              <Link href="/account" className="transition-colors hover:text-foreground">
+              <Link href="/account" className="transition-colors hover:text-navy">
                 Account
               </Link>
             </>
@@ -47,21 +47,21 @@ export default function Header() {
           {user ? (
             <Link
               href="/account"
-              className="text-sm font-medium text-foreground transition-opacity hover:opacity-70"
+              className="text-sm font-medium text-navy transition-opacity hover:opacity-70"
             >
               {user.name}
             </Link>
           ) : (
             <Link
               href="/login"
-              className="text-sm font-medium text-foreground transition-opacity hover:opacity-70"
+              className="text-sm font-medium text-navy transition-opacity hover:opacity-70"
             >
               Log in
             </Link>
           )}
           <Link
             href={user ? "/upload" : "/signup"}
-            className="gradient-bg rounded-xl px-4 py-2 text-sm font-semibold text-accent-foreground shadow-accent transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-accent-lg"
+            className="rounded border border-navy bg-navy px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-navy-light"
           >
             {user ? "Upload" : "Get started"}
           </Link>

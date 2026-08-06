@@ -1,24 +1,37 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Calistoga, Inter, JetBrains_Mono } from "next/font/google";
+import {
+  Fraunces,
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  IBM_Plex_Sans_Devanagari,
+} from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-const inter = Inter({
-  variable: "--font-inter",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const calistoga = Calistoga({
-  variable: "--font-calistoga",
-  weight: "400",
+const plex = IBM_Plex_Sans({
+  variable: "--font-plex",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const plexDevanagari = IBM_Plex_Sans_Devanagari({
+  variable: "--font-plex-deva",
+  subsets: ["devanagari"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -42,9 +55,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable}`}
+      className={`${fraunces.variable} ${plex.variable} ${plexDevanagari.variable} ${plexMono.variable}`}
     >
-      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
+      <body className="flex min-h-screen flex-col bg-parchment font-sans text-ink antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

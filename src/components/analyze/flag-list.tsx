@@ -7,10 +7,13 @@ import { FlagCard } from "@/components/analyze/flag-card";
 
 const SEVERITY_ORDER: Severity[] = ["danger", "warning", "info"];
 
-const SEVERITY_LABEL: Record<Severity, string> = {
-  danger: "Serious",
-  warning: "Warnings",
-  info: "Notes",
+const SEVERITY_META: Record<
+  Severity,
+  { label: string; dot: string }
+> = {
+  danger: { label: "Serious", dot: "bg-red" },
+  warning: { label: "Warnings", dot: "bg-amber" },
+  info: { label: "Notes", dot: "bg-sage" },
 };
 
 export function FlagList({
@@ -39,26 +42,26 @@ export function FlagList({
   return (
     <div className="mt-10">
       <div className="flex items-center gap-2">
-        <AlertTriangle className="h-5 w-5 text-accent" aria-hidden="true" />
-        <h2 className="font-display text-xl text-foreground">
+        <AlertTriangle className="h-5 w-5 text-gold" aria-hidden="true" />
+        <h2 className="font-display text-xl font-semibold text-navy">
           What to watch for
         </h2>
       </div>
 
-      <div className="mt-5 space-y-4">
+      <div className="mt-5 space-y-6">
         {present.map((severity) => (
-          <details
-            key={severity}
-            open={severity === "danger"}
-            className="rounded-xl border border-border bg-card"
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4">
-              <span className="font-semibold text-foreground">
-                {SEVERITY_LABEL[severity]} ({groups[severity].length})
+          <details key={severity} open={severity === "danger"}>
+            <summary className="flex cursor-pointer list-none items-center justify-between py-1">
+              <span className="flex items-center gap-2.5 font-semibold text-navy">
+                <span
+                  aria-hidden="true"
+                  className={`h-2 w-2 rounded-full ${SEVERITY_META[severity].dot}`}
+                />
+                {SEVERITY_META[severity].label} ({groups[severity].length})
               </span>
-              <ChevronDown className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+              <ChevronDown className="h-5 w-5 text-ink-soft" aria-hidden="true" />
             </summary>
-            <div className="space-y-4 px-5 pb-5">
+            <div className="mt-3 space-y-4">
               {groups[severity].map((flag, i) => (
                 <FlagCard key={i} flag={flag} lang={lang} />
               ))}
