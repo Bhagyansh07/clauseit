@@ -72,7 +72,7 @@ export async function analyzeDocument(
     );
   }
 
-  const model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+  const model = process.env.GEMINI_MODEL ?? "gemini-3.6-flash";
 
   const parts: GeminiPart[] = [];
   if (input.image) {
@@ -99,6 +99,9 @@ export async function analyzeDocument(
     if (response.status === 400 || response.status === 403) {
       message =
         "The AI service rejected the request. The Gemini API key may be invalid.";
+    } else if (response.status === 404) {
+      message =
+        "The AI model is not available. Check GEMINI_MODEL in your .env file.";
     } else if (response.status === 429) {
       message = "Too many requests right now. Please try again in a minute.";
     }
