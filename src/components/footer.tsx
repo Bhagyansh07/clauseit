@@ -36,7 +36,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="border-t-4 border-transparent bg-navy text-white/70 [border-image:linear-gradient(90deg,#7C3AED,#DB2777)_1]">
+    <footer className="border-t-4 border-transparent bg-navy-solid text-white/70 [border-image:linear-gradient(90deg,#1F6F67,#C18F3B)_1]">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 md:grid-cols-4">
           <div>

@@ -1,23 +1,74 @@
 @import "tailwindcss";
 
-@theme {
-  --color-navy: #1e1b4b;
-  --color-navy-light: #6d28d9;
-  --color-violet: #7c3aed;
-  --color-fuchsia: #db2777;
-  --color-gold: #f59e0b;
-  --color-gold-bright: #fbbf24;
-  --color-parchment: #f8f7ff;
-  --color-paper: #ffffff;
-  --color-ink: #1e1b33;
-  --color-ink-soft: #6b6887;
-  --color-red: #e11d48;
-  --color-red-soft: #fde8ef;
-  --color-amber: #d97706;
-  --color-amber-soft: #fef3c7;
-  --color-sage: #059669;
-  --color-sage-soft: #d1fae5;
-  --color-line: #e9e6f6;
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --navy: #143a3a;
+  --navy-light: #0f5149;
+  --navy-solid: #143a3a;
+  --violet: #1f6f67;
+  --fuchsia: #c18f3b;
+  --gold: #b78a2e;
+  --gold-bright: #c99a3d;
+  --parchment: #f6f3ec;
+  --paper: #ffffff;
+  --ink: #263534;
+  --ink-soft: #5f6d6a;
+  --red: #b4493f;
+  --red-soft: #f5e4e1;
+  --amber: #b7781f;
+  --amber-soft: #f6edd9;
+  --sage: #4e7c5a;
+  --sage-soft: #e5efe7;
+  --line: #e6e2d6;
+  --gradient-from: #1f6f67;
+  --gradient-to: #2a9d8f;
+  color-scheme: light;
+}
+
+.dark {
+  --navy: #e9e4d8;
+  --navy-light: #2a9d8f;
+  --navy-solid: #143a3a;
+  --violet: #37a191;
+  --fuchsia: #c99a3d;
+  --gold: #c99a3d;
+  --gold-bright: #e3c06b;
+  --parchment: #0f1b1b;
+  --paper: #152626;
+  --ink: #eae5da;
+  --ink-soft: #9fb0ac;
+  --red: #e07a6f;
+  --red-soft: rgba(180, 73, 63, 0.16);
+  --amber: #e3a443;
+  --amber-soft: rgba(183, 120, 31, 0.16);
+  --sage: #5fb376;
+  --sage-soft: rgba(78, 124, 90, 0.16);
+  --line: #263a38;
+  --gradient-from: #2a9d8f;
+  --gradient-to: #43bba9;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-navy-solid: var(--navy-solid);
+  --color-violet: var(--violet);
+  --color-fuchsia: var(--fuchsia);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-parchment: var(--parchment);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-line: var(--line);
 
   --font-display: var(--font-poppins);
   --font-sans: var(--font-inter), var(--font-noto-deva);
@@ -38,19 +89,20 @@ body {
 }
 
 .gradient-text {
-  background-image: linear-gradient(120deg, #7c3aed, #db2777);
+  background-image: linear-gradient(120deg, var(--gradient-from), var(--gold));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
 .gradient-bg {
-  background-image: linear-gradient(120deg, #7c3aed, #db2777);
+  background-image: linear-gradient(120deg, var(--gradient-from), var(--gradient-to));
 }
 
 .gradient-border {
   border: 1px solid transparent;
   background:
     linear-gradient(var(--color-paper), var(--color-paper)) padding-box,
-    linear-gradient(120deg, #7c3aed, #db2777) border-box;
+    linear-gradient(120deg, var(--gradient-from), var(--gradient-to)) border-box;
 }
+

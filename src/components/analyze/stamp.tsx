@@ -20,7 +20,7 @@ export function Stamp({ verdict }: { verdict: Verdict }) {
           cy="70"
           r="58"
           fill="none"
-          stroke="#FBBF24"
+          stroke="#C99A3D"
           strokeWidth="2.5"
         />
         <circle
@@ -28,7 +28,7 @@ export function Stamp({ verdict }: { verdict: Verdict }) {
           cy="70"
           r="49"
           fill="none"
-          stroke="#FBBF24"
+          stroke="#C99A3D"
           strokeWidth="4.5"
         />
         {ticks.map((_, i) => {
@@ -42,7 +42,7 @@ export function Stamp({ verdict }: { verdict: Verdict }) {
               y1={70 + r1 * Math.sin(a)}
               x2={70 + r2 * Math.cos(a)}
               y2={70 + r2 * Math.sin(a)}
-              stroke="#FBBF24"
+              stroke="#C99A3D"
               strokeWidth="1.5"
             />
           );
@@ -53,7 +53,7 @@ export function Stamp({ verdict }: { verdict: Verdict }) {
           textAnchor="middle"
           fontSize="10"
           letterSpacing="1.5"
-          fill="#FBBF24"
+          fill="#C99A3D"
           fontFamily="var(--font-jetbrains), monospace"
         >
           VERDICT
@@ -64,7 +64,7 @@ export function Stamp({ verdict }: { verdict: Verdict }) {
           textAnchor="middle"
           fontSize="28"
           fontWeight="700"
-          fill="#FBBF24"
+          fill="#C99A3D"
           fontFamily="var(--font-poppins), sans-serif"
         >
           {GLYPHS[verdict]}

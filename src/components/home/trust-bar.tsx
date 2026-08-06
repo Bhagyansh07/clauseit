@@ -29,7 +29,7 @@ export default function TrustBar() {
           {points.map((point) => (
             <div
               key={point.title}
-              className="flex items-start gap-4 rounded-2xl border border-line bg-white p-5 shadow-paper"
+              className="flex items-start gap-4 rounded-2xl border border-line bg-paper p-5 shadow-paper"
             >
               <span
                 className={`bg-gradient-to-br ${point.chip} flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white`}

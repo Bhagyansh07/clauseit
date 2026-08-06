@@ -71,7 +71,7 @@ export default function Features() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, i) => (
           <FadeIn key={feature.title} delay={0.06 * i}>
-            <div className="h-full rounded-2xl border border-line bg-white p-6 shadow-paper transition-transform duration-200 hover:-translate-y-1">
+            <div className="h-full rounded-2xl border border-line bg-paper p-6 shadow-paper transition-transform duration-200 hover:-translate-y-1">
               <span
                 className={`bg-gradient-to-br ${feature.chip} flex h-11 w-11 items-center justify-center rounded-xl text-white`}
               >

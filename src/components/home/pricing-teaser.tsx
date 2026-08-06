@@ -39,7 +39,7 @@ const plans = [
 
 export default function PricingTeaser() {
   return (
-    <section className="border-y border-line bg-white">
+    <section className="border-y border-line bg-paper">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-xl">
@@ -127,7 +127,7 @@ export default function PricingTeaser() {
                   className={`mt-6 inline-flex h-11 items-center justify-center rounded-xl px-4 text-sm font-bold transition-all ${
                     plan.highlight
                       ? "bg-white text-violet hover:bg-white/90"
-                      : "border border-violet bg-white text-violet hover:bg-violet hover:text-white"
+                      : "border border-violet bg-paper text-violet hover:bg-violet hover:text-white"
                   }`}
                 >
                   {plan.highlight ? "Start with Pro" : "Get started"}

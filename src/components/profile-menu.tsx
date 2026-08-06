@@ -77,7 +77,7 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-50 mt-2 w-60 rounded-2xl border border-line bg-white shadow-seal"
+          className="absolute right-0 top-full z-50 mt-2 w-60 rounded-2xl border border-line bg-paper shadow-seal"
         >
           <div className="border-b border-line px-4 py-3">
             <p className="truncate text-sm font-bold text-navy">

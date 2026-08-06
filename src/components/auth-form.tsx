@@ -38,12 +38,12 @@ export function AuthForm({ mode }: AuthFormProps) {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-ink placeholder:text-ink-soft/60 focus:border-violet focus:ring-2 focus:ring-violet/25 focus:outline-none";
+    "w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 text-ink placeholder:text-ink-soft/60 focus:border-violet focus:ring-2 focus:ring-violet/25 focus:outline-none";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-2xl border border-line bg-white p-7 shadow-seal"
+      className="space-y-4 rounded-2xl border border-line bg-paper p-7 shadow-seal"
     >
       {mode === "signup" && (
         <div>

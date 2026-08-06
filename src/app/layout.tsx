@@ -57,6 +57,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={`${poppins.variable} ${inter.variable} ${notoDevanagari.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=window.localStorage.getItem("theme");var d=s==="dark"||(!s&&window.matchMedia("(prefers-color-scheme: dark)").matches);if(d)document.documentElement.classList.add("dark");}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col bg-parchment font-sans text-ink antialiased">
         <Header />
         <main className="flex-1">{children}</main>

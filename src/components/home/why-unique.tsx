@@ -31,13 +31,13 @@ const points = [
     icon: Lock,
     title: "Your document is not stored",
     text: "Uploads are analyzed and discarded. We never keep a copy of your file by default.",
-    chip: "from-violet to-sky-500",
+    chip: "from-emerald-700 to-teal-600",
   },
   {
     icon: Wallet,
     title: "Free to start",
     text: "10 documents every month at no charge. No card required.",
-    chip: "from-sky-500 to-fuchsia",
+    chip: "from-teal-600 to-gold",
   },
 ];
 
@@ -65,7 +65,7 @@ export default function WhyUnique() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {points.map((point, i) => (
           <FadeIn key={point.title} delay={0.06 * i}>
-            <div className="h-full rounded-2xl border border-line bg-white p-6 shadow-paper transition-transform duration-200 hover:-translate-y-1">
+            <div className="h-full rounded-2xl border border-line bg-paper p-6 shadow-paper transition-transform duration-200 hover:-translate-y-1">
               <div className="flex items-center gap-3">
                 <span
                   className={`bg-gradient-to-br ${point.chip} flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white`}

@@ -147,7 +147,7 @@ export default function UploadPage() {
       </p>
 
       <div
-        className="mt-10 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-line bg-white px-6 py-14 text-center transition-colors hover:border-violet focus-within:border-violet"
+        className="mt-10 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-line bg-paper px-6 py-14 text-center transition-colors hover:border-violet focus-within:border-violet"
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
@@ -178,7 +178,7 @@ export default function UploadPage() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="rounded-xl border border-line bg-white px-4 py-2 text-sm font-semibold text-navy transition-colors hover:border-violet"
+                className="rounded-xl border border-line bg-paper px-4 py-2 text-sm font-semibold text-navy transition-colors hover:border-violet"
               >
                 Choose another file
               </button>
@@ -204,7 +204,7 @@ export default function UploadPage() {
               <button
                 type="button"
                 onClick={() => cameraInputRef.current?.click()}
-                className="flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-violet"
+                className="flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-violet"
               >
                 <Camera className="h-4 w-4 text-violet" aria-hidden="true" />
                 Scan with camera
@@ -254,7 +254,7 @@ export default function UploadPage() {
           onChange={(e) => setPastedText(e.target.value)}
           rows={6}
           placeholder="Paste the text of an agreement, policy, or terms here..."
-          className="mt-4 w-full rounded-2xl border border-line bg-white px-4 py-3 leading-7 placeholder:text-ink-soft/60 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/25"
+          className="mt-4 w-full rounded-2xl border border-line bg-paper px-4 py-3 leading-7 placeholder:text-ink-soft/60 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/25"
         />
       </div>
 

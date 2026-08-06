@@ -63,7 +63,7 @@ export default function Hero() {
       };
 
   return (
-    <section className="relative overflow-hidden bg-navy">
+    <section className="relative overflow-hidden bg-navy-solid">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-violet/40 blur-[120px]"
@@ -140,7 +140,7 @@ export default function Hero() {
             {...enter}
             transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
             aria-label="Example of a ClauseIt analysis"
-            className="relative rounded-2xl border border-white/15 bg-white p-6 shadow-seal sm:p-7"
+            className="relative rounded-2xl border border-line bg-paper p-6 shadow-seal sm:p-7"
           >
             <div className="flex items-center justify-between">
               <p className="font-mono text-xs uppercase tracking-wide text-ink-soft">
@@ -155,8 +155,8 @@ export default function Hero() {
               <svg viewBox="0 0 80 80" className="h-20 w-20 shrink-0" aria-hidden="true">
                 <defs>
                   <linearGradient id="gauge" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#7C3AED" />
-                    <stop offset="1" stopColor="#DB2777" />
+                    <stop offset="0" stopColor="#1F6F67" />
+                    <stop offset="1" stopColor="#C18F3B" />
                   </linearGradient>
                 </defs>
                 <circle cx="40" cy="40" r="32" fill="none" stroke="#E9E6F6" strokeWidth="6" />

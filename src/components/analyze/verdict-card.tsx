@@ -47,7 +47,7 @@ export function VerdictCard({
   const styles = STYLES[verdict.colorToken];
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy to-violet p-6 text-white shadow-seal sm:p-7">
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-solid to-violet p-6 text-white shadow-seal sm:p-7">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-fuchsia/30 blur-[80px]"

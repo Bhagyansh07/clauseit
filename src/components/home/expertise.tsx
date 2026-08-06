@@ -14,43 +14,43 @@ const categories = [
     icon: ScanSearch,
     title: "Hidden clauses",
     text: "Terms buried deep that change what the document really says.",
-    chip: "from-violet to-fuchsia",
+    chip: "from-emerald-700 to-teal-600",
   },
   {
     icon: Banknote,
     title: "Unfair charges",
     text: "Fees, interest, and amounts that cost more than they should.",
-    chip: "from-fuchsia to-rose-500",
+    chip: "from-violet to-gold",
   },
   {
     icon: FileWarning,
     title: "Penalties and bonds",
     text: "Exit penalties, service bonds, and fines you were not told about.",
-    chip: "from-amber to-orange-500",
+    chip: "from-teal-700 to-emerald-800",
   },
   {
     icon: RefreshCcw,
     title: "Auto-renewal",
     text: "Contracts that renew themselves and raise your cost every year.",
-    chip: "from-violet to-sky-500",
+    chip: "from-gold to-amber",
   },
   {
     icon: Scale,
     title: "One-sided liability",
     text: "Clauses that put most of the risk on you and little on them.",
-    chip: "from-sky-500 to-violet",
+    chip: "from-emerald-600 to-teal-500",
   },
   {
     icon: HelpCircle,
     title: "Jurisdiction traps",
     text: "Places that decide your disputes before they even happen.",
-    chip: "from-fuchsia to-violet",
+    chip: "from-teal-600 to-gold",
   },
 ];
 
 export default function Expertise() {
   return (
-    <section className="border-y border-line bg-white">
+    <section className="border-y border-line bg-paper">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="max-w-2xl">
           <FadeIn>
