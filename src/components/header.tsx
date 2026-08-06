@@ -20,7 +20,10 @@ export default function Header() {
           <Logo />
         </Link>
         <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground sm:flex">
-          <Link href="/upload" className="transition-colors hover:text-foreground">
+          <Link
+            href={user ? "/upload" : "/login"}
+            className="transition-colors hover:text-foreground"
+          >
             Analyze
           </Link>
           <Link href="/how-it-works" className="transition-colors hover:text-foreground">
