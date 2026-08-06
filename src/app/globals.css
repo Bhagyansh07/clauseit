@@ -1,17 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #0f1b2d;
-  --color-navy-light: #1a2b42;
-  --color-gold: #d4a837;
-  --color-gold-dark: #b08d2a;
-  --color-paper: #faf9f6;
-  --color-ink: #1a2230;
-  --color-muted: #5b6472;
-  --color-line: #e5e2da;
+  --color-background: #fafafa;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #0052ff;
+  --color-accent-secondary: #4d7cff;
+  --color-accent-foreground: #ffffff;
+  --color-border: #e2e8f0;
+  --color-card: #ffffff;
+  --color-ring: #0052ff;
 
   --font-sans: var(--font-inter);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-calistoga);
+  --font-mono: var(--font-jetbrains);
+
+  --shadow-accent: 0 4px 14px rgba(0, 82, 255, 0.25);
+  --shadow-accent-lg: 0 8px 24px rgba(0, 82, 255, 0.35);
+
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-float-delayed: float 4s ease-in-out 1s infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 60s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 0.7;
+    }
+  }
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 html {
@@ -19,13 +59,40 @@ html {
 }
 
 body {
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
-.highlight-stroke {
-  background-image: linear-gradient(var(--color-gold), var(--color-gold));
-  background-repeat: no-repeat;
-  background-size: 100% 0.18em;
-  background-position: 0 92%;
+.gradient-text {
+  background: linear-gradient(to right, var(--color-accent), var(--color-accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-secondary));
+}
+
+.gradient-underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  height: 0.75rem;
+  width: 100%;
+  border-radius: 0.125rem;
+  background: linear-gradient(
+    to right,
+    rgba(0, 82, 255, 0.15),
+    rgba(77, 124, 255, 0.1)
+  );
+}
+
+.dot-pattern {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.35) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
 }

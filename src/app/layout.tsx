@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Fraunces, Inter } from "next/font/google";
+import { Calistoga, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -10,8 +10,14 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const calistoga = Calistoga({
+  variable: "--font-calistoga",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
 });
 
@@ -34,8 +40,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="flex min-h-screen flex-col bg-paper font-sans text-ink antialiased">
+    <html
+      lang="en"
+      className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

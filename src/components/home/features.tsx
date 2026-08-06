@@ -6,6 +6,8 @@ import {
   ShieldAlert,
   FileText,
 } from "lucide-react";
+import { SectionLabel } from "@/components/ui/section-label";
+import { FadeIn } from "@/components/ui/fade-in";
 
 const features = [
   {
@@ -42,28 +44,40 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-28">
       <div className="max-w-2xl">
-        <h2 className="font-display text-3xl font-semibold text-navy">
-          What every document is hiding
-        </h2>
-        <p className="mt-4 text-muted">
-          Loan agreements, insurance policies, and rent contracts are written
-          for lawyers, not for the person signing them. ClauseIt changes that.
-        </p>
+        <FadeIn>
+          <SectionLabel>Features</SectionLabel>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <h2 className="mt-6 font-display text-3xl leading-tight tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
+            What ClauseIt{" "}
+            <span className="gradient-text">highlights</span> for you
+          </h2>
+        </FadeIn>
+        <FadeIn delay={0.2}>
+          <p className="mt-5 text-lg leading-8 text-muted-foreground">
+            The analysis is built around the details people usually miss: hidden
+            clauses, unfair charges, automatic renewals, and deadlines that
+            matter.
+          </p>
+        </FadeIn>
       </div>
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <div
-            key={feature.title}
-            className="rounded-xl border border-line bg-white p-6"
-          >
-            <feature.icon className="h-6 w-6 text-gold" aria-hidden="true" />
-            <h3 className="mt-4 font-display text-lg font-semibold text-navy">
-              {feature.title}
-            </h3>
-            <p className="mt-2 text-sm leading-6 text-muted">{feature.text}</p>
-          </div>
+        {features.map((feature, i) => (
+          <FadeIn key={feature.title} delay={0.06 * i}>
+            <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg">
+              <span className="gradient-bg flex h-12 w-12 items-center justify-center rounded-xl shadow-accent transition-transform group-hover:scale-110">
+                <feature.icon className="h-5 w-5 text-white" aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 font-display text-xl text-foreground">
+                {feature.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {feature.text}
+              </p>
+            </div>
+          </FadeIn>
         ))}
       </div>
     </section>

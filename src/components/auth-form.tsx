@@ -36,38 +36,41 @@ export function AuthForm({ mode }: AuthFormProps) {
     }
   }
 
+  const inputClass =
+    "w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-foreground placeholder:text-muted-foreground/60 focus:border-accent focus:ring-2 focus:ring-accent/30 focus:outline-none";
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-line bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
       {mode === "signup" && (
         <div>
-          <label className="mb-2 block text-sm font-medium text-ink">Name</label>
+          <label className="mb-2 block text-sm font-medium text-foreground">Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-lg border border-line px-3 py-2"
+            className={inputClass}
             placeholder="Your name"
           />
         </div>
       )}
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-ink">Email</label>
+        <label className="mb-2 block text-sm font-medium text-foreground">Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-lg border border-line px-3 py-2"
+          className={inputClass}
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-ink">Password</label>
+        <label className="mb-2 block text-sm font-medium text-foreground">Password</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-lg border border-line px-3 py-2"
+          className={inputClass}
           placeholder="At least 6 characters"
         />
       </div>
@@ -77,7 +80,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-lg bg-gold px-4 py-2.5 font-semibold text-navy transition-colors hover:bg-gold-dark disabled:opacity-60"
+        className="gradient-bg w-full rounded-xl px-4 py-2.5 font-semibold text-white shadow-accent transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-accent-lg disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-accent"
       >
         {loading ? "Please wait..." : mode === "signup" ? "Create account" : "Log in"}
       </button>

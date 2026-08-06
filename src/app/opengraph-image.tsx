@@ -16,7 +16,7 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0F1B2D",
+          backgroundColor: "#0F172A",
           fontFamily: "sans-serif",
         }}
       >
@@ -25,7 +25,9 @@ export default function OpenGraphImage() {
             display: "flex",
             fontSize: 96,
             fontWeight: 700,
-            color: "#D4A837",
+            background: "linear-gradient(to right, #0052FF, #4D7CFF)",
+            backgroundClip: "text",
+            color: "transparent",
           }}
         >
           ClauseIt
@@ -34,11 +36,21 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             fontSize: 44,
-            color: "#FAF9F6",
+            color: "#FAFAFA",
             marginTop: 16,
           }}
         >
           Read the clauses, not the fine print.
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 26,
+            color: "#64748B",
+            marginTop: 20,
+          }}
+        >
+          Loan · Insurance · Rent · Job offers — explained in plain language
         </div>
       </div>
     ),

@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 export default function Privacy() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
-      <h1 className="font-display text-4xl font-semibold text-navy">
+      <h1 className="font-display text-4xl font-semibold text-foreground">
         Privacy Policy
       </h1>
-      <p className="mt-2 text-sm text-muted">Last updated: August 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: August 2026</p>
 
-      <div className="mt-10 space-y-8 leading-7 text-ink">
+      <div className="mt-10 space-y-8 leading-7 text-foreground">
         <div>
-          <h2 className="font-display text-xl font-semibold text-navy">
+          <h2 className="font-display text-xl font-semibold text-foreground">
             What we collect
           </h2>
           <p className="mt-3">
@@ -25,7 +25,7 @@ export default function Privacy() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-navy">
+          <h2 className="font-display text-xl font-semibold text-foreground">
             What we do not do
           </h2>
           <p className="mt-3">
@@ -35,7 +35,7 @@ export default function Privacy() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-navy">
+          <h2 className="font-display text-xl font-semibold text-foreground">
             Processing
           </h2>
           <p className="mt-3">
@@ -45,7 +45,7 @@ export default function Privacy() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-navy">
+          <h2 className="font-display text-xl font-semibold text-foreground">
             Your rights
           </h2>
           <p className="mt-3">
@@ -54,7 +54,7 @@ export default function Privacy() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-navy">
+          <h2 className="font-display text-xl font-semibold text-foreground">
             Contact
           </h2>
           <p className="mt-3">

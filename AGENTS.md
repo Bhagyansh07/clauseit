@@ -47,21 +47,33 @@ Upload any document (PDF, DOCX, TXT, or camera photo) and get a plain-language a
 
 ## 3. Design System (Locked)
 
-Do not invent a new look per page. Use these tokens consistently everywhere.
+Do not invent a new look per page. Use these tokens consistently everywhere. See the "Minimalist Modern" spec (the source of truth given by the user).
 
 | Token | Value |
 |---|---|
-| Primary / Navy | `#0F1B2D` |
-| Accent / Gold | `#D4A837` |
-| Background | Off-white `#FAF9F6` (warm paper feel) |
-| Text | `#1A2230` |
-| Muted text | `#5B6472` |
-| Headings font | Fraunces (serif, confident) |
+| Background | `#FAFAFA` (light, near-white) |
+| Foreground | `#0F172A` (slate-900) |
+| Muted surface | `#F1F5F9` |
+| Muted text | `#64748B` |
+| Accent | `#0052FF` |
+| Accent secondary | `#4D7CFF` |
+| Border | `#E2E8F0` |
+| Card | `#FFFFFF` |
+| Signature gradient | `linear-gradient(to right, #0052FF, #4D7CFF)` (135deg for icon fills) |
+| Headings font | Calistoga (display serif) |
 | Body font | Inter |
-| Border radius | Consistent small radius, no rounded-bubble everything |
+| Labels font | JetBrains Mono (uppercase, 0.15em tracking) |
+| Radius | `rounded-xl` for cards, `rounded-2xl` for feature cards |
 | Icons | Lucide only |
-| Signature highlight-stroke | Used in exactly ONE place (hero or one key element), not everywhere |
-| Scroll animations | Sparse; only where meaningful. No animation overload |
+
+**Signature elements (use deliberately, not everywhere):**
+- Gradient text effect (`background-clip: text`) for one key word per section headline.
+- Inverted dark sections (`bg-foreground text-background`) with `.dot-pattern` texture and radial glows.
+- Section-label pills: mono uppercase, `border-accent/30 bg-accent/5`, pulsing accent dot.
+- Gradient icon backgrounds (small rounded squares with the signature gradient).
+- Gradient-border featured cards (2px stroke via nested div) — used for the highlighted pricing tier and the "what it means" card.
+- Primary buttons: gradient fill, `rounded-xl`, `h-12`/`h-14`, hover `-translate-y-0.5` + `shadow-accent-lg` + `brightness-110`, focus `ring-2 ring-accent ring-offset-2`.
+- Entrance animations via Framer Motion only (`FadeIn` wrapper: fade up 28px, easeOut `[0.16,1,0.3,1]`, 0.7s, stagger 0.1s, `once: true`), respecting `prefers-reduced-motion`. Continuous CSS animations (rotating ring 60s, floating cards ±10px, pulsing dot 2s) are fine but sparse.
 
 **Layout rules:**
 - Every page has exactly one `<h1>`, then a clear hierarchy.
@@ -128,11 +140,11 @@ Before any feature or release is considered done, verify:
 
 ### 6.1 Visible
 - Custom domain in production, not default `vercel.app`.
-- Navy + gold palette everywhere; no purple gradients, no default Tailwind/shadcn look.
+- Blue + white palette everywhere; no purple gradients, no default Tailwind/shadcn look.
 - Real screenshots of the actual product on the landing page; no generic AI stock photos.
 - No fake testimonials, fake visitor/customer counts, or invented social proof. Empty is better than fake.
 - No broken buttons. No `href="#"` dead links. Every interactive element works.
-- Sparse scroll animations; signature highlight-stroke in one place only.
+- Sparse scroll animations; signature elements (gradient text, inverted sections, gradient borders) used deliberately, not everywhere.
 - At least 5 real pages: Home, How it works, Pricing, Login/Signup, Dashboard. No one-page site.
 - Logo: icon + wordmark, not text-only. Favicon present (`favicon.ico` + app icon).
 - Specific, concrete copy. No "AI-powered platform" fluff. Say exactly what it does.

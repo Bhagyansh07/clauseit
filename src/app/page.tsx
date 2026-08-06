@@ -1,4 +1,5 @@
 import Hero from "@/components/home/hero";
+import TrustBar from "@/components/home/trust-bar";
 import Problem from "@/components/home/problem";
 import HowItWorks from "@/components/home/how-it-works";
 import Features from "@/components/home/features";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustBar />
       <Problem />
       <HowItWorks />
       <Features />

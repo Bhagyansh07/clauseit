@@ -39,8 +39,8 @@ export function FlagList({
   return (
     <div className="mt-10">
       <div className="flex items-center gap-2">
-        <AlertTriangle className="h-5 w-5 text-gold" aria-hidden="true" />
-        <h2 className="font-display text-xl font-semibold text-navy">
+        <AlertTriangle className="h-5 w-5 text-accent" aria-hidden="true" />
+        <h2 className="font-display text-xl text-foreground">
           What to watch for
         </h2>
       </div>
@@ -50,13 +50,13 @@ export function FlagList({
           <details
             key={severity}
             open={severity === "danger"}
-            className="rounded-xl border border-line bg-white"
+            className="rounded-xl border border-border bg-card"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4">
-              <span className="font-semibold text-ink">
+              <span className="font-semibold text-foreground">
                 {SEVERITY_LABEL[severity]} ({groups[severity].length})
               </span>
-              <ChevronDown className="h-5 w-5 text-muted" aria-hidden="true" />
+              <ChevronDown className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
             </summary>
             <div className="space-y-4 px-5 pb-5">
               {groups[severity].map((flag, i) => (
