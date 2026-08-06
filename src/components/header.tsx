@@ -9,6 +9,9 @@ export default function Header() {
           <Logo />
         </Link>
         <div className="hidden items-center gap-8 text-sm font-medium text-muted sm:flex">
+          <Link href="/upload" className="transition-colors hover:text-ink">
+            Upload
+          </Link>
           <Link href="/how-it-works" className="transition-colors hover:text-ink">
             How it works
           </Link>

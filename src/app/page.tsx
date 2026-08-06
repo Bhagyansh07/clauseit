@@ -60,10 +60,10 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/pricing"
+                href="/upload"
                 className="rounded-lg bg-gold px-6 py-3 text-center font-semibold text-navy transition-colors hover:bg-gold-dark"
               >
-                See plans
+                Upload a document
               </Link>
               <Link
                 href="/how-it-works"
