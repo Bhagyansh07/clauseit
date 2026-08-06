@@ -16,7 +16,7 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0A1A34",
+          background: "linear-gradient(135deg, #1E1B4B, #4C1D95)",
           fontFamily: "sans-serif",
         }}
       >
@@ -25,19 +25,21 @@ export default function OpenGraphImage() {
             display: "flex",
             fontSize: 96,
             fontWeight: 700,
-            color: "#FBF9F4",
+            background: "linear-gradient(120deg, #A78BFA, #F472B6)",
+            backgroundClip: "text",
+            color: "transparent",
           }}
         >
-          Clause
-          <span style={{ color: "#C79A3E" }}>It</span>
+          ClauseIt
         </div>
         <div
           style={{
             display: "flex",
             fontSize: 40,
-            color: "#E0B75A",
+            color: "#FBBF24",
             marginTop: 16,
             letterSpacing: 2,
+            fontWeight: 600,
           }}
         >
           READ THE CLAUSES, NOT THE FINE PRINT.
@@ -46,7 +48,7 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             fontSize: 26,
-            color: "#D8CFB8",
+            color: "#DDD6FE",
             marginTop: 20,
           }}
         >

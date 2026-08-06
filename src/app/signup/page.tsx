@@ -12,7 +12,7 @@ export default function Signup() {
     <section className="mx-auto flex max-w-3xl flex-1 items-center px-4 py-16 sm:px-6 sm:py-20">
       <div className="mx-auto w-full max-w-md">
         <div className="text-center">
-          <h1 className="font-display text-3xl font-semibold text-navy">
+          <h1 className="font-display text-3xl font-bold text-navy">
             Create your account
           </h1>
           <p className="mt-3 text-ink-soft">
@@ -24,7 +24,10 @@ export default function Signup() {
         </div>
         <p className="mt-5 text-center text-sm text-ink-soft">
           Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-navy underline decoration-gold underline-offset-4">
+          <Link
+            href="/login"
+            className="font-semibold text-violet underline decoration-fuchsia underline-offset-4"
+          >
             Log in
           </Link>
         </p>

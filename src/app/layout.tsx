@@ -1,35 +1,35 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import {
-  Fraunces,
-  IBM_Plex_Mono,
-  IBM_Plex_Sans,
-  IBM_Plex_Sans_Devanagari,
+  Poppins,
+  Inter,
+  Noto_Sans_Devanagari,
+  JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const plex = IBM_Plex_Sans({
-  variable: "--font-plex",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
-const plexDevanagari = IBM_Plex_Sans_Devanagari({
-  variable: "--font-plex-deva",
+const notoDevanagari = Noto_Sans_Devanagari({
+  variable: "--font-noto-deva",
   subsets: ["devanagari"],
   weight: ["400", "500", "600", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${plex.variable} ${plexDevanagari.variable} ${plexMono.variable}`}
+      className={`${poppins.variable} ${inter.variable} ${notoDevanagari.variable} ${jetbrainsMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-parchment font-sans text-ink antialiased">
         <Header />

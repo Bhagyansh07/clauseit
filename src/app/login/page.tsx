@@ -12,9 +12,7 @@ export default function Login() {
     <section className="mx-auto flex max-w-3xl flex-1 items-center px-4 py-16 sm:px-6 sm:py-20">
       <div className="mx-auto w-full max-w-md">
         <div className="text-center">
-          <h1 className="font-display text-3xl font-semibold text-navy">
-            Log in
-          </h1>
+          <h1 className="font-display text-3xl font-bold text-navy">Log in</h1>
           <p className="mt-3 text-ink-soft">
             Access your uploads, analysis history, and saved reports.
           </p>
@@ -24,7 +22,10 @@ export default function Login() {
         </div>
         <p className="mt-5 text-center text-sm text-ink-soft">
           New here?{" "}
-          <Link href="/signup" className="font-semibold text-navy underline decoration-gold underline-offset-4">
+          <Link
+            href="/signup"
+            className="font-semibold text-violet underline decoration-fuchsia underline-offset-4"
+          >
             Create an account
           </Link>
         </p>

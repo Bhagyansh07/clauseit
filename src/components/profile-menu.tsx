@@ -63,11 +63,11 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
         onClick={() => setOpen((value) => !value)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex items-center gap-2.5 rounded border border-line bg-paper px-2 py-1.5 text-sm font-medium text-navy transition-colors hover:border-gold"
+        className="flex items-center gap-2.5 rounded-xl border border-line bg-white px-2 py-1.5 text-sm font-semibold text-navy transition-colors hover:border-violet"
       >
         <span
           aria-hidden="true"
-          className="flex h-7 w-7 items-center justify-center rounded-full bg-navy text-xs font-semibold text-gold-bright"
+          className="gradient-bg flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white"
         >
           {initials(user.name)}
         </span>
@@ -77,10 +77,10 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-50 mt-2 w-60 rounded border border-line bg-paper shadow-seal"
+          className="absolute right-0 top-full z-50 mt-2 w-60 rounded-2xl border border-line bg-white shadow-seal"
         >
           <div className="border-b border-line px-4 py-3">
-            <p className="truncate text-sm font-semibold text-navy">
+            <p className="truncate text-sm font-bold text-navy">
               {user.name}
             </p>
             <p className="truncate text-xs text-ink-soft">{user.email}</p>
@@ -93,9 +93,9 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
                 href={item.href}
                 role="menuitem"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3 rounded px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-parchment hover:text-navy"
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-parchment hover:text-violet"
               >
-                <item.icon className="h-4 w-4 text-gold" aria-hidden="true" />
+                <item.icon className="h-4 w-4 text-violet" aria-hidden="true" />
                 {item.label}
               </Link>
             ))}
@@ -104,7 +104,7 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
               type="button"
               role="menuitem"
               onClick={handleSignOut}
-              className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-red-soft hover:text-red"
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-red-soft hover:text-red"
             >
               <LogOut className="h-4 w-4" aria-hidden="true" />
               Sign out

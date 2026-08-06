@@ -16,21 +16,21 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-4xl items-center justify-between px-4 sm:px-6">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" aria-label="ClauseIt home" className="flex items-center">
           <Logo />
         </Link>
-        <div className="hidden items-center gap-8 text-sm font-medium text-ink-soft sm:flex">
+        <div className="hidden items-center gap-8 text-sm font-semibold text-ink-soft md:flex">
           <Link
             href={user ? "/upload" : "/login"}
-            className="transition-colors hover:text-navy"
+            className="transition-colors hover:text-violet"
           >
             Analyze
           </Link>
-          <Link href="/how-it-works" className="transition-colors hover:text-navy">
+          <Link href="/how-it-works" className="transition-colors hover:text-violet">
             How it works
           </Link>
-          <Link href="/pricing" className="transition-colors hover:text-navy">
+          <Link href="/pricing" className="transition-colors hover:text-violet">
             Plans
           </Link>
         </div>
@@ -40,14 +40,14 @@ export default function Header() {
           ) : (
             <Link
               href="/login"
-              className="text-sm font-medium text-navy transition-opacity hover:opacity-70"
+              className="text-sm font-semibold text-navy transition-opacity hover:opacity-70"
             >
               Log in
             </Link>
           )}
           <Link
             href={user ? "/upload" : "/signup"}
-            className="rounded border border-navy bg-navy px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-navy-light"
+            className="gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
           >
             {user ? "Upload" : "Get started"}
           </Link>

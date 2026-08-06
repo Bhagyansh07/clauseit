@@ -31,17 +31,17 @@ function BilingualText({
 function RiskMeter({ risk }: { risk: Analysis["risk"] }) {
   const meta: Record<string, { color: string; label: string; badge: string }> = {
     low: {
-      color: "#4F7358",
+      color: "#059669",
       label: "Low risk",
       badge: "bg-sage-soft text-sage",
     },
     medium: {
-      color: "#B97D2B",
+      color: "#D97706",
       label: "Medium risk",
       badge: "bg-amber-soft text-amber",
     },
     high: {
-      color: "#9E3B32",
+      color: "#E11D48",
       label: "High risk",
       badge: "bg-red-soft text-red",
     },
@@ -126,14 +126,14 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
         <h1 className="font-display text-3xl font-semibold text-navy">
           Your analysis
         </h1>
-        <div className="flex items-center rounded border border-navy p-0.5">
+        <div className="flex items-center rounded-full border border-violet p-0.5">
           <button
             type="button"
             onClick={() => setLang("en")}
-            className={`rounded px-3 py-1.5 text-sm font-semibold transition-colors ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
               lang === "en"
-                ? "bg-navy text-paper"
-                : "text-ink-soft hover:text-navy"
+                ? "gradient-bg text-white"
+                : "text-ink-soft hover:text-violet"
             }`}
           >
             English
@@ -141,10 +141,10 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
           <button
             type="button"
             onClick={() => setLang("hi")}
-            className={`rounded px-3 py-1.5 text-sm font-semibold transition-colors ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
               lang === "hi"
-                ? "bg-navy text-paper"
-                : "text-ink-soft hover:text-navy"
+                ? "gradient-bg text-white"
+                : "text-ink-soft hover:text-violet"
             }`}
           >
             हिन्दी
@@ -155,7 +155,7 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/upload"
-          className="inline-flex items-center gap-2 rounded border border-navy bg-navy px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-navy-light"
+          className="gradient-bg inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
         >
           <FileUp className="h-4 w-4" aria-hidden="true" />
           Analyze another
@@ -163,7 +163,7 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
         <button
           type="button"
           onClick={downloadReport}
-          className="inline-flex items-center gap-2 rounded border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-gold"
+          className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm font-semibold text-violet transition-colors hover:border-violet"
         >
           <Download className="h-4 w-4" aria-hidden="true" />
           Download report

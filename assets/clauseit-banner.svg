@@ -1,12 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="ClauseIt — Read the clauses, not the fine print">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0a1a34"/>
-      <stop offset="1" stop-color="#1e3a63"/>
+      <stop offset="0" stop-color="#1E1B4B"/>
+      <stop offset="1" stop-color="#4C1D95"/>
     </linearGradient>
     <linearGradient id="accentline" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#c79a3e"/>
-      <stop offset="1" stop-color="#e0b75a"/>
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#DB2777"/>
+    </linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#F472B6"/>
     </linearGradient>
   </defs>
 
@@ -14,11 +18,11 @@
 
   <rect x="0" y="0" width="1200" height="6" fill="url(#accentline)"/>
 
-  <g fill="none" stroke="#c79a3e" stroke-opacity="0.3">
-    <rect x="72" y="82" width="300" height="196" rx="6"/>
-    <rect x="72" y="82" width="300" height="10" rx="5" fill="#c79a3e" fill-opacity="0.14" stroke="none"/>
+  <g fill="none" stroke="#7C3AED" stroke-opacity="0.45">
+    <rect x="72" y="82" width="300" height="196" rx="14"/>
+    <rect x="72" y="82" width="300" height="12" rx="6" fill="#7C3AED" fill-opacity="0.25" stroke="none"/>
   </g>
-  <g fill="#fbf9f4" fill-opacity="0.55">
+  <g fill="#FFFFFF" fill-opacity="0.6">
     <rect x="96" y="112" width="180" height="10" rx="5"/>
     <rect x="96" y="136" width="252" height="8" rx="4"/>
     <rect x="96" y="156" width="220" height="8" rx="4"/>
@@ -26,26 +30,26 @@
     <rect x="96" y="212" width="150" height="9" rx="4"/>
     <rect x="96" y="232" width="110" height="9" rx="4"/>
   </g>
-  <g fill="none" stroke="#c79a3e" stroke-opacity="0.6">
-    <rect x="96" y="190" width="252" height="1" rx="0.5"/>
+  <g fill="none" stroke="#FBBF24" stroke-opacity="0.7">
+    <rect x="96" y="190" width="252" height="1.5" rx="0.75"/>
   </g>
 
-  <g font-family="Georgia, 'Times New Roman', serif">
-    <text x="470" y="172" font-size="66" font-weight="bold" fill="#fbf9f4">Clause</text>
-    <text x="705" y="172" font-size="66" font-weight="bold" fill="#c79a3e">It</text>
+  <g font-family="Poppins, Arial, Helvetica, sans-serif">
+    <text x="470" y="172" font-size="66" font-weight="bold" fill="#FFFFFF">Clause</text>
+    <text x="705" y="172" font-size="66" font-weight="bold" fill="url(#word)">It</text>
   </g>
 
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="470" y="212" font-size="26" fill="#e0b75a">Read the clauses, not the fine print.</text>
-    <text x="470" y="246" font-size="16" fill="#fbf9f4" fill-opacity="0.65">Plain-language bilingual (EN/HI) analysis of loans, insurance, rent &amp; job documents.</text>
+  <g font-family="Inter, Arial, Helvetica, sans-serif">
+    <text x="470" y="212" font-size="26" fill="#FBBF24">Read the clauses, not the fine print.</text>
+    <text x="470" y="246" font-size="16" fill="#FFFFFF" fill-opacity="0.65">Plain-language bilingual (EN/HI) analysis of loans, insurance, rent &amp; job documents.</text>
   </g>
 
-  <g font-family="Arial, Helvetica, sans-serif">
-    <rect x="470" y="268" width="120" height="30" rx="15" fill="none" stroke="#fbf9f4" stroke-opacity="0.25"/>
-    <text x="530" y="287" font-size="13" fill="#fbf9f4" fill-opacity="0.7" text-anchor="middle">PDF · Word · Photo</text>
-    <rect x="602" y="268" width="132" height="30" rx="15" fill="none" stroke="#fbf9f4" stroke-opacity="0.25"/>
-    <text x="668" y="287" font-size="13" fill="#fbf9f4" fill-opacity="0.7" text-anchor="middle">10 free / month</text>
-    <rect x="746" y="268" width="150" height="30" rx="15" fill="none" stroke="#c79a3e" stroke-opacity="0.7"/>
-    <text x="821" y="287" font-size="13" fill="#e0b75a" text-anchor="middle">English + Hindi</text>
+  <g font-family="Inter, Arial, Helvetica, sans-serif">
+    <rect x="470" y="268" width="120" height="30" rx="15" fill="none" stroke="#FFFFFF" stroke-opacity="0.25"/>
+    <text x="530" y="287" font-size="13" fill="#FFFFFF" fill-opacity="0.7" text-anchor="middle">PDF · Word · Photo</text>
+    <rect x="602" y="268" width="132" height="30" rx="15" fill="none" stroke="#FFFFFF" stroke-opacity="0.25"/>
+    <text x="668" y="287" font-size="13" fill="#FFFFFF" fill-opacity="0.7" text-anchor="middle">10 free / month</text>
+    <rect x="746" y="268" width="150" height="30" rx="15" fill="none" stroke="#F472B6" stroke-opacity="0.7"/>
+    <text x="821" y="287" font-size="13" fill="#FBBF24" text-anchor="middle">English + Hindi</text>
   </g>
 </svg>

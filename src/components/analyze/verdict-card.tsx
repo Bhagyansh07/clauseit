@@ -31,9 +31,9 @@ const STYLES: Record<
   VerdictResult["colorToken"],
   { gauge: string; badge: string }
 > = {
-  emerald: { gauge: "#4F7358", badge: "bg-sage-soft text-sage" },
-  amber: { gauge: "#B97D2B", badge: "bg-amber-soft text-amber" },
-  red: { gauge: "#9E3B32", badge: "bg-red-soft text-red" },
+  emerald: { gauge: "#059669", badge: "bg-sage-soft text-sage" },
+  amber: { gauge: "#D97706", badge: "bg-amber-soft text-amber" },
+  red: { gauge: "#E11D48", badge: "bg-red-soft text-red" },
 };
 
 export function VerdictCard({
@@ -47,25 +47,29 @@ export function VerdictCard({
   const styles = STYLES[verdict.colorToken];
 
   return (
-    <div className="relative rounded bg-navy p-6 text-paper sm:p-7">
-      <div className="flex items-center gap-2.5">
-        <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy to-violet p-6 text-white shadow-seal sm:p-7">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-fuchsia/30 blur-[80px]"
+      />
+      <div className="relative flex items-center gap-2.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-gold-bright" aria-hidden="true" />
         <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold-bright">
           Should you sign?
         </p>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-start justify-between gap-6">
+      <div className="relative mt-5 flex flex-wrap items-start justify-between gap-6">
         <div className="min-w-0 flex-1">
-          <h2 className="font-display text-3xl font-semibold leading-tight">
+          <h2 className="font-display text-3xl font-bold leading-tight">
             {verdict.label}
           </h2>
-          <p className="mt-3 max-w-md leading-7 text-paper/80">{copy.en}</p>
+          <p className="mt-3 max-w-md leading-7 text-white/80">{copy.en}</p>
           <p className="mt-2 max-w-md text-sm leading-6 text-gold-bright/90">
             {copy.hi}
           </p>
           <span
-            className={`mt-4 inline-block rounded-sm px-2.5 py-0.5 text-xs font-semibold ${styles.badge}`}
+            className={`mt-4 inline-block rounded-full px-3 py-1 text-xs font-semibold ${styles.badge}`}
           >
             Score {score}/10
           </span>
