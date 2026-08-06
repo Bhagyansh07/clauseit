@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   FileUp,
@@ -27,6 +27,28 @@ export default function UploadPage() {
   const [fileError, setFileError] = useState<string | null>(null);
   const [pastedText, setPastedText] = useState("");
   const [submit, setSubmit] = useState<SubmitState>({ status: "idle" });
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      setChecked(true);
+      if (!getCurrentUser()) {
+        router.replace("/login");
+      }
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, [router]);
+
+  if (!checked) {
+    return (
+      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-border border-t-accent" />
+        <p className="mt-4 font-mono text-sm uppercase tracking-[0.15em] text-muted-foreground">
+          Checking your session
+        </p>
+      </section>
+    );
+  }
 
   function acceptFile(candidate: File) {
     const check = validateClientFile(candidate.name, candidate.size);
