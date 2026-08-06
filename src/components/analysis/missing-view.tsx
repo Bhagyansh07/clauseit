@@ -4,19 +4,16 @@ import { ArrowRight, FileUp } from "lucide-react";
 export function MissingView() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
-      <span className="gradient-bg mx-auto flex h-16 w-16 items-center justify-center rounded-2xl shadow-accent-lg">
-        <FileUp className="h-7 w-7 text-white" aria-hidden="true" />
-      </span>
-      <h1 className="mt-6 font-display text-3xl tracking-[-0.02em] text-foreground">
+      <h1 className="font-display text-3xl font-semibold text-navy">
         No analysis found
       </h1>
-      <p className="mx-auto mt-4 max-w-md text-muted-foreground">
+      <p className="mx-auto mt-4 max-w-md text-ink-soft">
         This analysis was not found. It may have been opened in a different
         browser or the result has expired.
       </p>
       <Link
         href="/upload"
-        className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 font-semibold text-accent-foreground shadow-accent transition-all hover:-translate-y-0.5 hover:shadow-accent-lg"
+        className="group mt-8 inline-flex items-center gap-2 rounded border border-navy bg-navy px-6 py-3 font-semibold text-paper transition-colors hover:bg-navy-light"
       >
         <FileUp className="h-5 w-5" aria-hidden="true" />
         Analyze a document

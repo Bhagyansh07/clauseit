@@ -9,17 +9,24 @@ export const metadata: Metadata = {
 
 export default function Signup() {
   return (
-    <section className="mx-auto flex max-w-6xl flex-1 items-center px-4 py-20 sm:px-6">
+    <section className="mx-auto flex max-w-3xl flex-1 items-center px-4 py-16 sm:px-6 sm:py-20">
       <div className="mx-auto w-full max-w-md">
         <div className="text-center">
-          <h1 className="font-display text-3xl tracking-[-0.02em] text-foreground">Create your account</h1>
-          <p className="mt-3 text-muted-foreground">Start free with 10 analyses a month. Upgrade anytime.</p>
+          <h1 className="font-display text-3xl font-semibold text-navy">
+            Create your account
+          </h1>
+          <p className="mt-3 text-ink-soft">
+            Start free with 10 analyses a month. Upgrade anytime.
+          </p>
         </div>
         <div className="mt-8">
           <AuthForm mode="signup" />
         </div>
-        <p className="mt-5 text-center text-sm text-muted-foreground">
-          Already have an account? <Link href="/login" className="font-semibold text-accent">Log in</Link>
+        <p className="mt-5 text-center text-sm text-ink-soft">
+          Already have an account?{" "}
+          <Link href="/login" className="font-semibold text-navy underline decoration-gold underline-offset-4">
+            Log in
+          </Link>
         </p>
       </div>
     </section>

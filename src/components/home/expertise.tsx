@@ -44,38 +44,34 @@ const categories = [
 
 export default function Expertise() {
   return (
-    <section className="dot-pattern relative overflow-hidden bg-foreground text-background">
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-accent/20 blur-[150px]" />
-      <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
+    <section className="border-y border-line bg-paper">
+      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="max-w-2xl">
           <FadeIn>
-            <SectionLabel inverted>The kind of issues ClauseIt looks for</SectionLabel>
+            <SectionLabel>The kind of issues ClauseIt looks for</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h2 className="mt-6 font-display text-3xl leading-tight tracking-[-0.02em] sm:text-4xl lg:text-5xl">
-              Built to catch what{" "}
-              <span className="gradient-text">small print hides</span>
+            <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
+              Built to catch what <span className="text-gold">small print hides</span>
             </h2>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="mt-5 text-lg leading-8 text-background/70">
+            <p className="mt-4 text-lg leading-8 text-ink-soft">
               This is not a generic summary tool. Every document is reviewed for
               the specific terms that often create risk, cost, or confusion for
               ordinary readers.
             </p>
           </FadeIn>
         </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, i) => (
             <FadeIn key={category.title} delay={0.06 * i}>
-              <div className="h-full rounded-2xl border border-background/10 bg-background/5 p-6 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/50">
-                <span className="gradient-bg flex h-11 w-11 items-center justify-center rounded-xl shadow-accent">
-                  <category.icon className="h-5 w-5 text-white" aria-hidden="true" />
-                </span>
-                <h3 className="mt-4 font-display text-xl">{category.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-background/60">
-                  {category.text}
-                </p>
+              <div className="h-full rounded border border-line bg-parchment p-6 shadow-paper">
+                <category.icon className="h-6 w-6 text-gold" aria-hidden="true" />
+                <h3 className="mt-4 font-display text-lg font-semibold text-navy">
+                  {category.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-ink-soft">{category.text}</p>
               </div>
             </FadeIn>
           ))}

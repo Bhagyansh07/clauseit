@@ -22,19 +22,19 @@ const examples = [
 
 export default function Problem() {
   return (
-    <section className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-28">
+    <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="max-w-2xl">
         <FadeIn>
           <SectionLabel>The problem</SectionLabel>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="mt-6 font-display text-3xl leading-tight tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
             The most expensive terms are often the{" "}
-            <span className="gradient-text">easiest to miss</span>
+            <span className="text-gold">easiest to miss</span>
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="mt-5 text-lg leading-8 text-muted-foreground">
+          <p className="mt-4 text-lg leading-8 text-ink-soft">
             In India, the clauses that cost people the most are often buried in
             schedules, footnotes, definitions, or tiny print. These are the kinds
             of terms people discover too late — after signing, paying, or
@@ -42,17 +42,14 @@ export default function Problem() {
           </p>
         </FadeIn>
       </div>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {examples.map((example, i) => (
           <FadeIn key={example.title} delay={0.08 * i}>
-            <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-accent transition-all group-hover:w-12" />
-                <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-accent">
-                  {example.title}
-                </p>
-              </div>
-              <p className="mt-3 font-display text-lg leading-7 text-foreground">
+            <div className="h-full rounded border border-line bg-paper p-6 shadow-paper transition-transform duration-200 hover:-translate-y-0.5">
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-gold">
+                {example.title}
+              </p>
+              <p className="mt-3 font-display text-lg leading-7 text-ink">
                 &ldquo;{example.text}&rdquo;
               </p>
             </div>

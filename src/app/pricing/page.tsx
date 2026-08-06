@@ -58,96 +58,66 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
       <SectionLabel>Pricing</SectionLabel>
-      <h1 className="mt-6 font-display text-4xl leading-tight tracking-[-0.02em] text-foreground sm:text-5xl">
+      <h1 className="mt-6 font-display text-4xl leading-tight text-navy sm:text-5xl">
         Simple pricing for{" "}
-        <span className="gradient-text">everyday review</span>
+        <span className="relative whitespace-nowrap text-gold">
+          everyday review
+          <span className="verdict-underline" aria-hidden="true" />
+        </span>
       </h1>
-      <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+      <p className="mt-4 max-w-2xl text-lg text-ink-soft">
         Start free, upgrade when you need it. Pay with UPI, cards, or
         netbanking.
       </p>
 
       <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
-        {plans.map((plan) =>
-          plan.highlighted ? (
-            <div
-              key={plan.name}
-              className="relative rounded-2xl bg-gradient-to-br from-accent to-accent-secondary p-[2px] shadow-accent-lg"
+        {plans.map((plan) => (
+          <div
+            key={plan.name}
+            className={`flex flex-col rounded border bg-paper p-8 shadow-paper ${
+              plan.highlighted
+                ? "border-2 border-navy"
+                : "border border-line"
+            }`}
+          >
+            <h2 className="font-display text-xl font-semibold text-navy">
+              {plan.name}
+            </h2>
+            <p className="mt-1 text-sm text-ink-soft">{plan.tagline}</p>
+            <p className="mt-6">
+              <span className="font-display text-4xl font-semibold text-navy">
+                {plan.price}
+              </span>
+              <span className="ml-2 text-sm text-ink-soft">{plan.period}</span>
+            </p>
+            <ul className="mt-8 flex-1 space-y-3">
+              {plan.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-3 text-sm">
+                  <Check
+                    className="mt-0.5 h-4 w-4 shrink-0 text-gold"
+                    aria-hidden="true"
+                  />
+                  <span className="text-ink">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/signup"
+              className={`mt-8 rounded px-5 py-3 text-center font-semibold transition-colors ${
+                plan.highlighted
+                  ? "border border-navy bg-navy text-paper hover:bg-navy-light"
+                  : "border border-line bg-paper text-navy hover:border-gold"
+              }`}
             >
-              <div className="flex h-full flex-col rounded-2xl bg-foreground p-8 text-background">
-                <h2 className="font-display text-xl text-background">
-                  {plan.name}
-                </h2>
-                <p className="mt-1 text-sm text-background/60">{plan.tagline}</p>
-                <p className="mt-6">
-                  <span className="font-display text-4xl">{plan.price}</span>
-                  <span className="ml-2 text-sm text-background/60">
-                    {plan.period}
-                  </span>
-                </p>
-                <ul className="mt-8 flex-1 space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm">
-                      <Check
-                        className="mt-0.5 h-4 w-4 shrink-0 text-accent-secondary"
-                        aria-hidden="true"
-                      />
-                      <span className="text-background/80">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/signup"
-                  className="gradient-bg mt-8 rounded-xl px-5 py-3 text-center font-semibold text-white transition-all hover:brightness-110"
-                >
-                  {plan.cta}
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <div
-              key={plan.name}
-              className="flex flex-col rounded-2xl border border-border bg-card p-8 shadow-sm"
-            >
-              <h2 className="font-display text-xl text-foreground">
-                {plan.name}
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {plan.tagline}
-              </p>
-              <p className="mt-6">
-                <span className="font-display text-4xl text-foreground">
-                  {plan.price}
-                </span>
-                <span className="ml-2 text-sm text-muted-foreground">
-                  {plan.period}
-                </span>
-              </p>
-              <ul className="mt-8 flex-1 space-y-3">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm">
-                    <Check
-                      className="mt-0.5 h-4 w-4 shrink-0 text-accent"
-                      aria-hidden="true"
-                    />
-                    <span className="text-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/signup"
-                className="mt-8 rounded-xl border border-border px-5 py-3 text-center font-semibold text-foreground transition-colors hover:border-accent/40 hover:bg-accent/5"
-              >
-                {plan.cta}
-              </Link>
-            </div>
-          )
-        )}
+              {plan.cta}
+            </Link>
+          </div>
+        ))}
       </div>
 
-      <p className="mt-10 max-w-2xl text-sm text-muted-foreground">
+      <p className="mt-10 max-w-2xl text-sm text-ink-soft">
         Premium includes a lawyer review section, arriving soon. Pro and Premium
         cancel anytime from your account page.
       </p>

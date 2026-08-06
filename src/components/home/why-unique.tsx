@@ -38,40 +38,36 @@ const points = [
 
 export default function WhyUnique() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-28">
+    <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="max-w-2xl">
         <FadeIn>
           <SectionLabel>Why ClauseIt</SectionLabel>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="mt-6 font-display text-3xl leading-tight tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
-            Built for the way{" "}
-            <span className="gradient-text">real people</span> read documents
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-navy sm:text-4xl">
+            Built for the way <span className="text-gold">real people</span>{" "}
+            read documents
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="mt-5 text-lg leading-8 text-muted-foreground">
+          <p className="mt-4 text-lg leading-8 text-ink-soft">
             ClauseIt is designed around everyday decisions: signing a lease,
             accepting a policy, taking a loan, or reviewing a job offer. It is
             practical, direct, and built to make the risk obvious.
           </p>
         </FadeIn>
       </div>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {points.map((point, i) => (
           <FadeIn key={point.title} delay={0.06 * i}>
-            <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg">
+            <div className="h-full rounded border border-line bg-paper p-6 shadow-paper">
               <div className="flex items-center gap-3">
-                <span className="gradient-bg flex h-10 w-10 shrink-0 items-center justify-center rounded-lg shadow-accent">
-                  <point.icon className="h-4 w-4 text-white" aria-hidden="true" />
-                </span>
-                <h3 className="font-display text-lg text-foreground">
+                <point.icon className="h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                <h3 className="font-display text-lg font-semibold text-navy">
                   {point.title}
                 </h3>
               </div>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                {point.text}
-              </p>
+              <p className="mt-3 text-sm leading-6 text-ink-soft">{point.text}</p>
             </div>
           </FadeIn>
         ))}

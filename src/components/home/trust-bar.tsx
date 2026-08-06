@@ -20,20 +20,15 @@ const points = [
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-border bg-card">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <section className="border-y border-line bg-paper">
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
         <div className="grid gap-4 md:grid-cols-3">
           {points.map((point) => (
-            <div
-              key={point.title}
-              className="flex items-start gap-3 rounded-xl border border-border bg-background px-4 py-4"
-            >
-              <span className="gradient-bg flex h-9 w-9 shrink-0 items-center justify-center rounded-lg shadow-accent">
-                <point.icon className="h-4 w-4 text-white" aria-hidden="true" />
-              </span>
+            <div key={point.title} className="flex items-start gap-3 rounded border border-line bg-parchment px-4 py-4">
+              <point.icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
               <div>
-                <p className="font-semibold text-foreground">{point.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{point.text}</p>
+                <p className="font-semibold text-navy">{point.title}</p>
+                <p className="mt-1 text-sm text-ink-soft">{point.text}</p>
               </div>
             </div>
           ))}

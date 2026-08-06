@@ -24,10 +24,11 @@ export function AuthForm({ mode }: AuthFormProps) {
     try {
       if (mode === "signup") {
         signupUser(name, email, password);
+        router.push("/login");
       } else {
         loginUser(email, password);
+        router.push("/dashboard");
       }
-      router.push("/upload");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -37,13 +38,18 @@ export function AuthForm({ mode }: AuthFormProps) {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-foreground placeholder:text-muted-foreground/60 focus:border-accent focus:ring-2 focus:ring-accent/30 focus:outline-none";
+    "w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-ink placeholder:text-ink-soft/60 focus:border-gold focus:ring-2 focus:ring-gold/30 focus:outline-none";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 rounded border border-line bg-paper p-6 shadow-paper"
+    >
       {mode === "signup" && (
         <div>
-          <label className="mb-2 block text-sm font-medium text-foreground">Name</label>
+          <label className="mb-2 block text-sm font-medium text-ink">
+            Name
+          </label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -54,7 +60,9 @@ export function AuthForm({ mode }: AuthFormProps) {
       )}
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-foreground">Email</label>
+        <label className="mb-2 block text-sm font-medium text-ink">
+          Email
+        </label>
         <input
           type="email"
           value={email}
@@ -65,7 +73,9 @@ export function AuthForm({ mode }: AuthFormProps) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-foreground">Password</label>
+        <label className="mb-2 block text-sm font-medium text-ink">
+          Password
+        </label>
         <input
           type="password"
           value={password}
@@ -75,14 +85,22 @@ export function AuthForm({ mode }: AuthFormProps) {
         />
       </div>
 
-      {error && <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
+      {error && (
+        <p className="rounded-sm border border-red-soft bg-red-soft px-3 py-2 text-sm text-red">
+          {error}
+        </p>
+      )}
 
       <button
         type="submit"
         disabled={loading}
-        className="gradient-bg w-full rounded-xl px-4 py-2.5 font-semibold text-white shadow-accent transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-accent-lg disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-accent"
+        className="w-full rounded border border-navy bg-navy px-4 py-2.5 font-semibold text-paper transition-colors hover:bg-navy-light focus:ring-2 focus:ring-gold focus:outline-none disabled:opacity-60"
       >
-        {loading ? "Please wait..." : mode === "signup" ? "Create account" : "Log in"}
+        {loading
+          ? "Please wait..."
+          : mode === "signup"
+            ? "Create account"
+            : "Log in"}
       </button>
     </form>
   );

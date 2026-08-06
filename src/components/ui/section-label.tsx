@@ -8,15 +8,16 @@ export function SectionLabel({
   inverted?: boolean;
 }) {
   return (
-    <div
-      className={`inline-flex items-center gap-3 rounded-full border px-5 py-2 ${
-        inverted
-          ? "border-accent/40 bg-accent/10"
-          : "border-accent/30 bg-accent/5"
-      }`}
-    >
-      <span className="h-2 w-2 animate-pulse-dot rounded-full bg-accent" />
-      <span className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-accent">
+    <div className="flex items-center gap-2.5">
+      <span
+        aria-hidden="true"
+        className="h-1.5 w-1.5 rounded-full bg-gold"
+      />
+      <span
+        className={`font-mono text-xs font-medium uppercase tracking-[0.1em] ${
+          inverted ? "text-gold-bright" : "text-navy-light"
+        }`}
+      >
         {children}
       </span>
     </div>

@@ -8,14 +8,16 @@ export const metadata: Metadata = {
 export default function Terms() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
-      <h1 className="font-display text-4xl font-semibold text-foreground">
+      <h1 className="font-display text-4xl font-semibold text-navy">
         Terms of Service
       </h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: August 2026</p>
+      <p className="mt-2 text-sm text-ink-soft">
+        Last updated: August 2026
+      </p>
 
-      <div className="mt-10 space-y-8 leading-7 text-foreground">
+      <div className="mt-10 space-y-8 leading-7 text-ink">
         <div>
-          <h2 className="font-display text-xl font-semibold text-foreground">
+          <h2 className="font-display text-xl font-semibold text-navy">
             What ClauseIt provides
           </h2>
           <p className="mt-3">
@@ -25,7 +27,7 @@ export default function Terms() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-foreground">
+          <h2 className="font-display text-xl font-semibold text-navy">
             Not legal advice
           </h2>
           <p className="mt-3">
@@ -35,7 +37,7 @@ export default function Terms() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-foreground">
+          <h2 className="font-display text-xl font-semibold text-navy">
             Your responsibility
           </h2>
           <p className="mt-3">
@@ -45,7 +47,7 @@ export default function Terms() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-foreground">
+          <h2 className="font-display text-xl font-semibold text-navy">
             Accounts and fair use
           </h2>
           <p className="mt-3">
@@ -54,7 +56,7 @@ export default function Terms() {
           </p>
         </div>
         <div>
-          <h2 className="font-display text-xl font-semibold text-foreground">
+          <h2 className="font-display text-xl font-semibold text-navy">
             Contact
           </h2>
           <p className="mt-3">

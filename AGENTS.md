@@ -47,38 +47,46 @@ Upload any document (PDF, DOCX, TXT, or camera photo) and get a plain-language a
 
 ## 3. Design System (Locked)
 
-Do not invent a new look per page. Use these tokens consistently everywhere. See the "Minimalist Modern" spec (the source of truth given by the user).
+Do not invent a new look per page. Use these tokens consistently everywhere. See the "The Notary's Desk" spec (the source of truth given by the user). This REPLACED the earlier "Minimalist Modern" electric-blue spec; do not reintroduce blue gradients.
 
-| Token | Value |
-|---|---|
-| Background | `#FAFAFA` (light, near-white) |
-| Foreground | `#0F172A` (slate-900) |
-| Muted surface | `#F1F5F9` |
-| Muted text | `#64748B` |
-| Accent | `#0052FF` |
-| Accent secondary | `#4D7CFF` |
-| Border | `#E2E8F0` |
-| Card | `#FFFFFF` |
-| Signature gradient | `linear-gradient(to right, #0052FF, #4D7CFF)` (135deg for icon fills) |
-| Headings font | Calistoga (display serif) |
-| Body font | Inter |
-| Labels font | JetBrains Mono (uppercase, 0.15em tracking) |
-| Radius | `rounded-xl` for cards, `rounded-2xl` for feature cards |
-| Icons | Lucide only |
+| Token | Value | Use |
+|---|---|---|
+| Navy | `#0A1A34` | Primary text, headings, verdict card background |
+| Navy-light | `#1E3A63` | Secondary navy, action-line text |
+| Gold | `#C79A3E` | THE one accent: verdict, stamp, focus rings, links |
+| Gold-bright | `#E0B75A` | Stamp text/lines on navy |
+| Parchment | `#F3EEE3` | Page background (with grain) |
+| Paper | `#FBF9F4` | Cards |
+| Ink | `#23211D` | Body text |
+| Ink-soft | `#706A5C` | Secondary / meta text |
+| Red / red-soft | `#9E3B32` / `#F3E3E0` | Serious severity |
+| Amber / amber-soft | `#B97D2B` / `#F5E9D6` | Warning severity |
+| Sage / sage-soft | `#4F7358` / `#E4ECE3` | Note / safe severity |
+| Line | `#D8CFB8` | Hairlines, borders, dashed dividers |
+| Headings font | Fraunces (400–700, English only) | `font-display` |
+| Body font | IBM Plex Sans + IBM Plex Sans Devanagari (400–700) | `font-sans` (both scripts) |
+| Labels font | IBM Plex Mono (400–500, uppercase) | `font-mono` |
+| Radius | 2–4px (`rounded`), never `rounded-2xl` | — |
+| Container | ~740px reading width (`max-w-3xl`/`max-w-4xl`) | — |
+| Icons | Lucide only | — |
 
 **Signature elements (use deliberately, not everywhere):**
-- Gradient text effect (`background-clip: text`) for one key word per section headline.
-- Inverted dark sections (`bg-foreground text-background`) with `.dot-pattern` texture and radial glows.
-- Section-label pills: mono uppercase, `border-accent/30 bg-accent/5`, pulsing accent dot.
-- Gradient icon backgrounds (small rounded squares with the signature gradient).
-- Gradient-border featured cards (2px stroke via nested div) — used for the highlighted pricing tier and the "what it means" card.
-- Primary buttons: gradient fill, `rounded-xl`, `h-12`/`h-14`, hover `-translate-y-0.5` + `shadow-accent-lg` + `brightness-110`, focus `ring-2 ring-accent ring-offset-2`.
-- Entrance animations via Framer Motion only (`FadeIn` wrapper: fade up 28px, easeOut `[0.16,1,0.3,1]`, 0.7s, stagger 0.1s, `once: true`), respecting `prefers-reduced-motion`. Continuous CSS animations (rotating ring 60s, floating cards ±10px, pulsing dot 2s) are fine but sparse.
+- **Stamp:** a circular, gold-ringed, tilted seal (rotates ~-12deg) overlapping the top-right edge of the verdict card. Lands once (rotate + scale animation), never loops. Disabled under `prefers-reduced-motion`. See `src/components/analyze/stamp.tsx`.
+- **Risk gauge:** a radial/arc gauge (`src/components/analyze/risk-gauge.tsx`), NEVER a progress bar. Severity-colored by level.
+- **Verdict card:** the only inverted navy section on the whole site. Gold eyebrow label, Fraunces headline, gold-bright Hindi subline, radial gauge, overlapping stamp.
+- **Flag cards:** paper card with a THIN LEFT border in the severity color (4px), a soft pill badge (`bg-*-soft text-*`), the quoted clause in italic, a dashed divider, then the plain explanation and a one-line action in navy-light with a gold arrow.
+- **Severity colors are reserved for flags.** Gold is reserved for trust/verdict/brand. Never use blue, purple, or gradient fills.
+- **Language toggle:** two-button pill, navy border, active side fills navy with paper text.
+- **Section labels:** static gold dot + mono uppercase (~0.1em tracking). No pulsing.
+- **Buttons:** primary = navy fill on paper, hover navy-light, focus `ring-2 ring-gold`. Secondary = paper fill, `border-line`, hover `border-gold`.
+- **Grain:** near-invisible paper noise over the whole page via `body::before` (opacity 0.035). Do not add per-section textures.
+- **Motion:** entrance animation once + stamp once. NO floating cards, NO rotating rings, NO continuous pulse. Respect `prefers-reduced-motion`.
 
 **Layout rules:**
 - Every page has exactly one `<h1>`, then a clear hierarchy.
 - Responsive on real breakpoints (mobile first), not resize-and-hope.
-- Loading, empty, and error states designed intentionally (skeletons, empty-state illustrations, error cards) — not bare spinners.
+- Loading, empty, and error states designed intentionally (paper cards, bordered empty states, soft severity-colored error notes) — not bare spinners.
+- Keep every component under ~200 lines; split `Stamp`, `RiskGauge`, `VerdictCard`, `FlagCard`, `FlagList` into their own files.
 
 ---
 
@@ -140,7 +148,7 @@ Before any feature or release is considered done, verify:
 
 ### 6.1 Visible
 - Custom domain in production, not default `vercel.app`.
-- Blue + white palette everywhere; no purple gradients, no default Tailwind/shadcn look.
+- Navy + gold palette on parchment everywhere; no purple/blue gradients, no default Tailwind/shadcn look.
 - Real screenshots of the actual product on the landing page; no generic AI stock photos.
 - No fake testimonials, fake visitor/customer counts, or invented social proof. Empty is better than fake.
 - No broken buttons. No `href="#"` dead links. Every interactive element works.
