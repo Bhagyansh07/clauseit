@@ -22,3 +22,10 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
 }
+
+.highlight-stroke {
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-repeat: no-repeat;
+  background-size: 100% 0.18em;
+  background-position: 0 92%;
+}

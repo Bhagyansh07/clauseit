@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { AuthForm } from "@/components/auth-form";
 
 export const metadata: Metadata = {
   title: "Sign up",
@@ -8,20 +10,17 @@ export const metadata: Metadata = {
 export default function Signup() {
   return (
     <section className="mx-auto flex max-w-6xl flex-1 items-center px-4 py-20 sm:px-6">
-      <div className="mx-auto max-w-md text-center">
-        <h1 className="font-display text-3xl font-semibold text-navy">
-          Accounts are almost ready
-        </h1>
-        <p className="mt-4 text-muted">
-          Sign-up goes live in the next phase of the build. You will need only an
-          email and a password. Free plan: 10 documents a month, no card required.
+      <div className="mx-auto w-full max-w-md">
+        <div className="text-center">
+          <h1 className="font-display text-3xl font-semibold text-navy">Create your account</h1>
+          <p className="mt-3 text-muted">Start free with 10 analyses a month. Upgrade anytime.</p>
+        </div>
+        <div className="mt-8">
+          <AuthForm mode="signup" />
+        </div>
+        <p className="mt-5 text-center text-sm text-muted">
+          Already have an account? <Link href="/login" className="font-semibold text-navy">Log in</Link>
         </p>
-        <a
-          href="mailto:hello@clauseit.in"
-          className="mt-8 inline-block rounded-lg bg-navy px-6 py-3 font-semibold text-paper transition-colors hover:bg-navy-light"
-        >
-          Notify me when ready
-        </a>
       </div>
     </section>
   );
