@@ -12,6 +12,7 @@ import {
 } from "@/lib/auth-server";
 import { SESSION_COOKIE } from "@/lib/session";
 import { captureError } from "@/lib/sentry";
+import { rateLimit, RateLimitError } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -24,6 +25,14 @@ export async function POST(req: NextRequest) {
   const user = await getSessionUser(req.cookies.get(SESSION_COOKIE)?.value);
   if (!user) {
     return error("Log in to analyze a document.", 401);
+  }
+
+  try {
+    rateLimit(`analyze:${user.id}`, 10, 10 * 60 * 1000);
+  } catch (err) {
+    if (err instanceof RateLimitError) {
+      return error(err.message, 429);
+    }
   }
 
   const used = await countMonthlyAnalyses(user.id);
