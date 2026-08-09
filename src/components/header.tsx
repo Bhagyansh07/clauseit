@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/logo";
 import { ProfileMenu } from "@/components/profile-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { getCurrentUser } from "@/lib/auth";
+import { useUser } from "@/lib/auth";
+
+const NAV = [
+  { href: "/signup", label: "Analyze" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/pricing", label: "Plans" },
+];
 
 export default function Header() {
-  const [user, setUser] = useState<ReturnType<typeof getCurrentUser> | null>(null);
-
-  useEffect(() => {
-    const t = window.setTimeout(() => setUser(getCurrentUser()), 0);
-    return () => window.clearTimeout(t);
-  }, []);
+  const pathname = usePathname();
+  const { user } = useUser();
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
@@ -22,18 +24,23 @@ export default function Header() {
           <Logo />
         </Link>
         <div className="hidden items-center gap-8 text-sm font-semibold text-ink-soft md:flex">
-          <Link
-            href="/signup"
-            className="transition-colors hover:text-violet"
-          >
-            Analyze
-          </Link>
-          <Link href="/how-it-works" className="transition-colors hover:text-violet">
-            How it works
-          </Link>
-          <Link href="/pricing" className="transition-colors hover:text-violet">
-            Plans
-          </Link>
+          {NAV.map((item) => {
+            const active =
+              item.href === "/signup"
+                ? pathname === "/upload" || pathname === "/signup"
+                : pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors hover:text-violet ${
+                  active ? "text-violet" : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
         <div className="flex items-center gap-3">
           <ThemeToggle />

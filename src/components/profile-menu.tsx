@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FileUp, LayoutDashboard, LogOut, User } from "lucide-react";
-import { logoutUser, type UserRecord } from "@/lib/auth";
+import { logout, type PublicUser } from "@/lib/auth";
 
 function initials(name: string) {
   return name
@@ -22,9 +22,10 @@ const ITEMS = [
   { href: "/account", label: "Account", icon: User },
 ];
 
-export function ProfileMenu({ user }: { user: UserRecord }) {
+export function ProfileMenu({ user }: { user: PublicUser }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,8 +50,9 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
     };
   }, []);
 
-  function handleSignOut() {
-    logoutUser();
+  async function handleSignOut() {
+    setSigningOut(true);
+    await logout();
     setOpen(false);
     router.push("/");
     router.refresh();
@@ -80,10 +82,11 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
           className="absolute right-0 top-full z-50 mt-2 w-60 rounded-2xl border border-line bg-paper shadow-seal"
         >
           <div className="border-b border-line px-4 py-3">
-            <p className="truncate text-sm font-bold text-navy">
-              {user.name}
-            </p>
+            <p className="truncate text-sm font-bold text-navy">{user.name}</p>
             <p className="truncate text-xs text-ink-soft">{user.email}</p>
+            <span className="mt-2 inline-block rounded-sm border border-gold bg-gold/10 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.15em] text-gold">
+              {user.plan}
+            </span>
           </div>
 
           <div className="p-1.5">
@@ -104,10 +107,11 @@ export function ProfileMenu({ user }: { user: UserRecord }) {
               type="button"
               role="menuitem"
               onClick={handleSignOut}
-              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-red-soft hover:text-red"
+              disabled={signingOut}
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-red-soft hover:text-red disabled:opacity-60"
             >
               <LogOut className="h-4 w-4" aria-hidden="true" />
-              Sign out
+              {signingOut ? "Signing out..." : "Sign out"}
             </button>
           </div>
         </div>

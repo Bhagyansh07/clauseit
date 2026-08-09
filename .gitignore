@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# local data store (users, analyses, session secret)
+/.data
+
 # vercel
 .vercel
 

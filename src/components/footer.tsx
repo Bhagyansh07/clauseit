@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { AtSign, Globe, MessageCircle } from "lucide-react";
 
 const columns = [
   {
@@ -28,11 +27,12 @@ const columns = [
   },
 ];
 
-const socials = [
-  { label: "X (Twitter)", icon: AtSign, href: "https://twitter.com" },
-  { label: "LinkedIn", icon: Globe, href: "https://linkedin.com" },
-  { label: "GitHub", icon: MessageCircle, href: "https://github.com" },
-];
+// Social links removed for now — add real profiles when available
+// const socials = [
+//   { label: "X (Twitter)", icon: AtSign, href: "https://twitter.com/clauseit_in" },
+//   { label: "LinkedIn", icon: Globe, href: "https://linkedin.com/company/clauseit" },
+//   { label: "GitHub", icon: MessageCircle, href: "https://github.com/clauseit" },
+// ];
 
 export default function Footer() {
   return (
@@ -47,20 +47,6 @@ export default function Footer() {
               Read the clauses, not the fine print. Plain-language analysis of
               your documents, in English and Hindi.
             </p>
-            <div className="mt-5 flex items-center gap-3">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white/70 transition-colors hover:border-violet hover:text-white"
-                >
-                  <social.icon className="h-4 w-4" aria-hidden="true" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {columns.map((column) => (

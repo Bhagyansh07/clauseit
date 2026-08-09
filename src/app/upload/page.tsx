@@ -6,11 +6,12 @@ import {
   FileUp,
   Camera,
   Loader2,
-  FileText,
   X,
   ClipboardType,
+  FileCheck2,
+  ShieldCheck,
 } from "lucide-react";
-import { getCurrentUser, saveAnalysisForUser } from "@/lib/auth";
+import { useUser } from "@/lib/auth";
 import { validateClientFile } from "@/lib/file-validation";
 
 type SubmitState =
@@ -18,37 +19,42 @@ type SubmitState =
   | { status: "loading" }
   | { status: "error"; message: string };
 
+const ACCEPT_HINTS = [
+  { ext: "PDF", label: "Agreements & policies" },
+  { ext: "DOCX", label: "Word contracts" },
+  { ext: "TXT", label: "Pasted terms" },
+  { ext: "JPG/PNG", label: "Photo of a page" },
+];
+
+const LOADING_STEPS = ["Reading every line", "Spotting hidden clauses", "Tallying charges & dates"];
+
 export default function UploadPage() {
   const router = useRouter();
+  const { user, loading } = useUser();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [pastedText, setPastedText] = useState("");
+  const [dragging, setDragging] = useState(false);
   const [submit, setSubmit] = useState<SubmitState>({ status: "idle" });
-  const [checked, setChecked] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
 
   useEffect(() => {
-    const t = window.setTimeout(() => {
-      setChecked(true);
-      if (!getCurrentUser()) {
-        router.replace("/login");
-      }
-    }, 0);
-    return () => window.clearTimeout(t);
-  }, [router]);
+    if (loading) return;
+    if (!user) {
+      router.replace("/login");
+    }
+  }, [user, loading, router]);
 
-  if (!checked) {
-    return (
-      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
-        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-violet" />
-        <p className="mt-4 font-mono text-sm uppercase tracking-[0.12em] text-ink-soft">
-          Checking your session
-        </p>
-      </section>
-    );
-  }
+  useEffect(() => {
+    if (submit.status !== "loading") return;
+    const id = window.setInterval(() => {
+      setStepIndex((index) => (index + 1) % LOADING_STEPS.length);
+    }, 2600);
+    return () => window.clearInterval(id);
+  }, [submit.status]);
 
   function acceptFile(candidate: File) {
     const check = validateClientFile(candidate.name, candidate.size);
@@ -96,6 +102,11 @@ export default function UploadPage() {
         error?: string;
       };
 
+      if (res.status === 401) {
+        router.replace("/login");
+        return;
+      }
+
       if (!res.ok || !data.id || !data.analysis) {
         setSubmit({
           status: "error",
@@ -104,30 +115,7 @@ export default function UploadPage() {
         return;
       }
 
-      const currentUser = getCurrentUser();
       sessionStorage.setItem(data.id, JSON.stringify(data.analysis));
-      if (data.id) {
-        window.localStorage.setItem(`clauseit-analysis-${data.id}`, JSON.stringify(data.analysis));
-      }
-
-      if (currentUser) {
-        const safeAnalysis =
-          typeof data.analysis === "object" && data.analysis !== null
-            ? (data.analysis as { summary?: { en?: string }; risk?: { level?: string; score?: number } })
-            : null;
-
-        saveAnalysisForUser({
-          id: data.id,
-          userId: currentUser.id,
-          title: (file?.name ?? pastedText.slice(0, 40)) || "Untitled analysis",
-          createdAt: new Date().toISOString(),
-          summary: safeAnalysis?.summary?.en ?? "Analysis created",
-          riskLevel: safeAnalysis?.risk?.level ?? "unknown",
-          riskScore: safeAnalysis?.risk?.score ?? 0,
-          analysis: data.analysis,
-        });
-      }
-
       router.push(`/analyze/${data.id}`);
     } catch {
       setSubmit({
@@ -137,20 +125,43 @@ export default function UploadPage() {
     }
   }
 
+  if (loading) {
+    return (
+      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-violet" />
+        <p className="mt-4 font-mono text-sm uppercase tracking-[0.12em] text-ink-soft">
+          Checking your session
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
       <h1 className="font-display text-4xl font-bold leading-tight text-navy sm:text-5xl">
         Upload a document
       </h1>
-      <p className="mt-3 text-ink-soft">
+      <p className="mt-3 max-w-xl text-ink-soft">
         PDF, Word, plain text, or a photo of the page. Up to 10MB.
       </p>
 
       <div
-        className="mt-10 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-line bg-paper px-6 py-14 text-center transition-colors hover:border-violet focus-within:border-violet"
-        onDragOver={(e) => e.preventDefault()}
+        className={`mt-10 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-paper px-6 py-14 text-center transition-colors ${
+          dragging
+            ? "gradient-border border-transparent"
+            : "border-line hover:border-violet focus-within:border-violet"
+        }`}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragging(true);
+        }}
+        onDragLeave={(e) => {
+          e.preventDefault();
+          setDragging(false);
+        }}
         onDrop={(e) => {
           e.preventDefault();
+          setDragging(false);
           const dropped = e.dataTransfer.files?.[0];
           if (dropped) acceptFile(dropped);
         }}
@@ -158,11 +169,13 @@ export default function UploadPage() {
         {file ? (
           <div className="w-full max-w-md">
             <div className="flex items-center gap-4 rounded-2xl border border-line bg-parchment p-4">
-              <FileText className="h-7 w-7 shrink-0 text-violet" aria-hidden="true" />
+              <span className="gradient-bg flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white">
+                <FileCheck2 className="h-6 w-6" aria-hidden="true" />
+              </span>
               <div className="min-w-0 flex-1 text-left">
                 <p className="truncate font-medium text-ink">{file.name}</p>
                 <p className="text-sm text-ink-soft">
-                  {(file.size / (1024 * 1024)).toFixed(2)} MB
+                  {(file.size / (1024 * 1024)).toFixed(2)} MB · ready to analyze
                 </p>
               </div>
               <button
@@ -186,13 +199,13 @@ export default function UploadPage() {
           </div>
         ) : (
           <>
-            <FileUp className="h-10 w-10 text-violet" aria-hidden="true" />
+            <span className="gradient-bg flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-glow">
+              <FileUp className="h-7 w-7" aria-hidden="true" />
+            </span>
             <p className="mt-4 font-display text-lg font-bold text-navy">
-              Drop your document here
+              {dragging ? "Drop it right here" : "Drop your document here"}
             </p>
-            <p className="mt-1 text-sm text-ink-soft">
-              or click to browse files
-            </p>
+            <p className="mt-1 text-sm text-ink-soft">or click to browse files</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
@@ -210,6 +223,19 @@ export default function UploadPage() {
                 Scan with camera
               </button>
             </div>
+            <ul className="mt-8 grid w-full max-w-lg grid-cols-2 gap-2 text-left sm:grid-cols-4">
+              {ACCEPT_HINTS.map((hint) => (
+                <li
+                  key={hint.ext}
+                  className="rounded-xl border border-line bg-parchment px-3 py-2"
+                >
+                  <p className="font-mono text-xs font-semibold text-violet">
+                    {hint.ext}
+                  </p>
+                  <p className="mt-0.5 text-[11px] text-ink-soft">{hint.label}</p>
+                </li>
+              ))}
+            </ul>
           </>
         )}
       </div>
@@ -237,7 +263,7 @@ export default function UploadPage() {
       />
 
       {fileError && (
-        <p className="mt-4 rounded border border-red-soft bg-red-soft px-4 py-3 text-sm text-red">
+        <p className="mt-4 rounded-xl border border-red-soft bg-red-soft px-4 py-3 text-sm text-red">
           {fileError}
         </p>
       )}
@@ -249,17 +275,22 @@ export default function UploadPage() {
             Or paste text
           </h2>
         </div>
-        <textarea
-          value={pastedText}
-          onChange={(e) => setPastedText(e.target.value)}
-          rows={6}
-          placeholder="Paste the text of an agreement, policy, or terms here..."
-          className="mt-4 w-full rounded-2xl border border-line bg-paper px-4 py-3 leading-7 placeholder:text-ink-soft/60 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/25"
-        />
+        <div className="relative">
+          <textarea
+            value={pastedText}
+            onChange={(e) => setPastedText(e.target.value)}
+            rows={6}
+            placeholder="Paste the text of an agreement, policy, or terms here..."
+            className="mt-4 w-full rounded-2xl border border-line bg-paper px-4 py-3 leading-7 placeholder:text-ink-soft/60 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/25"
+          />
+          <p className="mt-2 text-right font-mono text-xs text-ink-soft">
+            {pastedText.length.toLocaleString()} chars
+          </p>
+        </div>
       </div>
 
       {submit.status === "error" && (
-        <p className="mt-4 rounded border border-red-soft bg-red-soft px-4 py-3 text-sm text-red">
+        <p className="mt-4 rounded-xl border border-red-soft bg-red-soft px-4 py-3 text-sm text-red">
           {submit.message}
         </p>
       )}
@@ -273,12 +304,17 @@ export default function UploadPage() {
         {submit.status === "loading" ? (
           <>
             <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
-            Reading every line...
+            {LOADING_STEPS[stepIndex]}...
           </>
         ) : (
           "Analyze document"
         )}
       </button>
+
+      <p className="mt-4 flex items-center justify-center gap-2 text-center text-sm text-ink-soft">
+        <ShieldCheck className="h-4 w-4 text-sage" aria-hidden="true" />
+        Your file is never stored. Only the analysis is saved to your history.
+      </p>
     </section>
   );
 }

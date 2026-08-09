@@ -10,6 +10,7 @@ import {
   Languages,
   FileUp,
   Check,
+  LayoutDashboard,
 } from "lucide-react";
 import type { Analysis, Bilingual } from "@/lib/types";
 import { FLAG_LABEL } from "@/lib/flag-actions";
@@ -17,6 +18,8 @@ import { getVerdict } from "@/lib/verdict";
 import { VerdictCard } from "@/components/analyze/verdict-card";
 import { FlagList } from "@/components/analyze/flag-list";
 import { RiskGauge } from "@/components/analyze/risk-gauge";
+import { LawyerReview } from "@/components/analyze/lawyer-review";
+import { ShareAnalysis } from "@/components/analyze/share-analysis";
 
 function BilingualText({
   value,
@@ -73,7 +76,15 @@ function RiskMeter({ risk }: { risk: Analysis["risk"] }) {
   );
 }
 
-export function AnalysisView({ analysis }: { analysis: Analysis }) {
+export function AnalysisView({
+  analysis,
+  id,
+  shareMode = false,
+}: {
+  analysis: Analysis;
+  id?: string;
+  shareMode?: boolean;
+}) {
   const [lang, setLang] = useState<"en" | "hi">("en");
 
   function downloadReport() {
@@ -152,7 +163,7 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
         </div>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-3">
+      <div className="mt-8 flex flex-wrap items-center gap-3">
         <Link
           href="/upload"
           className="gradient-bg inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
@@ -160,6 +171,15 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
           <FileUp className="h-4 w-4" aria-hidden="true" />
           Analyze another
         </Link>
+        {!shareMode && (
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-violet transition-colors hover:border-violet"
+          >
+            <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
+            Dashboard
+          </Link>
+        )}
         <button
           type="button"
           onClick={downloadReport}
@@ -168,7 +188,17 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
           <Download className="h-4 w-4" aria-hidden="true" />
           Download report
         </button>
+        {!shareMode && id ? (
+          <ShareAnalysis id={id} />
+        ) : null}
       </div>
+
+      {shareMode && (
+        <p className="mt-4 text-sm text-ink-soft">
+          This is a shared analysis. The owner posted it without including your
+          personal details.
+        </p>
+      )}
 
       <div className="mt-8 rounded border border-line bg-paper p-6">
         <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink-soft">
@@ -218,7 +248,12 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
               <tbody className="divide-y divide-line">
                 {analysis.charges.map((charge, i) => (
                   <tr key={i}>
-                    <td className="px-5 py-4 text-ink">{charge.name}</td>
+                    <td className="px-5 py-4">
+                      <p className="font-medium text-ink">{charge.name}</p>
+                      <p className="mt-0.5 text-sm text-ink-soft">
+                        <BilingualText value={charge.note} lang={lang} />
+                      </p>
+                    </td>
                     <td className="px-5 py-4 font-medium text-ink">
                       {charge.amount}
                     </td>
@@ -245,16 +280,21 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
                 key={i}
                 className="flex flex-col gap-1 rounded border border-line bg-paper p-5 sm:flex-row sm:items-center sm:justify-between"
               >
-                <div>
-                  <p className="font-medium text-ink">{date.label}</p>
-                  <p className="text-sm text-ink-soft">
-                    <BilingualText value={date.note} lang={lang} />
+                  <div>
+                    <p className="font-medium text-ink">{date.label}</p>
+                    {date.action && (
+                      <p className="text-sm font-semibold text-violet">
+                        {date.action}
+                      </p>
+                    )}
+                    <p className="mt-1 text-sm text-ink-soft">
+                      <BilingualText value={date.note} lang={lang} />
+                    </p>
+                  </div>
+                  <p className="shrink-0 font-mono text-sm font-semibold text-navy">
+                    {date.date || "Check document"}
                   </p>
                 </div>
-                <p className="shrink-0 font-mono text-sm font-semibold text-navy">
-                  {date.date || "Check document"}
-                </p>
-              </div>
             ))}
           </div>
         </div>
@@ -282,6 +322,8 @@ export function AnalysisView({ analysis }: { analysis: Analysis }) {
           </div>
         </div>
       )}
+
+      {id && !shareMode ? <LawyerReview /> : null}
 
       <div className="mt-12 rounded border border-line bg-parchment p-6">
         <div className="flex items-start gap-3">

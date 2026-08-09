@@ -56,7 +56,9 @@ Run terminal basics manually sometimes (git, npm install, env). Do not automate 
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` (public, safe in frontend — it is a public client key)
    - `SUPABASE_SERVICE_ROLE_KEY` (SECRET — server-only, never expose)
 3. Enable Auth → Email provider.
-4. Later (Phase 3): enable Row Level Security (RLS) on all tables. Default is locked down.
+4. Create the tables by running `docs/supabase-migration.sql` in the SQL Editor (Profile → SQL Editor → paste → Run).
+5. The service role key is used for all DB calls, so no per-user config is needed in the app.
+6. Row Level Security (RLS) is already enabled by the migration script as defense-in-depth for the anon key.
 
 **Safety rule:** the anon key is public by design. The service role key is a superuser key — server-side only, never in client code.
 
@@ -108,6 +110,7 @@ Copy `.env.example` to `.env` and fill values:
 
 ```
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+AUTH_SECRET=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
@@ -121,3 +124,5 @@ SENTRY_DSN=
 ```
 
 `.env` is never committed. `.env.example` (with blank/dummy values) IS committed.
+
+`AUTH_SECRET` signs the app session cookies (HMAC). Leave it blank to auto-generate and persist a random key in `.data/secret` on first run; or set a stable value (e.g. `openssl rand -hex 32`) for production so sessions survive restarts.

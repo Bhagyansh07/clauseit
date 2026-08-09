@@ -11,9 +11,7 @@ import {
   Sparkles,
   User,
 } from "lucide-react";
-import { getCurrentUser, getFreeUsageCount, getUserAnalyses, type SavedAnalysis } from "@/lib/auth";
-
-const MONTHLY_LIMIT = 10;
+import { useUser, PLAN_LIMITS, PLAN_NAMES, type SavedAnalysis } from "@/lib/auth";
 
 const RISK_META: Record<string, { badge: string; dot: string }> = {
   low: { badge: "bg-sage-soft text-sage", dot: "bg-sage" },
@@ -36,26 +34,27 @@ function formatDate(iso: string) {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [user, setUser] = useState<ReturnType<typeof getCurrentUser> | null>(null);
+  const { user, usage, loading } = useUser();
   const [analyses, setAnalyses] = useState<SavedAnalysis[]>([]);
-  const [usage, setUsage] = useState(0);
 
   useEffect(() => {
-    const t = window.setTimeout(() => {
-      const currentUser = getCurrentUser();
-      setUser(currentUser);
+    if (loading) return;
+    fetch("/api/analyses", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : { analyses: [] }))
+      .then((data) => setAnalyses(data.analyses ?? []))
+      .catch(() => setAnalyses([]));
+  }, [loading]);
 
-      if (!currentUser) {
-        setAnalyses([]);
-        setUsage(0);
-        return;
-      }
-
-      setAnalyses(getUserAnalyses(currentUser.id));
-      setUsage(getFreeUsageCount(currentUser.id));
-    }, 0);
-    return () => window.clearTimeout(t);
-  }, []);
+  if (loading) {
+    return (
+      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-violet" />
+        <p className="mt-4 text-center font-mono text-sm uppercase tracking-[0.12em] text-ink-soft">
+          Loading your dashboard
+        </p>
+      </section>
+    );
+  }
 
   if (!user) {
     return (
@@ -75,9 +74,10 @@ export default function DashboardPage() {
   }
 
   const firstName = user.name.trim().split(/\s+/)[0] || "there";
-  const used = Math.min(usage, MONTHLY_LIMIT);
-  const remaining = Math.max(MONTHLY_LIMIT - usage, 0);
-  const usedPct = Math.min((used / MONTHLY_LIMIT) * 100, 100);
+  const limit = PLAN_LIMITS[user.plan];
+  const used = Math.min(usage, limit);
+  const remaining = Math.max(limit - usage, 0);
+  const usedPct = Math.min((used / limit) * 100, 100);
   const highest = analyses.reduce((max, item) => Math.max(max, item.riskScore ?? 0), 0);
 
   return (
@@ -108,14 +108,14 @@ export default function DashboardPage() {
         <div className="flex flex-col gap-6 border-b border-line p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div>
             <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-ink-soft">
-              Monthly limit · Free plan
+              Monthly limit · {PLAN_NAMES[user.plan]} plan
             </p>
             <p className="mt-2 font-display text-4xl font-bold text-navy">
               {remaining}
-              <span className="text-lg font-semibold text-ink-soft"> / {MONTHLY_LIMIT} left</span>
+              <span className="text-lg font-semibold text-ink-soft"> / {limit} left</span>
             </p>
             <p className="mt-1 text-sm text-ink-soft">
-              You have used {usage} of {MONTHLY_LIMIT} analyses this month.
+              You have used {usage} of {limit} analyses this month.
             </p>
           </div>
           {remaining === 0 ? (
@@ -196,26 +196,6 @@ export default function DashboardPage() {
               Your documents will appear here with their risk score, flagged clauses, and key
               dates — so you can reopen any review anytime.
             </p>
-
-            <div className="mx-auto mt-6 max-w-xl rounded-xl border border-dashed border-line bg-parchment p-4 text-left opacity-70">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <FileText className="h-4 w-4 text-violet" aria-hidden="true" />
-                  <div>
-                    <p className="text-sm font-semibold text-navy">
-                      Rent agreement — lock-in &amp; penalties
-                    </p>
-                    <p className="text-xs text-ink-soft">This is how your review will look</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="rounded-full bg-amber-soft px-2.5 py-0.5 text-xs font-semibold text-amber">
-                    Medium
-                  </span>
-                  <span className="font-mono text-xs font-semibold text-navy">6/10</span>
-                </div>
-              </div>
-            </div>
 
             <Link
               href="/upload"

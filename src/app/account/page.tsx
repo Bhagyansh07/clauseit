@@ -1,39 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { CreditCard, LogOut, User } from "lucide-react";
-import {
-  getCurrentUser,
-  getFreeUsageCount,
-  logoutUser,
-  type Plan,
-} from "@/lib/auth";
+import { logout, useUser, PLAN_LIMITS, PLAN_NAMES } from "@/lib/auth";
 
-const MONTHLY_LIMIT = 10;
-
-const planLabels: Record<Plan, string> = {
-  free: "Free",
-  pro: "Pro",
-  premium: "Premium",
-};
+const planLabels = PLAN_NAMES;
 
 export default function AccountPage() {
-  const [user, setUser] = useState<ReturnType<typeof getCurrentUser> | null>(null);
-  const [usage, setUsage] = useState(0);
+  const router = useRouter();
+  const { user, usage, loading } = useUser();
+  const [signingOut, setSigningOut] = useState(false);
 
-  useEffect(() => {
-    const t = window.setTimeout(() => {
-      const currentUser = getCurrentUser();
-      setUser(currentUser);
-      if (currentUser) setUsage(getFreeUsageCount(currentUser.id));
-    }, 0);
-    return () => window.clearTimeout(t);
-  }, []);
+  async function handleLogout() {
+    setSigningOut(true);
+    await logout();
+    router.push("/");
+    router.refresh();
+  }
 
-  function handleLogout() {
-    logoutUser();
-    setUser(null);
+  if (loading) {
+    return (
+      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-violet" />
+        <p className="mt-4 font-mono text-sm uppercase tracking-[0.12em] text-ink-soft">
+          Loading your account
+        </p>
+      </section>
+    );
   }
 
   if (!user) {
@@ -53,9 +48,10 @@ export default function AccountPage() {
     );
   }
 
-  const used = Math.min(usage, MONTHLY_LIMIT);
-  const remaining = Math.max(MONTHLY_LIMIT - usage, 0);
-  const usedPct = Math.min((used / MONTHLY_LIMIT) * 100, 100);
+  const limit = PLAN_LIMITS[user.plan];
+  const used = Math.min(usage, limit);
+  const remaining = Math.max(limit - usage, 0);
+  const usedPct = Math.min((used / limit) * 100, 100);
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
@@ -113,9 +109,14 @@ export default function AccountPage() {
             <dd className="mt-3 text-sm leading-6 text-ink">
               You are on the{" "}
               <span className="font-semibold capitalize text-navy">
-                {planLabels[user.plan as Plan]}
+                {planLabels[user.plan]}
               </span>{" "}
-              plan. Free users get 10 analyses per month. Upgrade options are coming soon.
+              plan, which includes {limit} analyses per month. Switch plans
+              anytime from the{" "}
+              <Link href="/pricing" className="font-semibold text-violet hover:underline">
+                pricing page
+              </Link>
+              .
             </dd>
           </div>
         </dl>
@@ -126,7 +127,7 @@ export default function AccountPage() {
               Monthly usage
             </p>
             <p className="font-mono text-sm font-bold text-navy">
-              {remaining} left / {MONTHLY_LIMIT}
+              {remaining} left / {limit}
             </p>
           </div>
           <div className="mt-3 h-1.5 w-full rounded-full bg-line/60">
@@ -136,7 +137,7 @@ export default function AccountPage() {
             />
           </div>
           <p className="mt-3 text-sm text-ink-soft">
-            Used {usage} of {MONTHLY_LIMIT} analyses this month. Resets on the 1st.
+            Used {usage} of {limit} analyses this month. Resets on the 1st.
           </p>
         </div>
 
@@ -149,10 +150,11 @@ export default function AccountPage() {
           </Link>
           <button
             onClick={handleLogout}
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-line bg-paper px-5 text-sm font-semibold text-navy transition-colors hover:border-red hover:bg-red-soft hover:text-red"
+            disabled={signingOut}
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-line bg-paper px-5 text-sm font-semibold text-navy transition-colors hover:border-red hover:bg-red-soft hover:text-red disabled:opacity-60"
           >
             <LogOut className="h-4 w-4" aria-hidden="true" />
-            Log out
+            {signingOut ? "Signing out..." : "Log out"}
           </button>
         </div>
       </div>

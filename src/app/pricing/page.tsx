@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Check } from "lucide-react";
 import { SectionLabel } from "@/components/ui/section-label";
+import { PlanCta } from "@/components/pricing/plan-cta";
+import type { Plan } from "@/lib/auth-types";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -22,7 +23,6 @@ const plans = [
       "Risk score",
       "English and Hindi output",
     ],
-    cta: "Start free",
     highlighted: false,
   },
   {
@@ -37,7 +37,6 @@ const plans = [
       "Document history dashboard",
       "Everything in Free",
     ],
-    cta: "Choose Pro",
     highlighted: true,
   },
   {
@@ -51,7 +50,6 @@ const plans = [
       "Priority processing",
       "Longer document support",
     ],
-    cta: "Choose Premium",
     highlighted: false,
   },
 ];
@@ -108,23 +106,19 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link
-              href="/signup"
-              className={`mt-8 rounded-xl px-5 py-3 text-center font-semibold transition-all ${
-                plan.highlighted
-                  ? "bg-white text-violet hover:bg-white/90"
-                  : "border border-violet text-violet hover:bg-violet hover:text-white"
-              }`}
-            >
-              {plan.cta}
-            </Link>
+            <PlanCta
+              plan={plan.name.toLowerCase() as Plan}
+              label={plan.name === "Free" ? "Start free" : `Choose ${plan.name}`}
+              highlighted={plan.highlighted}
+            />
           </div>
         ))}
       </div>
 
       <p className="mt-10 max-w-2xl text-sm text-ink-soft">
-        Premium includes a lawyer review section, arriving soon. Pro and Premium
-        cancel anytime from your account page.
+        Billing is not live yet, so you can preview any plan from your account
+        to see how gating works. Premium includes a lawyer review section.
+        Cancel anytime.
       </p>
     </section>
   );

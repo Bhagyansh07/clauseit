@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser, signupUser } from "@/lib/auth";
 
 interface AuthFormProps {
   mode: "login" | "signup";
@@ -22,17 +21,27 @@ export function AuthForm({ mode }: AuthFormProps) {
     setLoading(true);
 
     try {
-      if (mode === "signup") {
-        signupUser(name, email, password);
-        router.push("/login");
-      } else {
-        loginUser(email, password);
-        router.push("/dashboard");
+      const endpoint =
+        mode === "signup" ? "/api/auth/signup" : "/api/auth/login";
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          mode === "signup" ? { name, email, password } : { email, password }
+        ),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+      };
+
+      if (!res.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
       }
+
+      router.push("/dashboard");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
-    } finally {
       setLoading(false);
     }
   }
@@ -55,6 +64,8 @@ export function AuthForm({ mode }: AuthFormProps) {
             onChange={(e) => setName(e.target.value)}
             className={inputClass}
             placeholder="Your name"
+            autoComplete="name"
+            required
           />
         </div>
       )}
@@ -69,6 +80,8 @@ export function AuthForm({ mode }: AuthFormProps) {
           onChange={(e) => setEmail(e.target.value)}
           className={inputClass}
           placeholder="you@example.com"
+          autoComplete="email"
+          required
         />
       </div>
 
@@ -82,6 +95,8 @@ export function AuthForm({ mode }: AuthFormProps) {
           onChange={(e) => setPassword(e.target.value)}
           className={inputClass}
           placeholder="At least 6 characters"
+          autoComplete={mode === "signup" ? "new-password" : "current-password"}
+          required
         />
       </div>
 

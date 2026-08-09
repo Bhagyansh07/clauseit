@@ -74,9 +74,9 @@
   --font-sans: var(--font-inter), var(--font-noto-deva);
   --font-mono: var(--font-jetbrains);
 
-  --shadow-paper: 0 1px 3px rgba(30, 27, 75, 0.08);
-  --shadow-seal: 0 12px 28px rgba(124, 58, 237, 0.18);
-  --shadow-glow: 0 10px 26px rgba(124, 58, 237, 0.35);
+  --shadow-paper: 0 1px 3px rgba(20, 58, 58, 0.08);
+  --shadow-seal: 0 12px 28px rgba(31, 111, 103, 0.16);
+  --shadow-glow: 0 10px 26px rgba(31, 111, 103, 0.3);
 }
 
 html {

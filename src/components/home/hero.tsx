@@ -159,7 +159,7 @@ export default function Hero() {
                     <stop offset="1" stopColor="#C18F3B" />
                   </linearGradient>
                 </defs>
-                <circle cx="40" cy="40" r="32" fill="none" stroke="#E9E6F6" strokeWidth="6" />
+                <circle cx="40" cy="40" r="32" fill="none" className="stroke-line" strokeWidth="6" />
                 <circle
                   cx="40"
                   cy="40"
@@ -171,8 +171,14 @@ export default function Hero() {
                   strokeDasharray="120 201"
                   transform="rotate(-90 40 40)"
                 />
-                <text x="40" y="45" textAnchor="middle" fontSize="18" fontWeight="700" fill="#1E1B33">
-                  6<tspan fontSize="10" dx="2">/10</tspan>
+                <text
+                  x="40"
+                  y="45"
+                  textAnchor="middle"
+                  fontSize="18"
+                  fontWeight="700"
+                  className="fill-ink"
+                >  6<tspan fontSize="10" dx="2">/10</tspan>
                 </text>
               </svg>
               <div>

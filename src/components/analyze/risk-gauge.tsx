@@ -46,7 +46,7 @@ export function RiskGauge({
         textAnchor="middle"
         fontSize="17"
         fontWeight="700"
-        fill={onDark ? "#FFFFFF" : "#1E1B33"}
+        className={onDark ? "fill-white" : "fill-ink"}
       >
         {score}
         <tspan fontSize="9" dx="1">

@@ -34,14 +34,19 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://clauseit.in";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clauseit.in"),
+  metadataBase: new URL(APP_URL),
   title: {
     default: "ClauseIt — Read the clauses, not the fine print",
     template: "%s | ClauseIt",
   },
   description:
     "Upload any PDF, Word document, or a photo of an agreement and ClauseIt explains it in plain language: hidden clauses, unfair charges, and a clear risk score.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     type: "website",
     siteName: "ClauseIt",
