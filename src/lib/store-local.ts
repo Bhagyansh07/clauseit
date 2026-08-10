@@ -4,7 +4,12 @@ import path from "node:path";
 import type { PublicUser, SavedAnalysis, StoredUser } from "@/lib/auth-types";
 import type { Store } from "@/lib/store-types";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
+function resolveDataDir(): string {
+  if (process.env.VERCEL === "1") return path.join("/tmp", "clauseit-data");
+  return path.join(process.cwd(), ".data");
+}
+
+const DATA_DIR = resolveDataDir();
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 const ANALYSES_FILE = path.join(DATA_DIR, "analyses.json");
 

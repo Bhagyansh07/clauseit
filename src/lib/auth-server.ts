@@ -7,7 +7,10 @@ import { supabaseStore } from "@/lib/store-supabase";
 import type { Plan, PublicUser, SavedAnalysis } from "@/lib/auth-types";
 import type { Analysis } from "@/lib/types";
 
-const SECRET_FILE = path.join(process.cwd(), ".data", "secret");
+const SECRET_FILE =
+  process.env.VERCEL === "1"
+    ? path.join("/tmp", "clauseit-data", "secret")
+    : path.join(process.cwd(), ".data", "secret");
 
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
