@@ -58,10 +58,10 @@ export function LawyerReview() {
             on the clauses that matter. Included with the Premium plan.
           </p>
           <Link
-            href="/pricing"
+            href="/premium"
             className="mt-5 inline-flex items-center gap-2 rounded-xl border border-gold px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-white"
           >
-            View Premium
+            Explore Premium
           </Link>
         </div>
       )}

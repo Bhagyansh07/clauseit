@@ -81,6 +81,21 @@ export function PlanCta({ plan, label, highlighted = false }: PlanCtaProps) {
     );
   }
 
+  if (plan === "premium") {
+    return (
+      <Link
+        href="/premium"
+        className={`block rounded-xl px-5 py-3 text-center font-semibold transition-all ${
+          highlighted
+            ? "bg-white text-violet hover:bg-white/90"
+            : "border border-violet text-violet hover:bg-violet hover:text-white"
+        }`}
+      >
+        Choose Premium
+      </Link>
+    );
+  }
+
   return (
     <span className="block">
       <button
