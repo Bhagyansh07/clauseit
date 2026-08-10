@@ -67,7 +67,7 @@ export default function PremiumPage() {
           <ul className="mt-3 space-y-2 text-sm text-ink">
             <li className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-              Everything in Pro (unlimited analyses)
+              Everything in Pro (100 analyses per month)
             </li>
             <li className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />

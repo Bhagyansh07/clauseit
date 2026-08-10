@@ -7,7 +7,7 @@ import type { Plan } from "@/lib/auth-types";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Start free with 10 documents a month. Pro removes the limit. Premium adds lawyer review. UPI and card payments.",
+    "Start free with 10 analyses a month, get 100 with Pro, or add lawyer review with Premium. UPI and card payments.",
 };
 
 const plans = [
@@ -31,7 +31,7 @@ const plans = [
     period: "per month",
     tagline: "For people who sign documents regularly.",
     features: [
-      "Unlimited analyses",
+      "100 analyses per month",
       "Report download as PDF",
       "Share analysis links",
       "Document history dashboard",
@@ -116,9 +116,8 @@ export default function Pricing() {
       </div>
 
       <p className="mt-10 max-w-2xl text-sm text-ink-soft">
-        Billing is not live yet, so you can preview any plan from your account
-        to see how gating works. Premium includes a lawyer review section.
-        Cancel anytime.
+        Every plan uses the same analysis engine. Premium adds a lawyer review
+        section. You can switch or cancel anytime from your account.
       </p>
     </section>
   );

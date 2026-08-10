@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, CalendarClock, CheckCircle2, ShieldAlert } from "lucide-react";
 
@@ -17,30 +17,26 @@ function Counter({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
-  const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
-    let raf = 0;
-    if (reduce) {
-      raf = requestAnimationFrame(() => setValue(to));
-      return () => cancelAnimationFrame(raf);
-    }
+    if (!inView || reduce || !ref.current) return;
+    const el = ref.current;
     const start = performance.now();
     const duration = 900;
+    let raf = 0;
     function tick(now: number) {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(to * eased));
+      el.textContent = String(Math.round(to * eased)) + suffix;
       if (progress < 1) raf = requestAnimationFrame(tick);
     }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, reduce, to]);
+  }, [inView, reduce, to, suffix]);
 
   return (
     <span ref={ref} className="font-display text-3xl font-bold text-white sm:text-4xl">
-      {value}
+      {to}
       {suffix}
     </span>
   );

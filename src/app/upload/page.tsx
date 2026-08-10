@@ -100,6 +100,7 @@ export default function UploadPage() {
         id?: string;
         analysis?: unknown;
         error?: string;
+        guest?: boolean;
       };
 
       if (res.status === 401) {
@@ -116,6 +117,9 @@ export default function UploadPage() {
       }
 
       sessionStorage.setItem(data.id, JSON.stringify(data.analysis));
+      if (data.guest) {
+        sessionStorage.setItem(`${data.id}.guest`, "1");
+      }
       router.push(`/analyze/${data.id}`);
     } catch {
       setSubmit({

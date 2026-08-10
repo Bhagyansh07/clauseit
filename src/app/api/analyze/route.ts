@@ -12,7 +12,11 @@ import {
 } from "@/lib/auth-server";
 import { SESSION_COOKIE } from "@/lib/session";
 import { captureError } from "@/lib/sentry";
-import { rateLimit, RateLimitError } from "@/lib/rate-limit";
+import {
+  clientIp,
+  rateLimit,
+  RateLimitError,
+} from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -23,24 +27,28 @@ function error(message: string, status: number) {
 
 export async function POST(req: NextRequest) {
   const user = await getSessionUser(req.cookies.get(SESSION_COOKIE)?.value);
-  if (!user) {
-    return error("Log in to analyze a document.", 401);
-  }
+  const isGuest = !user;
 
   try {
-    rateLimit(`analyze:${user.id}`, 10, 10 * 60 * 1000);
+    if (isGuest) {
+      rateLimit(`analyze-guest:${clientIp(req)}`, 5, 10 * 60 * 1000);
+    } else {
+      rateLimit(`analyze:${user.id}`, 10, 10 * 60 * 1000);
+    }
   } catch (err) {
     if (err instanceof RateLimitError) {
       return error(err.message, 429);
     }
   }
 
-  const used = await countMonthlyAnalyses(user.id);
-  if (used >= PLAN_LIMITS[user.plan]) {
-    return error(
-      "You have reached your free limit of 10 analyses this month. Upgrade to analyze more.",
-      429
-    );
+  if (!isGuest) {
+    const used = await countMonthlyAnalyses(user.id);
+    if (used >= PLAN_LIMITS[user.plan]) {
+      return error(
+        "You have reached your free limit of 10 analyses this month. Upgrade to analyze more.",
+        429
+      );
+    }
   }
 
   try {
@@ -88,15 +96,17 @@ export async function POST(req: NextRequest) {
       file instanceof File ? file.name : pastedTitle || "Untitled analysis";
 
     const meta = extractAnalysisMeta(analysis);
-    await saveAnalysis(user.id, {
-      id,
-      title,
-      createdAt: new Date().toISOString(),
-      ...meta,
-      analysis,
-    });
+    if (!isGuest) {
+      await saveAnalysis(user.id, {
+        id,
+        title,
+        createdAt: new Date().toISOString(),
+        ...meta,
+        analysis,
+      });
+    }
 
-    return NextResponse.json({ id, analysis });
+    return NextResponse.json({ id, analysis, guest: isGuest });
   } catch (err) {
     captureError(err);
     if (err instanceof GeminiError) {

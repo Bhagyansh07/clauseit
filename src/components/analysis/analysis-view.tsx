@@ -80,10 +80,12 @@ export function AnalysisView({
   analysis,
   id,
   shareMode = false,
+  guest = false,
 }: {
   analysis: Analysis;
   id?: string;
   shareMode?: boolean;
+  guest?: boolean;
 }) {
   const [lang, setLang] = useState<"en" | "hi">("en");
 
@@ -171,7 +173,7 @@ export function AnalysisView({
           <FileUp className="h-4 w-4" aria-hidden="true" />
           Analyze another
         </Link>
-        {!shareMode && (
+        {!shareMode && !guest && (
           <Link
             href="/dashboard"
             className="inline-flex items-center gap-2 rounded-xl border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-violet transition-colors hover:border-violet"
@@ -188,7 +190,7 @@ export function AnalysisView({
           <Download className="h-4 w-4" aria-hidden="true" />
           Download report
         </button>
-        {!shareMode && id ? (
+        {!shareMode && id && !guest ? (
           <ShareAnalysis id={id} />
         ) : null}
       </div>
@@ -197,6 +199,13 @@ export function AnalysisView({
         <p className="mt-4 text-sm text-ink-soft">
           This is a shared analysis. The owner posted it without including your
           personal details.
+        </p>
+      )}
+
+      {guest && (
+        <p className="mt-4 rounded-xl border border-line bg-paper p-4 text-sm leading-6 text-ink-soft">
+          This analysis was not saved to an account. Create a free account to
+          keep your history, save up to 10 analyses a month, and share a link.
         </p>
       )}
 
@@ -323,7 +332,7 @@ export function AnalysisView({
         </div>
       )}
 
-      {id && !shareMode ? <LawyerReview /> : null}
+      {id && !shareMode && !guest ? <LawyerReview /> : null}
 
       <div className="mt-12 rounded border border-line bg-parchment p-6">
         <div className="flex items-start gap-3">

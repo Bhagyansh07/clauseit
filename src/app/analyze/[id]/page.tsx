@@ -16,12 +16,21 @@ function readFromSession(id: string): Analysis | null {
   return null;
 }
 
+function isGuestSession(id: string): boolean {
+  try {
+    return sessionStorage.getItem(`${id}.guest`) === "1";
+  } catch {
+    return false;
+  }
+}
+
 export default function AnalyzePage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const [analysis, setAnalysis] = useState<Analysis | null | "missing">(() =>
     id ? (readFromSession(id) ?? "missing") : "missing"
   );
+  const guest = id ? isGuestSession(id) : false;
 
   useEffect(() => {
     if (!id || analysis !== "missing") return;
@@ -57,5 +66,5 @@ export default function AnalyzePage() {
     return <MissingView />;
   }
 
-  return <AnalysisView analysis={analysis} id={id} />;
+  return <AnalysisView analysis={analysis} id={id} guest={guest} />;
 }

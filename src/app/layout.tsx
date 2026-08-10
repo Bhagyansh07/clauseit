@@ -14,24 +14,28 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  preload: false,
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  preload: false,
 });
 
 const notoDevanagari = Noto_Sans_Devanagari({
   variable: "--font-noto-deva",
   subsets: ["devanagari"],
   weight: ["400", "500", "600", "700"],
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500"],
+  preload: false,
 });
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://clauseit.in";

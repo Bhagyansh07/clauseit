@@ -19,7 +19,7 @@ const plans = [
     price: "99",
     period: "per month",
     features: [
-      "200 documents per month",
+      "100 documents per month",
       "Faster analysis",
       "Shareable analysis links",
     ],
