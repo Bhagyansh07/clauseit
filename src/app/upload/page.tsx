@@ -11,7 +11,6 @@ import {
   FileCheck2,
   ShieldCheck,
 } from "lucide-react";
-import { useUser } from "@/lib/auth";
 import { validateClientFile } from "@/lib/file-validation";
 
 type SubmitState =
@@ -30,7 +29,6 @@ const LOADING_STEPS = ["Reading every line", "Spotting hidden clauses", "Tallyin
 
 export default function UploadPage() {
   const router = useRouter();
-  const { user, loading } = useUser();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
 
@@ -40,13 +38,6 @@ export default function UploadPage() {
   const [dragging, setDragging] = useState(false);
   const [submit, setSubmit] = useState<SubmitState>({ status: "idle" });
   const [stepIndex, setStepIndex] = useState(0);
-
-  useEffect(() => {
-    if (loading) return;
-    if (!user) {
-      router.replace("/login");
-    }
-  }, [user, loading, router]);
 
   useEffect(() => {
     if (submit.status !== "loading") return;
@@ -127,17 +118,6 @@ export default function UploadPage() {
         message: "Network error. Check your connection and try again.",
       });
     }
-  }
-
-  if (loading) {
-    return (
-      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
-        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-line border-t-violet" />
-        <p className="mt-4 font-mono text-sm uppercase tracking-[0.12em] text-ink-soft">
-          Checking your session
-        </p>
-      </section>
-    );
   }
 
   return (

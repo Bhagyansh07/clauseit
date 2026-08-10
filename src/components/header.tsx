@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useUser } from "@/lib/auth";
 
 const NAV = [
-  { href: "/signup", label: "Analyze" },
+  { href: "/upload", label: "Analyze" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/pricing", label: "Plans" },
 ];
@@ -26,7 +26,7 @@ export default function Header() {
         <div className="hidden items-center gap-8 text-sm font-semibold text-ink-soft md:flex">
           {NAV.map((item) => {
             const active =
-              item.href === "/signup"
+              item.href === "/upload"
                 ? pathname === "/upload" || pathname === "/signup"
                 : pathname.startsWith(item.href);
             return (
@@ -55,10 +55,10 @@ export default function Header() {
                 Log in
               </Link>
               <Link
-                href="/signup"
+                href="/upload"
                 className="gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all hover:brightness-110"
               >
-                Get started
+                Analyze
               </Link>
             </>
           )}
