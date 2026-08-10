@@ -44,3 +44,4 @@ dev-server.log
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+vercel-login.log
