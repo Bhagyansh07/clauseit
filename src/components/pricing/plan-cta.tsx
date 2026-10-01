@@ -17,20 +17,20 @@ export function PlanCta({ plan, label, highlighted = false }: PlanCtaProps) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  async function handleUpgrade() {
+  async function switchToFree() {
     setBusy(true);
     setMessage(null);
     try {
       const res = await fetch("/api/account/plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify({ plan: "free" }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         throw new Error(data?.error ?? "Could not update your plan.");
       }
-      setMessage(`Preview switched to ${label}.`);
+      setMessage("Switched to the Free plan.");
       router.refresh();
     } catch (err) {
       setMessage(err instanceof Error ? err.message : "Could not update your plan.");
@@ -96,22 +96,34 @@ export function PlanCta({ plan, label, highlighted = false }: PlanCtaProps) {
     );
   }
 
+  if (plan === "free") {
+    return (
+      <span className="block">
+        <button
+          onClick={switchToFree}
+          disabled={busy}
+          className={`w-full rounded-xl px-5 py-3 text-center font-semibold transition-all disabled:opacity-60 ${
+            highlighted
+              ? "bg-white text-violet hover:bg-white/90"
+              : "border border-violet text-violet hover:bg-violet hover:text-white"
+          }`}
+        >
+          {busy ? "Switching..." : "Switch to Free"}
+        </button>
+        {message ? (
+          <span className="mt-3 block text-center text-xs text-ink-soft">{message}</span>
+        ) : null}
+      </span>
+    );
+  }
+
   return (
-    <span className="block">
-      <button
-        onClick={handleUpgrade}
-        disabled={busy}
-        className={`w-full rounded-xl px-5 py-3 text-center font-semibold transition-all disabled:opacity-60 ${
-          highlighted
-            ? "bg-white text-violet hover:bg-white/90"
-            : "border border-violet text-violet hover:bg-violet hover:text-white"
-        }`}
-      >
-        {busy ? "Switching..." : `Preview ${label}`}
-      </button>
-      {message ? (
-        <span className="mt-3 block text-center text-xs text-ink-soft">{message}</span>
-      ) : null}
+    <span
+      className={`block rounded-xl border border-line px-5 py-3 text-center text-sm ${
+        highlighted ? "bg-white/70 text-white/90" : "bg-paper text-ink-soft"
+      }`}
+    >
+      Payments are opening soon
     </span>
   );
 }

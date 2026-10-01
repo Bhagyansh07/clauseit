@@ -89,11 +89,11 @@ export default function PremiumPage() {
         <p className="text-sm leading-6 text-ink-soft">
           The lawyer review itself launches soon. If you pay for Premium now,
           your plan activates immediately and you will get a note here when the
-          review queue opens. You can also just{" "}
+          review queue opens. You can{" "}
           <Link href="/pricing" className="font-semibold text-violet hover:underline">
-            preview the plan
+            compare plans
           </Link>{" "}
-          without paying anything.
+          or move back to Free any time from your account.
         </p>
       </div>
     </section>

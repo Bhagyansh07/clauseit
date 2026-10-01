@@ -6,17 +6,8 @@ import type { PublicUser } from "@/lib/auth-types";
 
 export type { Plan, PublicUser, SavedAnalysis } from "@/lib/auth-types";
 
-export const PLAN_LIMITS: Record<"free" | "pro" | "premium", number> = {
-  free: 10,
-  pro: 100,
-  premium: 9999,
-};
-
-export const PLAN_NAMES: Record<"free" | "pro" | "premium", string> = {
-  free: "Free",
-  pro: "Pro",
-  premium: "Premium",
-};
+// Limits live in lib/plans.ts so the client and the API cannot disagree.
+export { PLAN_LIMITS, PLAN_NAMES } from "@/lib/plans";
 
 interface MeResponse {
   user: PublicUser | null;

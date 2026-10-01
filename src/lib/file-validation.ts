@@ -14,9 +14,10 @@ const EXT_TO_KIND: Record<string, FileKind> = {
 const MAGIC: Partial<Record<FileKind, number[][]>> = {
   pdf: [[0x25, 0x50, 0x44, 0x46, 0x2d]],
   docx: [[0x50, 0x4b, 0x03, 0x04]],
+  // txt has no signature, so it is intentionally absent.
   image: [
-    [0xff, 0xd8, 0xff],
-    [0x89, 0x50, 0x4e, 0x47],
+    [0xff, 0xd8, 0xff], // JPEG
+    [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], // PNG (full 8-byte signature)
   ],
 };
 
@@ -59,16 +60,19 @@ export function validateServerFile(
   if (!client.ok) return client;
 
   const magicList = MAGIC[client.kind];
-  if (
-    magicList &&
-    !magicList.some((magic) =>
-      magic.every((byte, i) => buffer[i] === byte)
-    )
-  ) {
-    return {
-      ok: false,
-      error: "File contents do not match its name. It may be renamed or corrupt.",
-    };
+  if (magicList) {
+    // Compare the whole prefix, and reject a file too short to hold it.
+    const matched = magicList.some(
+      (magic) =>
+        buffer.length >= magic.length &&
+        magic.every((byte, i) => buffer[i] === byte)
+    );
+    if (!matched) {
+      return {
+        ok: false,
+        error: "File contents do not match its name. It may be renamed or corrupt.",
+      };
+    }
   }
   return client;
 }

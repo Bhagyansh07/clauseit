@@ -14,17 +14,8 @@ const SECRET_FILE =
 
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
-export const PLAN_LIMITS: Record<Plan, number> = {
-  free: 10,
-  pro: 100,
-  premium: 9999,
-};
-
-export const PLAN_NAMES: Record<Plan, string> = {
-  free: "Free",
-  pro: "Pro",
-  premium: "Premium",
-};
+// Limits live in lib/plans.ts so the client and the API cannot disagree.
+export { PLAN_LIMITS, PLAN_NAMES } from "@/lib/plans";
 
 export class AuthError extends Error {}
 

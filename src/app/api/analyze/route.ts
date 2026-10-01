@@ -8,6 +8,7 @@ import {
   extractAnalysisMeta,
   getSessionUser,
   PLAN_LIMITS,
+  PLAN_NAMES,
   saveAnalysis,
 } from "@/lib/auth-server";
 import { SESSION_COOKIE } from "@/lib/session";
@@ -39,13 +40,18 @@ export async function POST(req: NextRequest) {
     if (err instanceof RateLimitError) {
       return error(err.message, 429);
     }
+    // Fail closed. This endpoint spends Gemini credits, so an unexpected
+    // limiter failure must not quietly let unlimited traffic through.
+    captureError(err);
+    return error("Analysis is busy right now. Please try again shortly.", 503);
   }
 
   if (!isGuest) {
+    const limit = PLAN_LIMITS[user.plan];
     const used = await countMonthlyAnalyses(user.id);
-    if (used >= PLAN_LIMITS[user.plan]) {
+    if (used >= limit) {
       return error(
-        "You have reached your free limit of 10 analyses this month. Upgrade to analyze more.",
+        `You have used all ${limit} analyses on your ${PLAN_NAMES[user.plan]} plan this month. Upgrade to analyze more.`,
         429
       );
     }
