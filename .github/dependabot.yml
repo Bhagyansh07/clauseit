@@ -1,0 +1,16 @@
+# One npm manifest at the repository root plus the workflow actions, neither of
+# which was being refreshed by anything. Dependabot opens a weekly pull request
+# per ecosystem; auto-merge stays off so a bump lands only after lint,
+# typecheck, test and build have run green on it.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
