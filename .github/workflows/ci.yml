@@ -24,7 +24,7 @@ jobs:
     # hung install fails the run instead of holding a runner for six hours.
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 22
