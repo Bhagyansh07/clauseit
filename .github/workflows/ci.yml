@@ -10,10 +10,19 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# The job only reads the checkout: lint, typecheck, test and build publish
+# nothing. The default token is read-write over the whole repository, which is
+# far more than this workflow uses.
+permissions:
+  contents: read
+
 jobs:
   build:
     name: lint + typecheck + test + build
     runs-on: ubuntu-latest
+    # Observed at about a minute with a warm npm cache. The limit exists so a
+    # hung install fails the run instead of holding a runner for six hours.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
