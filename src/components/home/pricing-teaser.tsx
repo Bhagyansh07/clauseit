@@ -20,7 +20,7 @@ const plans = [
     period: "per month",
     features: [
       "100 documents per month",
-      "Faster analysis",
+      "Document history dashboard",
       "Shareable analysis links",
     ],
     highlight: true,
@@ -32,7 +32,7 @@ const plans = [
     features: [
       "Unlimited documents",
       "Lawyer review (coming soon)",
-      "Priority support",
+      "Priority processing",
     ],
   },
 ];

@@ -26,7 +26,7 @@ export default function FinalCta() {
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
-                href="/login"
+                href="/upload"
                 className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet to-fuchsia px-7 text-base font-semibold text-white shadow-glow transition-all hover:brightness-110"
               >
                 Upload a document

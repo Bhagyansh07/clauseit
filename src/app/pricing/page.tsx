@@ -22,6 +22,7 @@ const plans = [
       "Hidden clause and charge flags",
       "Risk score",
       "English and Hindi output",
+      "Report download",
     ],
     highlighted: false,
   },
@@ -32,7 +33,6 @@ const plans = [
     tagline: "For people who sign documents regularly.",
     features: [
       "100 analyses per month",
-      "Report download as PDF",
       "Share analysis links",
       "Document history dashboard",
       "Everything in Free",
@@ -46,7 +46,7 @@ const plans = [
     tagline: "For the documents that really matter.",
     features: [
       "Everything in Pro",
-      "Lawyer review of your document",
+      "Lawyer review (coming soon)",
       "Priority processing",
       "Longer document support",
     ],
