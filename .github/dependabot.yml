@@ -1,16 +1,40 @@
-# One npm manifest at the repository root plus the workflow actions, neither of
-# which was being refreshed by anything. Dependabot opens a weekly pull request
-# per ecosystem; auto-merge stays off so a bump lands only after lint,
-# typecheck, test and build have run green on it.
+# One npm manifest at the repository root plus the workflow actions.
+#
+# Minor and patch updates are batched into one pull request per ecosystem so the
+# queue stays short. Major updates are held rather than offered: eslint 9 -> 10
+# and framer-motion 13 -> 14 each need a lint/API pass, not a merge. Delete a
+# line from `ignore:` when you are ready to do that work on purpose.
+#
+# Auto-merge is deliberately absent: every bump lands through lint + typecheck +
+# test + build.
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
+    groups:
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "framer-motion"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 3
+    groups:
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "actions/checkout"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "actions/setup-node"
+        update-types: ["version-update:semver-major"]
