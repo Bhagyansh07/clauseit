@@ -1,40 +1,41 @@
 # One npm manifest at the repository root plus the workflow actions.
 #
-# Minor and patch updates are batched into one pull request per ecosystem so the
-# queue stays short. Major updates are held rather than offered: eslint 9 -> 10
-# and framer-motion 13 -> 14 each need a lint/API pass, not a merge. Delete a
-# line from `ignore:` when you are ready to do that work on purpose.
+# Minor and patch updates arrive as one grouped pull request per
+# ecosystem, capped at three open PRs each. Major updates are ignored
+# outright: eslint 9 -> 10 and framer-motion 13 -> 14 each need a
+# lint/API pass rather than a merge.
 #
-# Auto-merge is deliberately absent: every bump lands through lint + typecheck +
-# test + build.
+# Auto-merge is deliberately absent: every bump lands through
+# lint + typecheck + test + build.
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
-    groups:
-      minor-and-patch:
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-    ignore:
-      - dependency-name: "eslint"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "framer-motion"
-        update-types: ["version-update:semver-major"]
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
-    groups:
-      minor-and-patch:
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-    ignore:
-      - dependency-name: "actions/checkout"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "actions/setup-node"
-        update-types: ["version-update:semver-major"]
+- package-ecosystem: "npm"
+  directory: "/"
+  schedule:
+    interval: "weekly"
+  open-pull-requests-limit: 3
+  groups:
+    minor-and-patch:
+      patterns: ["*"]
+      update-types: ["minor", "patch"]
+  ignore:
+    # A major is a migration with its own test pass, so it is taken on
+    # deliberately rather than offered weekly. Delete this rule when you
+    # want to be told about majors again.
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "weekly"
+  open-pull-requests-limit: 3
+  groups:
+    minor-and-patch:
+      patterns: ["*"]
+      update-types: ["minor", "patch"]
+  ignore:
+    # A major is a migration with its own test pass, so it is taken on
+    # deliberately rather than offered weekly. Delete this rule when you
+    # want to be told about majors again.
+    - dependency-name: "*"
+      update-types: ["version-update:semver-major"]
