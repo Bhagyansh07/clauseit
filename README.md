@@ -10,6 +10,7 @@
 ![AI](https://img.shields.io/badge/AI-Google_Gemini-886FBF?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-0F1B2D?style=for-the-badge)
 ![Status](https://img.shields.io/badge/status-in_development-D4A837?style=for-the-badge)
+[![CI](https://github.com/Bhagyansh07/clauseit/actions/workflows/ci.yml/badge.svg)](https://github.com/Bhagyansh07/clauseit/actions/workflows/ci.yml)
 
 **Upload any agreement and understand it before you sign.**
 
@@ -49,17 +50,18 @@ ClauseIt reads the document the way a careful reader would, and tells you what a
 
 ## Tech stack
 
-| Layer | Choice |
-|---|---|
-| Framework | [Next.js](https://nextjs.org) 16 (App Router) + TypeScript |
-| Styling | [Tailwind CSS](https://tailwindcss.com) v4 + [Lucide](https://lucide.dev) icons |
-| AI | [Google Gemini](https://ai.google.dev) API (server-side only, `gemini-3.6-flash`) |
-| Document parsing | [unpdf](https://www.npmjs.com/package/unpdf), [mammoth](https://www.npmjs.com/package/mammoth) |
-| Auth / DB / Storage | Supabase *(in progress)* |
-| Payments | Razorpay *(planned)* |
-| Rate limiting | Upstash *(planned)* |
-| Monitoring | Sentry *(planned)* |
-| Deployment | Vercel *(planned)* |
+| Layer | Choice | Status |
+|---|---|---|
+| Framework | [Next.js](https://nextjs.org) 16 (App Router) + TypeScript | Implemented |
+| Styling | [Tailwind CSS](https://tailwindcss.com) v4 + [Lucide](https://lucide.dev) icons | Implemented |
+| AI | [Google Gemini](https://ai.google.dev) API (server-side only, `gemini-3.6-flash`) | Implemented |
+| Document parsing | [unpdf](https://www.npmjs.com/package/unpdf), [mammoth](https://www.npmjs.com/package/mammoth) | Implemented |
+| Auth / DB / Storage | Supabase | In progress (local fallback store for dev) |
+| Payments | Razorpay | Partial (routes present, not live) |
+| Rate limiting | In-memory limiter (Upstash planned) | Partial |
+| Monitoring | Sentry | Installed |
+| Deployment | Vercel | Live |
+| Tests / CI | Vitest + GitHub Actions | Implemented |
 
 ## Getting started
 
@@ -102,11 +104,27 @@ clauseit/
 - [ ] **Phase 5** — Premium: lawyer review section *(coming soon)*
 - [ ] **Phase 6** — Polish + deploy: share links, Sentry, Vercel, custom domain
 
+## Testing
+
+Pure logic (file validation and magic-byte checks, the risk verdict bands, plan
+limits, the bilingual flag copy, and the rate limiter) is covered by a Vitest
+suite, and CI runs lint, typecheck, tests and a production build on every push
+and pull request.
+
+```bash
+npm test          # vitest run
+npm run typecheck # tsc --noEmit
+npm run lint      # eslint
+```
+
 ## Documentation
 
 - [Feature specification](docs/FEATURE_SPEC.md) — page-by-page spec and phase plan
 - [Setup guide](docs/SETUP.md) — accounts, keys, and environment setup
 - [AGENTS.md](AGENTS.md) — engineering and security rules
+- [PRIVACY.md](PRIVACY.md) — what happens to uploaded documents
+- [SECURITY.md](SECURITY.md) — reporting and security posture
+- [CONTRIBUTING.md](CONTRIBUTING.md) — how to contribute
 
 ## License
 
